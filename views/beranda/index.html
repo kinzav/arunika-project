@@ -1,11 +1,932 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="theme-color" content="#0b1a15">
+    <meta name="description" content="Jelajahi kekayaan seni, tradisi, sejarah, dan budaya Jawa.">
+    <title>Prambanan — Seni & Budaya Jawa</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: '#0b1a15',
+                        deep: '#0d2119',
+                        card: '#142b21',
+                        gold: '#d4af67',
+                        cream: '#f0e6d2',
+                        muted: '#b9c2b7'
+                    },
+                    fontFamily: {
+                        sans: ['Segoe UI', 'Tahoma', 'sans-serif'],
+                        serif: ['Georgia', 'serif']
+                    },
+                    boxShadow: {
+                        gold: '0 10px 35px rgba(212, 175, 103, 0.12)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- GSAP Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #0b1a15;
+            color: #f0e6d2;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: #d4af67;
+            color: #0b1a15;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(
+                90deg,
+                rgba(11, 26, 21, 0.97) 0%,
+                rgba(11, 26, 21, 0.80) 45%,
+                rgba(11, 26, 21, 0.12) 100%
+            );
+        }
+
+        .gold-line {
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                #d4af67,
+                transparent
+            );
+        }
+
+        .gallery-image {
+            transition: transform 0.7s ease, filter 0.7s ease;
+        }
+
+        .gallery-card:hover .gallery-image {
+            transform: scale(1.08);
+            filter: brightness(0.8);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 1px;
+            left: 0;
+            bottom: -7px;
+            background: #d4af67;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .map-pattern {
+            background-image:
+                radial-gradient(
+                    ellipse at 50% 50%,
+                    rgba(212,175,103,.09),
+                    transparent 65%
+                ),
+                linear-gradient(
+                    rgba(212,175,103,.045) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(212,175,103,.045) 1px,
+                    transparent 1px
+                );
+            background-size: auto, 35px 35px, 35px 35px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
 </head>
-<body>
-    <p>Selamat datang di halaman beranda!</p>
+
+<body class="font-sans antialiased">
+
+
+<nav id="navbar"
+    class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-forest/90 backdrop-blur-xl">
+
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-10">
+
+        <!-- Logo -->
+        <a href="#beranda" class="flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center border border-gold/60 text-xl text-gold">
+                ✦
+            </div>
+
+            <div>
+                <p class="font-serif text-xl font-bold tracking-[0.15em] text-gold">
+                    Arunika
+                </p>
+                <p class="text-[9px] uppercase tracking-[0.3em] text-cream/60">
+                    Warisan Nusantara
+                </p>
+            </div>
+        </a>
+
+        <!-- Tombol Menu Mobile -->
+        <button id="menu-button"
+            class="rounded border border-white/15 px-3 py-2 text-sm text-cream md:hidden"
+            aria-label="Buka menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu">
+            ☰
+        </button>
+
+        <!-- Menu Desktop -->
+        <div class="hidden items-center gap-8 text-sm text-cream/80 md:flex">
+            <a href="#beranda" class="nav-link hover:text-gold">
+                Beranda
+            </a>
+
+            <a href="#galeri-seni" class="nav-link hover:text-gold">
+                Galeri Seni
+            </a>
+
+            <a href="#tradisi" class="nav-link hover:text-gold">
+                Tradisi
+            </a>
+
+            <a href="#kuliner" class="nav-link hover:text-gold">
+                Kuliner
+            </a>
+
+            <a href="#sejarah" class="nav-link hover:text-gold">
+                Sejarah
+            </a>
+        </div>
+
+        <!-- Tombol Eksplorasi -->
+        <a href="#sejarah"
+            class="hidden border border-gold/60 px-5 py-3 text-xs font-semibold uppercase tracking-widest text-gold transition hover:bg-gold hover:text-forest lg:block">
+            Mulai Eksplorasi ↗
+        </a>
+
+    </div>
+
+    <!-- Menu Mobile -->
+    <div id="mobile-menu"
+        class="hidden border-t border-white/10 bg-forest px-6 py-4 md:hidden">
+
+        <div class="flex flex-col gap-5 text-sm">
+            <a href="#beranda" class="mobile-link">
+                Beranda
+            </a>
+
+            <a href="#galeri-seni" class="mobile-link">
+                Galeri Seni
+            </a>
+
+            <a href="#tradisi" class="mobile-link">
+                Tradisi
+            </a>
+
+            <a href="#kuliner" class="mobile-link">
+                Kuliner
+            </a>
+
+            <a href="#sejarah" class="mobile-link">
+                Sejarah
+            </a>
+        </div>
+
+    </div>
+</nav>
+
+
+        <!-- HERO -->
+        <section id="beranda" class="relative flex min-h-screen items-center overflow-hidden">
+
+            <div class="absolute inset-0">
+                <img
+                    src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=2000&q=85"
+                    alt="Arsitektur candi dengan suasana bersejarah"
+                    class="h-full w-full object-cover object-center"
+                    fetchpriority="high">
+
+                <div class="hero-overlay absolute inset-0"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-forest via-transparent to-forest/30"></div>
+            </div>
+
+            <div class="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 px-5 pb-28 pt-40 md:px-10 lg:grid-cols-2">
+
+                <div class="hero-text">
+                    <div class="mb-7 flex items-center gap-4">
+                        <span class="h-px w-12 bg-gold"></span>
+                        <p class="text-xs uppercase tracking-[0.3em] text-gold">
+                            Seni · Sejarah · Tradisi
+                        </p>
+                    </div>
+
+                    <h1 class="max-w-2xl font-serif text-5xl leading-[1.12] md:text-7xl lg:text-8xl">
+                        Menjaga
+                        <span class="block italic text-gold">Nyala</span>
+                        <span class="block">Tradisi.</span>
+                    </h1>
+
+                    <p class="mt-7 max-w-lg text-base leading-8 text-cream/75 md:text-lg">
+                        Menelusuri keindahan seni, kemegahan arsitektur,
+                        dan filosofi kehidupan yang tumbuh dari warisan
+                        budaya Jawa.
+                    </p>
+
+                    <div class="mt-10 flex flex-wrap items-center gap-5">
+                        <a href="#tentang"
+                            class="group inline-flex items-center gap-4 bg-gold px-7 py-4 text-xs font-bold uppercase tracking-widest text-forest transition hover:bg-cream">
+                            Jelajahi Warisan
+                            <span class="transition group-hover:translate-x-1">→</span>
+                        </a>
+
+                        <a href="#galeri"
+                            class="border border-white/25 px-7 py-4 text-xs uppercase tracking-widest text-cream transition hover:border-gold hover:text-gold">
+                            Lihat Galeri
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="hero-image relative hidden lg:block">
+                    <div class="absolute -right-2 -top-8 h-64 w-64 rounded-full border border-gold/30"></div>
+
+                    <div class="relative ml-auto max-w-md border border-gold/40 bg-forest/30 p-3 backdrop-blur-sm">
+                        <img
+                            src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=900&q=85"
+                            alt="Pemandangan bangunan bersejarah di Indonesia"
+                            class="h-[440px] w-full object-cover">
+
+                        <div class="absolute -bottom-6 -left-8 max-w-xs border border-gold/30 bg-forest/95 p-5 shadow-gold">
+                            <p class="text-[10px] uppercase tracking-[0.3em] text-gold">
+                                Jejak Peradaban
+                            </p>
+                            <p class="mt-2 font-serif text-xl">
+                                Keindahan yang tak lekang waktu.
+                            </p>
+                        </div>
+                    </div>
+
+                    <span class="absolute -bottom-12 right-0 font-serif text-sm italic text-cream/50">
+                        Discover the soul of Java
+                    </span>
+                </div>
+            </div>
+
+            <div class="absolute bottom-7 left-1/2 hidden -translate-x-1/2 items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-cream/50 md:flex">
+                <span class="h-10 w-px bg-gold/70"></span>
+                Scroll to explore
+            </div>
+        </section>
+
+        <!-- INTRO / INFO CARDS -->
+        <section id="tentang" class="relative z-10 -mt-10 px-5 pb-24 md:px-10">
+
+            <div class="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
+
+                <article class="info-card group border border-white/5 bg-card p-5 transition duration-500 hover:-translate-y-2 hover:border-gold/40 hover:shadow-gold">
+                    <div class="overflow-hidden">
+                        <img
+                            src="https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?auto=format&fit=crop&w=800&q=80"
+                            alt="Pemandangan alam dan warisan budaya"
+                            loading="lazy"
+                            class="h-56 w-full object-cover transition duration-700 group-hover:scale-105">
+                    </div>
+
+                    <p class="mt-6 text-[10px] uppercase tracking-[0.25em] text-gold">01 — Arsitektur</p>
+
+                    <h2 class="mt-3 font-serif text-2xl">
+                        Mahakarya Batu
+                    </h2>
+
+                    <p class="mt-3 text-sm leading-7 text-muted">
+                        Mengenal keagungan candi dan detail arsitektur
+                        yang merekam kecerdasan peradaban masa lampau.
+                    </p>
+
+                    <a href="#budaya" class="mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-gold">
+                        Selengkapnya <span>↗</span>
+                    </a>
+                </article>
+
+                <article class="info-card group border border-white/5 bg-card p-5 transition duration-500 hover:-translate-y-2 hover:border-gold/40 hover:shadow-gold">
+                    <div class="overflow-hidden">
+                        <img
+                            src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80"
+                            alt="Karya seni dan proses kreatif"
+                            loading="lazy"
+                            class="h-56 w-full object-cover transition duration-700 group-hover:scale-105">
+                    </div>
+
+                    <p class="mt-6 text-[10px] uppercase tracking-[0.25em] text-gold">02 — Seni Rupa</p>
+
+                    <h2 class="mt-3 font-serif text-2xl">
+                        Jejak Kreativitas
+                    </h2>
+
+                    <p class="mt-3 text-sm leading-7 text-muted">
+                        Dari batik hingga ukiran, setiap karya menyimpan
+                        simbol, ketelitian, dan cerita kehidupan.
+                    </p>
+
+                    <a href="#galeri" class="mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-gold">
+                        Selengkapnya <span>↗</span>
+                    </a>
+                </article>
+
+                <article class="info-card group border border-white/5 bg-card p-5 transition duration-500 hover:-translate-y-2 hover:border-gold/40 hover:shadow-gold">
+                    <div class="overflow-hidden">
+                        <img
+                            src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
+                            alt="Bentang alam yang menjadi bagian kehidupan masyarakat"
+                            loading="lazy"
+                            class="h-56 w-full object-cover transition duration-700 group-hover:scale-105">
+                    </div>
+
+                    <p class="mt-6 text-[10px] uppercase tracking-[0.25em] text-gold">03 — Filosofi</p>
+
+                    <h2 class="mt-3 font-serif text-2xl">
+                        Harmoni Kehidupan
+                    </h2>
+
+                    <p class="mt-3 text-sm leading-7 text-muted">
+                        Memahami nilai kebersamaan, keselarasan alam,
+                        dan kearifan yang diwariskan antargenerasi.
+                    </p>
+
+                    <a href="#budaya" class="mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-gold">
+                        Selengkapnya <span>↗</span>
+                    </a>
+                </article>
+
+            </div>
+        
+<!-- PETA INDONESIA -->
+<section id="peta" class="bg-deep px-5 py-24 md:px-10 md:py-32">
+
+    <div class="mx-auto max-w-7xl">
+
+        <div class="text-center">
+            <p class="section-reveal text-xs uppercase tracking-[0.35em] text-gold">
+                Mengenal Nusantara
+            </p>
+
+            <h2 class="section-reveal mt-5 font-serif text-4xl md:text-6xl">
+                Sebuah Negeri,
+                <span class="italic text-gold">Ribuan Cerita.</span>
+            </h2>
+
+            <p class="section-reveal mx-auto mt-6 max-w-2xl text-sm leading-8 text-muted md:text-base">
+                Indonesia menyimpan beragam bahasa, seni, adat,
+                dan tradisi. Temukan posisi budaya Jawa dalam
+                kekayaan warisan Nusantara.
+            </p>
+        </div>
+
+        <div class="relative mt-14 overflow-hidden border border-gold/20 px-5 py-12 md:px-12 md:py-16">
+
+            <!-- Label peta -->
+            <div class="absolute left-5 top-5 z-10 text-[10px] uppercase tracking-[0.25em] text-gold/70">
+                Peta Warisan Nusantara
+            </div>
+
+            <div class="grid items-center gap-12 lg:grid-cols-2">
+
+                <!-- GAMBAR PETA INDONESIA -->
+                <div class="relative flex items-center justify-center pt-5">
+
+                    <img
+                        src="../../img/Peta_Indonesia.png"
+                        alt="Peta Indonesia dan kepulauannya"
+                        class="w-full max-w-xl object-contain"
+                    >
+
+                <!-- Penanda Pulau Jawa -->
+                <div class="absolute left-[35%] top-[72%] z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
+
+                    <!-- Gambar Stupa -->
+                    <img
+                        src="../../img/stupa.png"
+                        alt="Stupa di Pulau Jawa"
+                        class="w-12 h-12 object-contain drop-shadow-lg md:h-16 md:w-16"
+                    >
+
+                    <!-- Label Pulau Jawa -->
+                    <span class="mt-1 whitespace-nowrap border border-gold/50 bg-deep/95 px-3 py-1 text-[10px] uppercase tracking-wider text-gold md:text-xs">
+                        Pulau Jawa
+                    </span>
+
+                </div>
+
+                    <p class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full pt-4 text-center text-[10px] uppercase tracking-widest text-cream/40">
+                        Kepulauan Indonesia
+                    </p>
+
+                </div>
+
+                <!-- INFORMASI BUDAYA JAWA -->
+                <div class="mt-5 lg:mt-0">
+
+                    <p class="text-xs uppercase tracking-[0.3em] text-gold">
+                        Sorotan Budaya
+                    </p>
+
+                    <h3 class="mt-5 font-serif text-3xl leading-snug md:text-4xl">
+                        Jawa, tempat tradisi
+                        <span class="italic text-gold">terus bertumbuh.</span>
+                    </h3>
+
+                    <p class="mt-5 text-sm leading-8 text-muted">
+                        Pulau Jawa menjadi rumah bagi beragam
+                        tradisi, mulai dari wayang kulit dan
+                        gamelan hingga batik, keris, serta
+                        berbagai upacara adat.
+                    </p>
+
+                    <div class="mt-8 grid grid-cols-2 gap-4">
+
+                        <div class="border-l border-gold/50 pl-4">
+                            <p class="font-serif text-2xl text-gold">Seni</p>
+                            <p class="mt-1 text-xs text-muted">
+                                Karya dan pertunjukan
+                            </p>
+                        </div>
+
+                        <div class="border-l border-gold/50 pl-4">
+                            <p class="font-serif text-2xl text-gold">Tradisi</p>
+                            <p class="mt-1 text-xs text-muted">
+                                Nilai lintas generasi
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <a
+                        href="#galeri"
+                        class="mt-9 inline-flex items-center gap-4 border border-gold/50 px-6 py-4 text-xs uppercase tracking-widest text-gold transition hover:bg-gold hover:text-forest"
+                    >
+                        Jelajahi Galeri <span>→</span>
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+        <!-- GALERI -->
+        <section id="galeri" class="px-5 py-24 md:px-10 md:py-32">
+
+            <div class="mx-auto max-w-7xl">
+
+                <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+                    <div>
+                        <p class="section-reveal text-xs uppercase tracking-[0.35em] text-gold">
+                            Rupa dan Irama Jawa
+                        </p>
+
+                        <h2 class="section-reveal mt-5 font-serif text-4xl md:text-6xl">
+                            Kisah dalam
+                            <span class="italic text-gold">Setiap Karya.</span>
+                        </h2>
+                    </div>
+
+                    <p class="section-reveal max-w-md text-sm leading-8 text-muted">
+                        Menikmati keindahan visual dan ekspresi artistik
+                        yang menjadi bagian dari identitas budaya Jawa.
+                    </p>
+                </div>
+
+                <div class="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+
+                    <article class="gallery-card group relative h-80 overflow-hidden sm:h-96">
+                        <img
+                            src="https://images.unsplash.com/photo-1577083288073-40892c0860a4?auto=format&fit=crop&w=800&q=80"
+                            alt="Karya seni lukis"
+                            loading="lazy"
+                            class="gallery-image h-full w-full object-cover">
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-forest via-forest/10 to-transparent"></div>
+
+                        <div class="absolute bottom-0 p-6">
+                            <p class="text-[10px] uppercase tracking-[0.25em] text-gold">01 / Seni Rupa</p>
+                            <h3 class="mt-2 font-serif text-2xl">Jejak Artistik</h3>
+                            <p class="mt-2 text-xs text-cream/70">Warna, bentuk, dan makna.</p>
+                        </div>
+                    </article>
+
+                    <article class="gallery-card group relative mt-0 h-80 overflow-hidden sm:mt-10 sm:h-96">
+                        <img
+                            src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80"
+                            alt="Inspirasi karya seni"
+                            loading="lazy"
+                            class="gallery-image h-full w-full object-cover">
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-forest via-forest/10 to-transparent"></div>
+
+                        <div class="absolute bottom-0 p-6">
+                            <p class="text-[10px] uppercase tracking-[0.25em] text-gold">02 / Kreativitas</p>
+                            <h3 class="mt-2 font-serif text-2xl">Ruang Ekspresi</h3>
+                            <p class="mt-2 text-xs text-cream/70">Inspirasi dalam setiap karya.</p>
+                        </div>
+                    </article>
+
+                    <article class="gallery-card group relative h-80 overflow-hidden sm:h-96">
+                        <img
+                            src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80"
+                            alt="Arsitektur bangunan bersejarah"
+                            loading="lazy"
+                            class="gallery-image h-full w-full object-cover">
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-forest via-forest/10 to-transparent"></div>
+
+                        <div class="absolute bottom-0 p-6">
+                            <p class="text-[10px] uppercase tracking-[0.25em] text-gold">03 / Arsitektur</p>
+                            <h3 class="mt-2 font-serif text-2xl">Warisan Batu</h3>
+                            <p class="mt-2 text-xs text-cream/70">Kemegahan masa lampau.</p>
+                        </div>
+                    </article>
+
+                    <article class="gallery-card group relative mt-0 h-80 overflow-hidden sm:mt-10 sm:h-96">
+                        <img
+                            src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
+                            alt="Keindahan lanskap alam"
+                            loading="lazy"
+                            class="gallery-image h-full w-full object-cover">
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-forest via-forest/10 to-transparent"></div>
+
+                        <div class="absolute bottom-0 p-6">
+                            <p class="text-[10px] uppercase tracking-[0.25em] text-gold">04 / Kehidupan</p>
+                            <h3 class="mt-2 font-serif text-2xl">Harmoni Alam</h3>
+                            <p class="mt-2 text-xs text-cream/70">Manusia dan lingkungannya.</p>
+                        </div>
+                    </article>
+
+                </div>
+
+                <div class="mt-12 text-center">
+                    <a href="#budaya"
+                        class="inline-flex items-center gap-4 border border-gold/50 px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-gold transition hover:bg-gold hover:text-forest">
+                        Temukan Kisah Lainnya <span>↗</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- BUDAYA DAN ADAT -->
+        <section id="budaya" class="overflow-hidden bg-deep">
+
+            <div class="mx-auto grid max-w-7xl lg:grid-cols-2">
+
+                <div class="culture-text px-5 py-20 md:px-10 md:py-28 lg:pl-12 lg:pr-16">
+
+                    <p class="text-xs uppercase tracking-[0.35em] text-gold">
+                        Seni, Adat, dan Religi
+                    </p>
+
+                    <h2 class="mt-6 font-serif text-4xl leading-tight md:text-6xl">
+                        Budaya dan
+                        <span class="block italic text-gold">Adat Jawa.</span>
+                    </h2>
+
+                    <div class="gold-line my-8 max-w-24"></div>
+
+                    <h3 class="font-serif text-2xl">
+                        Kearifan dalam Setiap Tradisi
+                    </h3>
+
+                    <p class="mt-5 text-sm leading-8 text-muted">
+                        Budaya Jawa tumbuh melalui perpaduan kesenian,
+                        nilai sosial, kepercayaan, dan kebiasaan
+                        masyarakat. Setiap tradisi memiliki latar
+                        belakang serta makna yang berbeda, mencerminkan
+                        cara masyarakat memahami kehidupan dan
+                        hubungannya dengan lingkungan.
+                    </p>
+
+                    <p class="mt-4 text-sm leading-8 text-muted">
+                        Wayang kulit menyampaikan kisah dan nilai
+                        kehidupan, gamelan menghadirkan harmoni bunyi,
+                        sementara batik menyimpan keragaman motif
+                        yang berkembang di berbagai daerah.
+                    </p>
+
+                    <div class="mt-9 grid grid-cols-2 gap-5">
+                        <div class="border-l border-gold/50 pl-4">
+                            <p class="font-serif text-xl text-gold">Wayang</p>
+                            <p class="mt-2 text-xs leading-6 text-muted">
+                                Seni pertunjukan penuh simbol.
+                            </p>
+                        </div>
+
+                        <div class="border-l border-gold/50 pl-4">
+                            <p class="font-serif text-xl text-gold">Gamelan</p>
+                            <p class="mt-2 text-xs leading-6 text-muted">
+                                Harmoni musik tradisional.
+                            </p>
+                        </div>
+
+                        <div class="border-l border-gold/50 pl-4">
+                            <p class="font-serif text-xl text-gold">Batik</p>
+                            <p class="mt-2 text-xs leading-6 text-muted">
+                                Motif dengan karakter khas.
+                            </p>
+                        </div>
+
+                        <div class="border-l border-gold/50 pl-4">
+                            <p class="font-serif text-xl text-gold">Adat</p>
+                            <p class="mt-2 text-xs leading-6 text-muted">
+                                Tradisi yang hidup di masyarakat.
+                            </p>
+                        </div>
+                    </div>
+
+                    <a href="#penutup"
+                        class="mt-10 inline-flex items-center gap-4 bg-gold px-7 py-4 text-xs font-bold uppercase tracking-widest text-forest transition hover:bg-cream">
+                        Kenali Warisan Kita <span>→</span>
+                    </a>
+                </div>
+
+                <div class="culture-image relative min-h-[450px] lg:min-h-full">
+                    <img
+                        src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=1200&q=85"
+                        alt="Arsitektur bersejarah yang menginspirasi pelestarian budaya"
+                        loading="lazy"
+                        class="absolute inset-0 h-full w-full object-cover">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-forest/80 via-transparent to-forest/10"></div>
+
+                    <div class="absolute bottom-8 left-8 right-8 border border-white/20 bg-forest/65 p-6 backdrop-blur-md md:bottom-12 md:left-12 md:right-12">
+                        <p class="text-[10px] uppercase tracking-[0.3em] text-gold">
+                            Warisan Lintas Generasi
+                        </p>
+
+                        <p class="mt-3 font-serif text-2xl leading-snug md:text-3xl">
+                            Mengenal masa lalu,
+                            merawat identitas,
+                            menatap masa depan.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PENUTUP -->
+        <section id="penutup" class="px-5 py-24 text-center md:px-10 md:py-32">
+
+            <div class="mx-auto max-w-3xl">
+                <div class="section-reveal mx-auto flex h-14 w-14 items-center justify-center border border-gold/50 font-serif text-2xl text-gold">
+                    ✦
+                </div>
+
+                <p class="section-reveal mt-8 text-xs uppercase tracking-[0.35em] text-gold">
+                    Warisan yang Berharga
+                </p>
+
+                <h2 class="section-reveal mt-5 font-serif text-4xl leading-tight md:text-6xl">
+                    Budaya bukan sekadar masa lalu,
+                    <span class="block italic text-gold">melainkan kehidupan.</span>
+                </h2>
+
+                <p class="section-reveal mx-auto mt-6 max-w-xl text-sm leading-8 text-muted">
+                    Mari mengenal, menghargai, dan menjaga kekayaan
+                    budaya Jawa agar tetap menjadi bagian bermakna
+                    dari kehidupan generasi mendatang.
+                </p>
+
+                <a href="#beranda"
+                    class="mt-9 inline-flex items-center gap-3 border border-gold/50 px-7 py-4 text-xs uppercase tracking-widest text-gold transition hover:bg-gold hover:text-forest">
+                    Kembali ke Atas ↑
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 bg-[#080f0c] px-5 py-14 md:px-10">
+
+        <div class="mx-auto grid max-w-7xl gap-10 sm:grid-cols-2 lg:grid-cols-4">
+
+            <div class="lg:col-span-2">
+                <a href="#beranda" class="inline-flex items-center gap-3">
+                    <div class="flex h-10 w-10 items-center justify-center border border-gold/60 text-xl text-gold">
+                        ✦
+                    </div>
+
+                    <span class="font-serif text-2xl tracking-[0.15em] text-gold">
+                        PRAMBANAN
+                    </span>
+                </a>
+
+                <p class="mt-5 max-w-sm text-sm leading-7 text-muted">
+                    Ruang digital untuk mengenal seni, sejarah,
+                    tradisi, dan kekayaan budaya Jawa.
+                </p>
+
+                <p class="mt-6 text-xs uppercase tracking-widest text-cream/40">
+                    Merawat warisan, meneruskan cerita.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-gold">
+                    Navigasi
+                </h3>
+
+                <ul class="mt-5 space-y-4 text-sm text-muted">
+                    <li><a href="#beranda" class="transition hover:text-gold">Beranda</a></li>
+                    <li><a href="#tentang" class="transition hover:text-gold">Tentang</a></li>
+                    <li><a href="#peta" class="transition hover:text-gold">Jelajahi Nusantara</a></li>
+                    <li><a href="#galeri" class="transition hover:text-gold">Galeri</a></li>
+                    <li><a href="#budaya" class="transition hover:text-gold">Budaya dan Adat</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-gold">
+                    Tentang Situs
+                </h3>
+
+                <p class="mt-5 text-sm leading-7 text-muted">
+                    Dibuat sebagai ruang belajar dan eksplorasi
+                    kekayaan seni serta budaya Jawa.
+                </p>
+
+                <a href="#penutup"
+                    class="mt-5 inline-block text-sm text-gold transition hover:text-cream">
+                    Kenali warisan kita ↗
+                </a>
+            </div>
+        </div>
+
+        <div class="mx-auto mt-12 max-w-7xl border-t border-white/10 pt-6">
+            <div class="flex flex-col justify-between gap-3 text-xs text-cream/40 sm:flex-row">
+                <p>© <span id="year"></span> Prambanan — Seni & Budaya Jawa.</p>
+                <p>Dibuat dengan rasa cinta terhadap budaya Nusantara.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Tahun otomatis
+        document.getElementById('year').textContent =
+            new Date().getFullYear();
+
+        // Menu mobile
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuButton.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.toggle('hidden');
+
+            menuButton.setAttribute('aria-expanded', String(!isHidden));
+            menuButton.textContent = isHidden ? '☰' : '✕';
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.className +=
+                ' block text-cream/80 transition hover:text-gold';
+
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuButton.setAttribute('aria-expanded', 'false');
+                menuButton.textContent = '☰';
+            });
+        });
+
+        // Animasi GSAP
+        if (window.gsap && window.ScrollTrigger) {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Menghormati pengaturan reduced motion
+            const reduceMotion = window.matchMedia(
+                '(prefers-reduced-motion: reduce)'
+            ).matches;
+
+            if (!reduceMotion) {
+                const intro = gsap.timeline({
+                    defaults: {
+                        ease: 'power3.out'
+                    }
+                });
+
+                intro
+                    .from('#navbar', {
+                        y: -35,
+                        opacity: 0,
+                        duration: 0.8
+                    })
+                    .from('.hero-text > *', {
+                        y: 30,
+                        opacity: 0,
+                        duration: 0.8,
+                        stagger: 0.15
+                    }, '-=0.35')
+                    .from('.hero-image', {
+                        x: 35,
+                        opacity: 0,
+                        duration: 1
+                    }, '-=0.6');
+
+                gsap.from('.info-card', {
+                    scrollTrigger: {
+                        trigger: '#tentang',
+                        start: 'top 80%'
+                    },
+                    y: 45,
+                    opacity: 0,
+                    duration: 0.7,
+                    stagger: 0.18,
+                    ease: 'power2.out'
+                });
+
+                gsap.utils.toArray('.section-reveal').forEach(element => {
+                    gsap.from(element, {
+                        scrollTrigger: {
+                            trigger: element,
+                            start: 'top 88%'
+                        },
+                        y: 30,
+                        opacity: 0,
+                        duration: 0.8,
+                        ease: 'power2.out'
+                    });
+                });
+
+                gsap.from('.gallery-card', {
+                    scrollTrigger: {
+                        trigger: '#galeri',
+                        start: 'top 75%'
+                    },
+                    y: 35,
+                    opacity: 0,
+                    duration: 0.7,
+                    stagger: 0.15,
+                    ease: 'power2.out'
+                });
+
+                gsap.from('.culture-text', {
+                    scrollTrigger: {
+                        trigger: '#budaya',
+                        start: 'top 75%'
+                    },
+                    x: -35,
+                    opacity: 0,
+                    duration: 0.9,
+                    ease: 'power2.out'
+                });
+
+                gsap.from('.culture-image', {
+                    scrollTrigger: {
+                        trigger: '#budaya',
+                        start: 'top 75%'
+                    },
+                    x: 35,
+                    opacity: 0,
+                    duration: 0.9,
+                    ease: 'power2.out'
+                });
+            }
+        }
+    </script>
+
 </body>
 </html>
