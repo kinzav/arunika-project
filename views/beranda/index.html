@@ -804,7 +804,126 @@
         });
 
         // Animasi GSAP
-        if (window.gsap && window.ScrollTrigger) {
+
+/* ANIMASI GSAP — RESPONSIVE & ANTI-STUCK */
+(() => {
+    const reduceMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    // Kalau GSAP gagal dimuat, konten tetap terlihat.
+    if (!window.gsap || !window.ScrollTrigger || reduceMotion) {
+        document.querySelectorAll(
+            '.hero-text > *, .hero-image, .info-card, ' +
+            '.section-reveal, .gallery-card, ' +
+            '.culture-text, .culture-image'
+        ).forEach((element) => {
+            element.style.opacity = '1';
+            element.style.visibility = 'visible';
+            element.style.transform = 'none';
+        });
+
+        return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animasi navbar dan hero
+    gsap.fromTo(
+        '#navbar',
+        { y: -25, autoAlpha: 0 },
+        {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.7,
+            ease: 'power3.out'
+        }
+    );
+
+    gsap.fromTo(
+        '.hero-text > *',
+        { y: 25, autoAlpha: 0 },
+        {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.7,
+            stagger: 0.12,
+            ease: 'power3.out',
+            delay: 0.15
+        }
+    );
+
+    // Gambar hero hanya tampil pada breakpoint lg ke atas.
+    if (window.matchMedia('(min-width: 1024px)').matches) {
+        gsap.fromTo(
+            '.hero-image',
+            { x: 30, autoAlpha: 0 },
+            {
+                x: 0,
+                autoAlpha: 1,
+                duration: 0.9,
+                ease: 'power3.out',
+                delay: 0.35
+            }
+        );
+    }
+
+    // Fungsi reveal: setiap elemen punya trigger sendiri.
+    function reveal(selector, options = {}) {
+        gsap.utils.toArray(selector).forEach((element) => {
+            gsap.fromTo(
+                element,
+                {
+                    autoAlpha: 0,
+                    y: options.y ?? 28,
+                    x: options.x ?? 0
+                },
+                {
+                    autoAlpha: 1,
+                    y: 0,
+                    x: 0,
+                    duration: options.duration ?? 0.7,
+                    ease: 'power2.out',
+                    immediateRender: false,
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 92%',
+                        once: true,
+                        invalidateOnRefresh: true
+                    }
+                }
+            );
+        });
+    }
+
+    // Card informasi
+    reveal('.info-card', { y: 35 });
+
+    // Judul dan teks section
+    reveal('.section-reveal', { y: 25 });
+
+    // Card galeri
+    reveal('.gallery-card', { y: 30 });
+
+    // Konten budaya
+    reveal('.culture-text', { x: -30, y: 0, duration: 0.8 });
+    reveal('.culture-image', { x: 30, y: 0, duration: 0.8 });
+
+    // Hitung ulang posisi trigger setelah layout dan gambar berubah.
+    window.addEventListener('load', () => {
+        ScrollTrigger.refresh();
+    });
+
+    window.addEventListener('resize', () => {
+        ScrollTrigger.refresh();
+    });
+
+    // Pastikan trigger dihitung setelah animasi didaftarkan.
+    requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+    });
+})();
+
             gsap.registerPlugin(ScrollTrigger);
 
             // Menghormati pengaturan reduced motion
@@ -896,8 +1015,6 @@
                     ease: 'power2.out'
                 });
             }
-        }
     </script>
-
 </body>
 </html>
