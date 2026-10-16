@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1512">
+
+    <title>Galeri Seni — Arunika</title>
+    <meta name="description" content="Jelajahi keindahan seni dan warisan budaya Jawa melalui galeri seni Arunika.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: '#0b1512',
+                        deep: '#101c18',
+                        surface: '#17251f',
+                        gold: '#d4af67',
+                        cream: '#f0e6d2',
+                        muted: '#b9c2b7'
+                    },
+                    fontFamily: {
+                        sans: ['Segoe UI', 'Tahoma', 'sans-serif'],
+                        serif: ['Georgia', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            margin: 0;
+            background: #0b1512;
+            color: #f0e6d2;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: #c9a66b;
+            color: #0b1512;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 1px;
+            left: 0;
+            bottom: -7px;
+            background: #d4af67;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hero-background {
+            background:
+                radial-gradient(ellipse at 80% 40%, rgba(201,166,107,.09), transparent 40%),
+                radial-gradient(ellipse at 10% 90%, rgba(54,92,68,.13), transparent 40%);
+        }
+
+        .hero-image {
+            transition: transform .8s cubic-bezier(.2,.7,.2,1);
+        }
+
+        .hero-frame:hover .hero-image {
+            transform: scale(1.045);
+        }
+
+        .gallery-card {
+            transition:
+                transform .35s ease,
+                border-color .35s ease,
+                background .35s ease;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(201,166,107,.6);
+            background: #1b2a23;
+        }
+
+        .gallery-image {
+            transition: transform .65s cubic-bezier(.2,.7,.2,1);
+        }
+
+        .gallery-card:hover .gallery-image {
+            transform: scale(1.07);
+        }
+
+        .gallery-card:hover .card-title {
+            color: #c9a66b;
+        }
+
+        .card-title {
+            transition: color .3s ease;
+        }
+
+        .filter-button {
+            transition: all .25s ease;
+        }
+
+        .filter-button.active {
+            background: #c9a66b;
+            color: #0b1512;
+            border-color: #c9a66b;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #c9a66b;
+            box-shadow: 0 0 0 3px rgba(201,166,107,.08);
+        }
+
+        .section-line {
+            height: 1px;
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(201,166,107,.5),
+                transparent
+            );
+        }
+
+        .ornament {
+            color: #c9a66b;
+            letter-spacing: .35em;
+        }
+
+        .reveal {
+            animation: fadeUp .8s ease both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar"
+    class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-forest/90 backdrop-blur-xl">
+
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-10">
+
+        <!-- Logo -->
+        <a href="#beranda" class="flex items-center">
+            <div>
+                <p class="font-serif text-xl font-bold tracking-[0.15em] text-gold">
+                    Arunika
+                </p>
+                <p class="text-[9px] uppercase tracking-[0.3em] text-cream/60">
+                    Warisan Nusantara
+                </p>
+            </div>
+        </a>
+
+        <!-- Tombol Menu Mobile -->
+        <button id="menu-button"
+            class="rounded border border-white/15 px-3 py-2 text-sm text-cream md:hidden"
+            aria-label="Buka menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu">
+            ☰
+        </button>
+
+        <!-- Menu Desktop -->
+        <div class="hidden items-center gap-8 text-sm text-cream/80 md:flex">
+            <a href="#beranda" class="nav-link transition hover:text-gold">
+                Beranda
+            </a>
+
+            <a href="galeri-seni.html#galeri-seni"
+                class="nav-link transition hover:text-gold">
+                Galeri Seni
+            </a>
+
+            <a href="#tradisi"
+                class="nav-link transition hover:text-gold">
+                Tradisi
+            </a>
+
+            <a href="#kuliner"
+                class="nav-link transition hover:text-gold">
+                Kuliner
+            </a>
+
+            <a href="#sejarah"
+                class="nav-link transition hover:text-gold">
+                Sejarah
+            </a>
+        </div>
+
+        <!-- Tombol Eksplorasi -->
+        <a href="#sejarah"
+            class="hidden border border-gold/60 px-5 py-3 text-xs font-semibold uppercase tracking-widest text-gold transition hover:bg-gold hover:text-forest lg:block">
+            Mulai Eksplorasi ↗
+        </a>
+
+    </div>
+
+    <!-- Menu Mobile -->
+    <div id="mobile-menu"
+        class="hidden border-t border-white/10 bg-forest px-6 py-4 md:hidden">
+
+        <div class="flex flex-col gap-5 text-sm">
+            <a href="#beranda"
+                class="mobile-link block text-cream/80 transition hover:text-gold">
+                Beranda
+            </a>
+
+            <a href="galeri-seni.html#galeri-seni"
+                class="mobile-link block text-cream/80 transition hover:text-gold">
+                Galeri Seni
+            </a>
+
+            <a href="#tradisi"
+                class="mobile-link block text-cream/80 transition hover:text-gold">
+                Tradisi
+            </a>
+
+            <a href="#kuliner"
+                class="mobile-link block text-cream/80 transition hover:text-gold">
+                Kuliner
+            </a>
+
+            <a href="#sejarah"
+                class="mobile-link block text-cream/80 transition hover:text-gold">
+                Sejarah
+            </a>
+        </div>
+
+    </div>
+</nav>
+
+    <!-- HERO -->
+    <header id="beranda" class="hero-background relative overflow-hidden px-5 pb-20 pt-32 md:px-10 md:pb-32 md:pt-48">
+
+        <!-- Dekorasi -->
+        <div class="pointer-events-none absolute -right-40 top-20 h-96 w-96 rounded-full bg-gold/[0.06] blur-[100px]"></div>
+        <div class="pointer-events-none absolute -left-40 bottom-0 h-80 w-80 rounded-full bg-emerald-900/20 blur-[100px]"></div>
+
+        <div class="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1fr_.9fr] lg:gap-20">
+
+            <!-- Hero Text -->
+            <div class="reveal">
+                <div class="mb-7 flex items-center gap-4">
+                    <span class="h-px w-10 bg-gold"></span>
+                    <p class="text-[10px] font-semibold uppercase tracking-[.35em] text-gold md:text-xs">
+                        Galeri Seni Jawa
+                    </p>
+                </div>
+
+                <h1 class="font-serif text-5xl leading-[1.12] tracking-tight sm:text-6xl md:text-7xl xl:text-[86px]">
+                    Keindahan
+                    <span class="mt-2 block italic text-gold">yang Abadi.</span>
+                </h1>
+
+                <p class="mt-8 max-w-lg text-sm leading-8 text-muted md:text-base">
+                    Dari goresan canting hingga irama gamelan,
+                    setiap karya menyimpan cerita tentang identitas,
+                    filosofi, dan jiwa masyarakat Jawa.
+                </p>
+
+                <div class="mt-9 flex flex-wrap items-center gap-5">
+                    <a href="#koleksi"
+                        class="group inline-flex items-center gap-5 bg-gold px-6 py-4 text-xs font-bold uppercase tracking-[.18em] text-forest transition hover:bg-cream">
+                        Temukan Karya
+                        <span class="text-base transition-transform group-hover:translate-x-1">→</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Hero Images -->
+            <div class="relative mx-auto w-full max-w-xl reveal">
+
+                <div class="absolute -inset-4 border border-gold/20"></div>
+
+                <div class="relative grid grid-cols-[1.1fr_.9fr] gap-3 sm:gap-4">
+
+                    <!-- Gambar Utama -->
+                    <div class="hero-frame relative mt-10 overflow-hidden border border-white/10 bg-surface">
+                        <img
+                            src="img/wayang-utama.jpg"
+                            alt="Wayang kulit sebagai karya seni tradisional Jawa"
+                            class="hero-image h-[310px] w-full object-cover sm:h-[420px]"
+                            fetchpriority="high"
+                        >
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-forest/90 via-transparent to-transparent"></div>
+
+                        <div class="absolute bottom-0 left-0 p-4 sm:p-6">
+                            <p class="text-[9px] uppercase tracking-[.25em] text-gold">
+                                Seni Pertunjukan
+                            </p>
+                            <h2 class="mt-2 font-serif text-xl sm:text-2xl">
+                                Wayang Kulit
+                            </h2>
+                        </div>
+                    </div>
+
+                    <!-- Gambar Kedua -->
+                    <div class="flex flex-col gap-3 sm:gap-4">
+                        <div class="hero-frame relative overflow-hidden border border-white/10 bg-surface">
+                            <img
+                                src="img/batik-jawa.jpg"
+                                alt="Motif batik tradisional Jawa"
+                                class="hero-image h-44 w-full object-cover sm:h-60"
+                            >
+                        </div>
+
+                        <div class="flex flex-1 flex-col justify-between border border-gold/25 bg-surface p-4 sm:p-6">
+                            <span class="text-2xl text-gold">✳</span>
+                            <div>
+                                <p class="text-[9px] uppercase tracking-[.2em] text-muted">
+                                    Seni Tekstil
+                                </p>
+                                <h2 class="mt-2 font-serif text-lg sm:text-2xl">
+                                    Batik Jawa
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="mt-6 text-center text-[9px] uppercase tracking-[.3em] text-cream/40">
+                    Setiap karya, sebuah warisan
+                </p>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- PEMBATAS -->
+    <div class="px-5 md:px-10">
+        <div class="section-line mx-auto max-w-7xl"></div>
+    </div>
+
+
+    <!-- TENTANG SENI -->
+    <section id="tentang-seni" class="px-5 py-20 md:px-10 md:py-28">
+
+        <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-center lg:gap-20">
+
+            <div>
+                <p class="ornament text-[10px] uppercase">
+                     Filosofi Karya
+                </p>
+
+                <h2 class="mt-6 font-serif text-4xl leading-tight md:text-5xl">
+                    Bukan sekadar seni,
+                    <span class="block italic text-gold">melainkan cerita.</span>
+                </h2>
+
+            </div>
+
+            <div>
+                <p class="text-sm leading-8 text-muted md:text-base">
+                    Seni tradisional Jawa tumbuh bersama kehidupan
+                    masyarakatnya. Ia hadir dalam upacara adat,
+                    pertunjukan, kerajinan, hingga keseharian.
+                    Di balik setiap bentuk dan motif, terdapat
+                    nilai, simbol, serta pengetahuan yang diwariskan
+                    dari satu generasi ke generasi berikutnya.
+                </p>
+
+                <p class="mt-5 text-sm leading-8 text-muted md:text-base">
+                    Melalui Arunika, mari mengenal kembali karya-karya
+                    tersebut, memahami maknanya, dan menjaga agar
+                    kekayaan budaya ini tetap hidup di masa depan.
+                </p>
+
+                <a href="#koleksi"
+                    class="mt-7 inline-flex items-center gap-4 border-b border-gold/60 pb-2 text-xs font-semibold uppercase tracking-[.15em] text-gold transition hover:border-cream hover:text-cream">
+                    Jelajahi koleksi <span>→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- KARYA UTAMA -->
+    <section class="bg-deep px-5 py-20 md:px-10 md:py-28">
+
+        <div class="mx-auto max-w-7xl">
+
+            <div class="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+                <div>
+                    <p class="text-[10px] uppercase tracking-[.3em] text-gold">
+                        Pilihan Editor
+                    </p>
+
+                    <h2 class="mt-4 font-serif text-4xl md:text-5xl">
+                        Mahakarya <span class="italic text-gold">Pilihan.</span>
+                    </h2>
+                </div>
+
+                <p class="max-w-md text-sm leading-7 text-muted">
+                    Mengenal salah satu kesenian yang menjadi bagian
+                    penting dalam perjalanan budaya Jawa.
+                </p>
+            </div>
+
+            <div class="grid overflow-hidden border border-gold/20 lg:grid-cols-2">
+
+                <!-- Gambar -->
+                <div class="group relative min-h-[300px] overflow-hidden bg-surface lg:min-h-[500px]">
+                    <img
+                        src="img/wayang-utama.jpg"
+                        alt="Pertunjukan wayang kulit tradisional Jawa"
+                        loading="lazy"
+                        class="gallery-image absolute inset-0 h-full w-full object-cover"
+                    >
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-forest/70 via-transparent to-transparent"></div>
+
+                    <div class="absolute bottom-6 left-6 border border-white/30 px-4 py-3 backdrop-blur-md">
+                        <p class="text-[9px] uppercase tracking-[.2em] text-cream">
+                            Warisan Budaya Jawa
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Deskripsi -->
+                <div class="flex flex-col justify-center p-7 md:p-12 lg:p-16">
+
+                    <p class="text-[10px] uppercase tracking-[.3em] text-gold">
+                        01 — Seni Pertunjukan
+                    </p>
+
+                    <h3 class="mt-5 font-serif text-4xl md:text-5xl">
+                        Wayang Kulit
+                    </h3>
+
+                    <p class="mt-6 text-sm leading-8 text-muted">
+                        Wayang kulit merupakan seni pertunjukan tradisional
+                        yang menggunakan tokoh berbahan kulit yang diukir.
+                        Kisahnya dibawakan oleh dalang, diiringi gamelan,
+                        dan kerap mengandung pesan moral serta filosofi
+                        kehidupan.
+                    </p>
+
+                    <p class="mt-4 text-sm leading-8 text-muted">
+                        Lebih dari sekadar hiburan, wayang menjadi ruang
+                        untuk menyampaikan nilai, pengetahuan, dan
+                        pandangan hidup masyarakat.
+                    </p>
+
+                    <div class="mt-8 flex items-center gap-4 border-t border-white/10 pt-6">
+                        <p class="text-xs leading-6 text-cream/65">
+                            Sebuah tradisi yang terus dipelajari,
+                            dimainkan, dan diwariskan.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- GALERI -->
+    <section id="koleksi" class="px-5 py-20 md:px-10 md:py-28">
+
+        <div class="mx-auto max-w-7xl">
+
+            <!-- Heading -->
+            <div id="galeri-seni" class="mb-10">
+                <p class="text-[10px] uppercase tracking-[.3em] text-gold">
+                    Arsip Budaya
+                </p>
+
+                <div class="mt-4 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+                    <div>
+                        <h2 class="font-serif text-4xl md:text-6xl">
+                            Ruang <span class="italic text-gold">Karya.</span>
+                        </h2>
+
+                        <p class="mt-5 max-w-xl text-sm leading-7 text-muted">
+                            Temukan ragam seni tradisional Jawa, mulai
+                            dari pertunjukan yang penuh filosofi hingga
+                            kerajinan yang dibuat dengan ketelitian.
+                        </p>
+                    </div>
+
+                    <p id="resultCount" class="text-xs tracking-wide text-muted">
+                        Menampilkan 6 karya
+                    </p>
+                </div>
+            </div>
+
+            <!-- Search -->
+            <div class="mb-7 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+
+                <div class="flex flex-wrap gap-2" id="filterButtons">
+                    <button type="button"
+                        class="filter-button active border border-white/15 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[.12em]"
+                        data-filter="Semua">
+                        Semua Karya
+                    </button>
+
+                    <button type="button"
+                        class="filter-button border border-white/15 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[.12em] text-cream/65 hover:border-gold/50 hover:text-gold"
+                        data-filter="Pertunjukan">
+                        Pertunjukan
+                    </button>
+
+                    <button type="button"
+                        class="filter-button border border-white/15 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[.12em] text-cream/65 hover:border-gold/50 hover:text-gold"
+                        data-filter="Kerajinan">
+                        Kerajinan
+                    </button>
+
+                    <button type="button"
+                        class="filter-button border border-white/15 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[.12em] text-cream/65 hover:border-gold/50 hover:text-gold"
+                        data-filter="Musik">
+                        Musik
+                    </button>
+
+                    <button type="button"
+                        class="filter-button border border-white/15 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[.12em] text-cream/65 hover:border-gold/50 hover:text-gold"
+                        data-filter="Tari">
+                        Tari
+                    </button>
+                </div>
+
+                <div class="relative w-full lg:max-w-xs">
+                    <label for="searchGallery" class="sr-only">
+                        Cari karya seni
+                    </label>
+
+                    <input
+                        id="searchGallery"
+                        type="search"
+                        placeholder="Cari karya seni..."
+                        autocomplete="off"
+                        class="search-input w-full border border-white/15 bg-surface px-5 py-3.5 pr-12 text-sm text-cream placeholder:text-muted/60"
+                    >
+
+                    <span class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-lg text-gold">
+                        ⌕
+                    </span>
+                </div>
+            </div>
+
+            <!-- Kartu Galeri -->
+            <div id="galleryGrid" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+                <!-- Wayang -->
+                <article class="gallery-card overflow-hidden border border-white/10 bg-surface"
+                    data-title="Wayang Kulit"
+                    data-category="Pertunjukan">
+
+                    <div class="relative overflow-hidden">
+                        <img src="img/wayang-kulit.jpg"
+                            alt="Seni wayang kulit Jawa"
+                            loading="lazy"
+                            class="gallery-image h-64 w-full object-cover">
+
+                        <span class="absolute left-4 top-4 border border-white/20 bg-forest/80 px-3 py-2 text-[9px] uppercase tracking-[.15em] text-gold backdrop-blur-md">
+                            Pertunjukan
+                        </span>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="flex items-start justify-between gap-3">
+                            <h3 class="card-title font-serif text-2xl">Wayang Kulit</h3>
+                        </div>
+
+                        <p class="mt-3 text-sm leading-7 text-muted">
+                            Kisah kehidupan dan filosofi yang disampaikan
+                            melalui tokoh wayang, dalang, dan iringan gamelan.
+                        </p>
+
+                        <div class="mt-5 border-t border-white/10 pt-4">
+                            <p class="text-[9px] uppercase tracking-[.2em] text-cream/40">
+                                Seni Pertunjukan Jawa
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Batik -->
+                <article class="gallery-card overflow-hidden border border-white/10 bg-surface"
+                    data-title="Batik Jawa"
+                    data-category="Kerajinan">
+
+                    <div class="relative overflow-hidden">
+                        <img src="img/batik-jawa.jpg"
+                            alt="Motif batik tradisional Jawa"
+                            loading="lazy"
+                            class="gallery-image h-64 w-full object-cover">
+
+                        <span class="absolute left-4 top-4 border border-white/20 bg-forest/80 px-3 py-2 text-[9px] uppercase tracking-[.15em] text-gold backdrop-blur-md">
+                            Kerajinan
+                        </span>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="flex items-start justify-between gap-3">
+                            <h3 class="card-title font-serif text-2xl">Batik Jawa</h3>
+                        </div>
+
+                        <p class="mt-3 text-sm leading-7 text-muted">
+                            Kain bermotif yang dibuat melalui teknik
+                            tradisional dengan ragam corak dan makna.
+                        </p>
+
+                        <div class="mt-5 border-t border-white/10 pt-4">
+                            <p class="text-[9px] uppercase tracking-[.2em] text-cream/40">
+                                Seni Tekstil
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Gamelan -->
+                <article class="gallery-card overflow-hidden border border-white/10 bg-surface"
+                    data-title="Gamelan Jawa"
+                    data-category="Musik">
+
+                    <div class="relative overflow-hidden">
+                        <img src="img/gamelan-jawa.jpg"
+                            alt="Perangkat gamelan Jawa"
+                            loading="lazy"
+                            class="gallery-image h-64 w-full object-cover">
+
+                        <span class="absolute left-4 top-4 border border-white/20 bg-forest/80 px-3 py-2 text-[9px] uppercase tracking-[.15em] text-gold backdrop-blur-md">
+                            Musik
+                        </span>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="flex items-start justify-between gap-3">
+                            <h3 class="card-title font-serif text-2xl">Gamelan Jawa</h3>
+                        </div>
+
+                        <p class="mt-3 text-sm leading-7 text-muted">
+                            Ansambel musik tradisional dengan perpaduan
+                            instrumen yang membentuk irama khas Jawa.
+                        </p>
+
+                        <div class="mt-5 border-t border-white/10 pt-4">
+                            <p class="text-[9px] uppercase tracking-[.2em] text-cream/40">
+                                Seni Musik
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Tari Gambyong -->
+                <article class="gallery-card overflow-hidden border border-white/10 bg-surface"
+                    data-title="Tari Gambyong"
+                    data-category="Tari">
+
+                    <div class="relative overflow-hidden">
+                        <img src="img/tari-gambyong.jpg"
+                            alt="Pertunjukan Tari Gambyong"
+                            loading="lazy"
+                            class="gallery-image h-64 w-full object-cover">
+
+                        <span class="absolute left-4 top-4 border border-white/20 bg-forest/80 px-3 py-2 text-[9px] uppercase tracking-[.15em] text-gold backdrop-blur-md">
+                            Tari
+                        </span>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="flex items-start justify-between gap-3">
+                            <h3 class="card-title font-serif text-2xl">Tari Gambyong</h3>
+                        </div>
+
+                        <p class="mt-3 text-sm leading-7 text-muted">
+                            Tarian tradisional yang dikenal melalui
+                            gerak lembut, ekspresif, dan iringan gamelan.
+                        </p>
+
+                        <div class="mt-5 border-t border-white/10 pt-4">
+                            <p class="text-[9px] uppercase tracking-[.2em] text-cream/40">
+                                Seni Tari Jawa
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Ukiran Jepara -->
+                <article class="gallery-card overflow-hidden border border-white/10 bg-surface"
+                    data-title="Ukiran Jepara"
+                    data-category="Kerajinan">
+
+                    <div class="relative overflow-hidden">
+                        <img src="img/ukiran-jepara.jpg"
+                            alt="Ukiran kayu khas Jepara"
+                            loading="lazy"
+                            class="gallery-image h-64 w-full object-cover">
+
+                        <span class="absolute left-4 top-4 border border-white/20 bg-forest/80 px-3 py-2 text-[9px] uppercase tracking-[.15em] text-gold backdrop-blur-md">
+                            Kerajinan
+                        </span>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="flex items-start justify-between gap-3">
+                            <h3 class="card-title font-serif text-2xl">Ukiran Jepara</h3>
+                        </div>
+
+                        <p class="mt-3 text-sm leading-7 text-muted">
+                            Seni ukir kayu dengan detail motif yang
+                            mencerminkan ketelitian para pengrajin.
+                        </p>
+
+                        <div class="mt-5 border-t border-white/10 pt-4">
+                            <p class="text-[9px] uppercase tracking-[.2em] text-cream/40">
+                                Seni Ukir Kayu
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Keris -->
+                <article class="gallery-card overflow-hidden border border-white/10 bg-surface"
+                    data-title="Keris Jawa"
+                    data-category="Kerajinan">
+
+                    <div class="relative overflow-hidden">
+                        <img src="img/keris-jawa.jpg"
+                            alt="Keris sebagai warisan budaya Jawa"
+                            loading="lazy"
+                            class="gallery-image h-64 w-full object-cover">
+
+                        <span class="absolute left-4 top-4 border border-white/20 bg-forest/80 px-3 py-2 text-[9px] uppercase tracking-[.15em] text-gold backdrop-blur-md">
+                            Kerajinan
+                        </span>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="flex items-start justify-between gap-3">
+                            <h3 class="card-title font-serif text-2xl">Keris Jawa</h3>
+                        </div>
+
+                        <p class="mt-3 text-sm leading-7 text-muted">
+                            Warisan seni tempa yang memiliki nilai
+                            sejarah, filosofi, dan identitas budaya.
+                        </p>
+
+                        <div class="mt-5 border-t border-white/10 pt-4">
+                            <p class="text-[9px] uppercase tracking-[.2em] text-cream/40">
+                                Seni Kriya Tradisional
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Hasil pencarian kosong -->
+            <div id="emptyMessage" class="hidden py-20 text-center">
+                <p class="font-serif text-3xl text-cream">
+                    Karya belum ditemukan.
+                </p>
+                <p class="mt-3 text-sm text-muted">
+                    Coba gunakan kata kunci atau kategori lainnya.
+                </p>
+
+                <button id="resetSearch"
+                    class="mt-6 border border-gold/50 px-5 py-3 text-xs uppercase tracking-widest text-gold transition hover:bg-gold hover:text-forest">
+                    Reset Pencarian
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-[#080f0c] px-5 py-14 md:px-10 md:py-20">
+
+        <div class="mx-auto grid max-w-7xl gap-10 sm:grid-cols-2 lg:grid-cols-4">
+
+            <div class="lg:col-span-2">
+                <a href="#beranda" class="inline-flex items-center gap-3">
+
+
+                    <span class="font-serif text-2xl tracking-[0.15em] text-gold">
+                        Arunika
+                    </span>
+                </a>
+
+                <p class="mt-5 max-w-sm text-sm leading-7 text-muted">
+                    Ruang digital untuk mengenal seni, sejarah,
+                    tradisi, dan kekayaan budaya Jawa.
+                </p>
+
+                <p class="mt-6 text-xs uppercase tracking-widest text-cream/40">
+                    Merawat warisan, meneruskan cerita.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-gold">
+                    Navigasi
+                </h3>
+
+
+               <ul class="mt-6 grid w-fit grid-flow-col grid-rows-3 gap-x-4 gap-y-3 text-sm text-muted">
+
+                    <li>
+                        <a href="#beranda" class="transition hover:text-gold">
+                            Beranda
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#galeri" class="transition hover:text-gold">
+                            Galeri Seni
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#peta" class="transition hover:text-gold">
+                            Tradisi
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#kuliner" class="transition hover:text-gold">
+                            Kuliner
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#sejarah" class="transition hover:text-gold">
+                            Sejarah
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-gold">
+                    Tentang Situs
+                </h3>
+
+                <p class="mt-5 text-sm leading-7 text-muted">
+                    Dibuat sebagai ruang belajar dan eksplorasi
+                    kekayaan seni serta budaya Jawa.
+                </p>
+            </div>
+        </div>
+
+        <div class="mx-auto mt-12 max-w-7xl border-t border-white/10 pt-6">
+            <div class="flex flex-col justify-between gap-3 text-xs text-cream/40 sm:flex-row">
+                <p>© <span id="year"></span> Arunika — Seni & Budaya Jawa.</p>
+                <p>Dibuat dengan rasa cinta terhadap budaya Nusantara.</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        // Tahun otomatis di footer
+        document.getElementById('year').textContent =
+            new Date().getFullYear();
+
+        // Menu mobile
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuButton.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.toggle('hidden');
+
+            menuButton.setAttribute('aria-expanded', String(!isHidden));
+            menuButton.textContent = isHidden ? '☰' : '✕';
+        });
+
+        // Tutup menu setelah link dipilih
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuButton.setAttribute('aria-expanded', 'false');
+                menuButton.textContent = '☰';
+            });
+        });
+
+
+        // Pencarian dan filter galeri
+        const searchInput = document.getElementById('searchGallery');
+        const galleryCards = Array.from(
+            document.querySelectorAll('.gallery-card')
+        );
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const emptyMessage = document.getElementById('emptyMessage');
+        const resultCount = document.getElementById('resultCount');
+        const resetButton = document.getElementById('resetSearch');
+
+        let activeFilter = 'Semua';
+
+        function filterGallery() {
+            const keyword = searchInput.value
+                .toLowerCase()
+                .trim();
+
+            let visibleCards = 0;
+
+            galleryCards.forEach(function (card) {
+                const title = card.dataset.title.toLowerCase();
+                const category = card.dataset.category;
+                const description = card.textContent.toLowerCase();
+
+                const matchesSearch =
+                    title.includes(keyword) ||
+                    description.includes(keyword);
+
+                const matchesCategory =
+                    activeFilter === 'Semua' ||
+                    category === activeFilter;
+
+                const isVisible = matchesSearch && matchesCategory;
+
+                card.classList.toggle('hidden', !isVisible);
+
+                if (isVisible) {
+                    visibleCards++;
+                }
+            });
+
+            emptyMessage.classList.toggle('hidden', visibleCards !== 0);
+
+            resultCount.textContent =
+                `Menampilkan ${visibleCards} dari ${galleryCards.length} karya`;
+        }
+
+        searchInput.addEventListener('input', filterGallery);
+
+        filterButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                activeFilter = this.dataset.filter;
+
+                filterButtons.forEach(function (item) {
+                    item.classList.remove('active');
+                    item.classList.add('text-cream/65');
+                });
+
+                this.classList.add('active');
+                this.classList.remove('text-cream/65');
+
+                filterGallery();
+            });
+        });
+
+        resetButton.addEventListener('click', function () {
+            searchInput.value = '';
+            activeFilter = 'Semua';
+
+            filterButtons.forEach(function (button) {
+                const isAll = button.dataset.filter === 'Semua';
+
+                button.classList.toggle('active', isAll);
+                button.classList.toggle('text-cream/65', !isAll);
+            });
+
+            filterGallery();
+            searchInput.focus();
+        });
+    </script>
+
+</body>
+</html>
