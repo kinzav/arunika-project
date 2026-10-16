@@ -35,101 +35,91 @@
         }
     </script>
 
-    <!-- GSAP Animation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+    html {
+        scroll-behavior: auto !important;
+    }
 
-    <style>
+    body {
+        margin: 0;
+        background: #0b1a15;
+        color: #f0e6d2;
+        overflow-x: hidden;
+    }
 
-        body {
-            margin: 0;
-            background: #0b1a15;
-            color: #f0e6d2;
-            overflow-x: hidden;
-        }
+    ::selection {
+        background: #d4af67;
+        color: #0b1a15;
+    }
 
-        ::selection {
-            background: #d4af67;
-            color: #0b1a15;
-        }
+    .hero-overlay {
+        background: linear-gradient(
+            90deg,
+            rgba(11, 26, 21, 0.97) 0%,
+            rgba(11, 26, 21, 0.80) 45%,
+            rgba(11, 26, 21, 0.12) 100%
+        );
+    }
 
-        .hero-overlay {
-            background: linear-gradient(
+    .gold-line {
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            #d4af67,
+            transparent
+        );
+    }
+
+    .gallery-image {
+        transform: none !important;
+        filter: none !important;
+    }
+
+    .nav-link {
+        position: relative;
+    }
+
+    .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 1px;
+        left: 0;
+        bottom: -7px;
+        background: #d4af67;
+    }
+
+    .map-pattern {
+        background-image:
+            radial-gradient(
+                ellipse at 50% 50%,
+                rgba(212,175,103,.09),
+                transparent 65%
+            ),
+            linear-gradient(
+                rgba(212,175,103,.045) 1px,
+                transparent 1px
+            ),
+            linear-gradient(
                 90deg,
-                rgba(11, 26, 21, 0.97) 0%,
-                rgba(11, 26, 21, 0.80) 45%,
-                rgba(11, 26, 21, 0.12) 100%
+                rgba(212,175,103,.045) 1px,
+                transparent 1px
             );
-        }
 
-        .gold-line {
-            height: 1px;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                #d4af67,
-                transparent
-            );
-        }
+        background-size: auto, 35px 35px, 35px 35px;
+    }
 
-        .gallery-image {
-            transition: transform 0.7s ease, filter 0.7s ease;
-        }
-
-        .gallery-card:hover .gallery-image {
-            transform: scale(1.08);
-            filter: brightness(0.8);
-        }
-
-        .nav-link {
-            position: relative;
-        }
-
-        .nav-link::after {
-            content: "";
-            position: absolute;
-            width: 0;
-            height: 1px;
-            left: 0;
-            bottom: -7px;
-            background: #d4af67;
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .map-pattern {
-            background-image:
-                radial-gradient(
-                    ellipse at 50% 50%,
-                    rgba(212,175,103,.09),
-                    transparent 65%
-                ),
-                linear-gradient(
-                    rgba(212,175,103,.045) 1px,
-                    transparent 1px
-                ),
-                linear-gradient(
-                    90deg,
-                    rgba(212,175,103,.045) 1px,
-                    transparent 1px
-                );
-            background-size: auto, 35px 35px, 35px 35px;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-    </style>
+    /* Matikan animasi dan transisi di semua perangkat */
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+        transform: none !important;
+    }
+</style>
 </head>
 
 <body class="font-sans antialiased">
@@ -776,32 +766,37 @@
     </footer>
 
     <!-- JAVASCRIPT -->
-    <script>
-        // Tahun otomatis
-        document.getElementById('year').textContent =
-            new Date().getFullYear();
+<script>
+    // Tahun otomatis di footer
+    document.getElementById('year').textContent =
+        new Date().getFullYear();
 
-        // Menu mobile
-        const menuButton = document.getElementById('menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+    // Menu mobile
+    const menuButton = document.getElementById('menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-        menuButton.addEventListener('click', () => {
-            const isHidden = mobileMenu.classList.toggle('hidden');
+    menuButton.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.toggle('hidden');
 
-            menuButton.setAttribute('aria-expanded', String(!isHidden));
-            menuButton.textContent = isHidden ? '☰' : '✕';
+        menuButton.setAttribute('aria-expanded', String(!isHidden));
+        menuButton.textContent = isHidden ? '☰' : '✕';
+    });
+
+    // Tutup menu setelah link dipilih
+    document.querySelectorAll('.mobile-link').forEach(link => {
+        link.classList.add(
+            'block',
+            'text-cream/80',
+            'hover:text-gold'
+        );
+
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            menuButton.setAttribute('aria-expanded', 'false');
+            menuButton.textContent = '☰';
         });
-
-        document.querySelectorAll('.mobile-link').forEach(link => {
-            link.className +=
-                ' block text-cream/80 transition hover:text-gold';
-
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                menuButton.setAttribute('aria-expanded', 'false');
-                menuButton.textContent = '☰';
-            });
-        });
-    </script>
+    });
+</script>
 </body>
 </html>
+s
