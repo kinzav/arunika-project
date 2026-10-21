@@ -1,0 +1,238 @@
+
+/* FLOATING ACCESSIBILITY MENU */
+.accessibility-widget {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 9999;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    font-family: Arial, sans-serif;
+    color: #f0e6d2;
+}
+
+/* TOMBOL UTAMA */
+.accessibility-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 56px;
+    height: 56px;
+    border: 1px solid #e4c47d;
+    border-radius: 50%;
+    background: #d4af67;
+    color: #0b1a15;
+    font-size: 25px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px #0005;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.accessibility-toggle:hover {
+    transform: scale(1.06);
+    background: #e4c47d;
+    box-shadow: 0 8px 24px #0006;
+}
+
+.accessibility-toggle:active {
+    transform: scale(0.94);
+}
+
+.accessibility-toggle:focus-visible,
+.accessibility-option:focus-visible,
+.accessibility-reset:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 4px;
+}
+
+/* ANIMASI IKON TOMBOL */
+.accessibility-toggle .toggle-icon {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.accessibility-toggle[aria-expanded="true"] .toggle-icon {
+    transform: rotate(45deg);
+}
+
+/* PANEL MENU */
+.accessibility-panel {
+    display: block;
+    box-sizing: border-box;
+
+    width: min(300px, calc(100vw - 32px));
+    margin-bottom: 12px;
+    padding: 20px;
+
+    background: #0d2119;
+    border: 1px solid #d4af6755;
+    border-radius: 16px;
+    box-shadow: 0 12px 35px #0005;
+
+    /* Posisi awal saat tertutup */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(12px) scale(0.96);
+    transform-origin: bottom right;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
+}
+
+/* PANEL SAAT DIBUKA */
+.accessibility-panel.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+}
+
+/* HEADER */
+.accessibility-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.accessibility-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.accessibility-description {
+    margin: 0 0 16px;
+    color: #c4cbbf;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* PILIHAN AKSESIBILITAS */
+.accessibility-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+
+    border: 1px solid #ffffff20;
+    border-radius: 10px;
+    background: #142b21;
+    color: #f0e6d2;
+    text-align: left;
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.accessibility-option:hover {
+    border-color: #d4af67;
+}
+
+.accessibility-option[aria-pressed="true"] {
+    border-color: #d4af67;
+    background: #253b2b;
+}
+
+.accessibility-option span {
+    display: block;
+}
+
+.accessibility-option small {
+    display: block;
+    margin-top: 4px;
+    color: #c4cbbf;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.accessibility-status {
+    flex-shrink: 0;
+    font-size: 12px;
+    font-weight: bold;
+    color: #e4c47d;
+}
+
+/* TOMBOL RESET */
+.accessibility-reset {
+    width: 100%;
+    margin-top: 14px;
+    padding: 11px;
+
+    border: 1px solid #d4af67;
+    border-radius: 10px;
+    background: transparent;
+    color: #f0e6d2;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.accessibility-reset:hover {
+    background: #d4af6718;
+}
+
+/* FILTER TAMPILAN */
+html.a11y-grayscale {
+    filter: grayscale(1);
+}
+
+html.a11y-high-contrast {
+    filter: contrast(1.5);
+}
+
+html.a11y-invert {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+/* KEMBALIKAN WARNA GAMBAR SAAT INVERT */
+html.a11y-invert img,
+html.a11y-invert video {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+    .accessibility-widget {
+        right: 16px;
+        bottom: 16px;
+    }
+
+    .accessibility-toggle {
+        width: 52px;
+        height: 52px;
+    }
+
+    .accessibility-panel {
+        padding: 16px;
+    }
+}
+
+/* HORMATI PREFERENSI REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+    .accessibility-panel,
+    .accessibility-toggle,
+    .accessibility-toggle .toggle-icon,
+    .accessibility-option,
+    .accessibility-reset {
+        transition: none;
+    }
+}
