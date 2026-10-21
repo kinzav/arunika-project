@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0b1a15">
     <meta name="description" content="Jelajahi kekayaan seni, tradisi, sejarah, dan budaya Jawa.">
+    <link rel="stylesheet" href="../../css/accessibility.css">
     <title>Arunika — Seni & Budaya Jawa</title>
 
     <!-- Tailwind CSS -->
@@ -746,6 +747,86 @@
             </div>
         </div>
     </footer>
+
+<div class="accessibility-widget">
+
+    <div
+        class="accessibility-panel"
+        id="accessibilityPanel"
+        aria-hidden="true"
+    >
+        <div class="accessibility-header">
+            <h2>Aksesibilitas</h2>
+        </div>
+
+        <p class="accessibility-description">
+            Sesuaikan tampilan agar lebih nyaman dilihat.
+        </p>
+
+        <button
+            type="button"
+            class="accessibility-option"
+            id="toggleGrayscale"
+            aria-pressed="false"
+        >
+            <span>
+                Grayscale
+                <small>Tampilan hitam putih</small>
+            </span>
+            <span class="accessibility-status">MATI</span>
+        </button>
+
+        <button
+            type="button"
+            class="accessibility-option"
+            id="toggleContrast"
+            aria-pressed="false"
+        >
+            <span>
+                Kontras tinggi
+                <small>Mempertegas perbedaan warna</small>
+            </span>
+            <span class="accessibility-status">MATI</span>
+        </button>
+
+        <button
+            type="button"
+            class="accessibility-option"
+            id="toggleInvert"
+            aria-pressed="false"
+        >
+            <span>
+                Warna terbalik
+                <small>Membalik skema warna halaman</small>
+            </span>
+            <span class="accessibility-status">MATI</span>
+        </button>
+
+        <button
+            type="button"
+            class="accessibility-reset"
+            id="accessibilityReset"
+        >
+            Reset tampilan
+        </button>
+    </div>
+
+    <button
+        type="button"
+        class="accessibility-toggle"
+        id="accessibilityToggle"
+        aria-label="Buka menu aksesibilitas"
+        aria-expanded="false"
+        aria-controls="accessibilityPanel"
+    >
+        <span class="toggle-icon">♿</span>
+    </button>
+
+</div>
+
+<script src="../../js/accessibility.js" defer></script>
+</body>
+</html>
 
     <!-- JAVASCRIPT -->
 <script>
