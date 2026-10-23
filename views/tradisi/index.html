@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1a15">
+    <meta name="description" content="Jelajahi kekayaan seni, tradisi, sejarah, dan budaya Jawa.">
+    <title>Kuliner — Arunika</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: '#0b1a15',
+                        deep: '#0d2119',
+                        card: '#142b21',
+                        gold: '#d4af67',
+                        cream: '#f0e6d2',
+                        muted: '#b9c2b7'
+                    },
+                    fontFamily: {
+                        sans: ['Segoe UI', 'Tahoma', 'sans-serif'],
+                        serif: ['Georgia', 'serif']
+                    },
+                    boxShadow: {
+                        gold: '0 10px 35px rgba(212, 175, 103, 0.12)'
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translate(-50%, -50%)' },
+                            '50%': { transform: 'translate(-50%, -65%)' }
+                        }
+                    },
+                    animation: {
+                        'fade-up': 'fadeUp 1s ease-out forwards',
+                        'fade-in': 'fadeIn 1.5s ease-out forwards',
+                        'float': 'float 4s ease-in-out infinite'
+                    }
+                }
+            }
+        }
+    </script>
+
+<style>
+    html {
+        scroll-behavior: smooth !important;
+    }
+
+    body {
+        margin: 0;
+        background: #0b1a15;
+        color: #f0e6d2;
+        overflow-x: hidden;
+    }
+
+    ::selection {
+        background: #d4af67;
+        color: #0b1a15;
+    }
+
+    .hero-overlay {
+        background: linear-gradient(
+            90deg,
+            rgba(11, 26, 21, 0.97) 0%,
+            rgba(11, 26, 21, 0.80) 45%,
+            rgba(11, 26, 21, 0.12) 100%
+        );
+    }
+
+    .gold-line {
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            #d4af67,
+            transparent
+        );
+    }
+
+    .nav-link {
+        position: relative;
+    }
+
+    .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 1px;
+        left: 0;
+        bottom: -7px;
+        background: #d4af67;
+        transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
+    }
+
+    .map-pattern {
+        background-image:
+            radial-gradient(
+                ellipse at 50% 50%,
+                rgba(212,175,103,.09),
+                transparent 65%
+            ),
+            linear-gradient(
+                rgba(212,175,103,.045) 1px,
+                transparent 1px
+            ),
+            linear-gradient(
+                90deg,
+                rgba(212,175,103,.045) 1px,
+                transparent 1px
+            );
+
+        background-size: auto, 35px 35px, 35px 35px;
+    }
+</style>
+</head>
+
+<body class="font-sans antialiased">
+
+<nav id="navbar"
+    class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-forest/90 backdrop-blur-xl opacity-0 animate-fade-in">
+
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-10">
+
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 transition-transform duration-300 hover:scale-105">
+            <div>
+                <p class="font-serif text-xl font-bold tracking-[0.15em] text-gold">
+                    Arunika
+                </p>
+                <p class="text-[9px] uppercase tracking-[0.3em] text-cream/60">
+                    Warisan Nusantara
+                </p>
+            </div>
+        </a>
+
+        <!-- Tombol Menu Mobile -->
+        <button id="menu-button"
+            class="rounded border border-white/15 px-3 py-2 text-sm text-cream transition-colors hover:border-gold md:hidden"
+            aria-label="Buka menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu">
+            ☰
+        </button>
+
+        <!-- Menu Desktop -->
+        <div class="hidden items-center gap-8 text-sm text-cream/80 md:flex">
+            <a href="../beranda/index.html" class="nav-link hover:text-gold transition-colors">
+                Beranda
+            </a>
+
+            <a href="../galeri-seni/index.html" class="nav-link hover:text-gold transition-colors">
+                Galeri Seni
+            </a>
+
+            <a href="index.html" class="nav-link hover:text-gold transition-colors">
+                Tradisi
+            </a>
+
+            <a href="../kuliner/index.html" class="nav-link hover:text-gold transition-colors">
+                Kuliner
+            </a>
+
+            <a href="../sejarah/index.html" class="nav-link hover:text-gold transition-colors">
+                Sejarah
+            </a>
+        </div>
+
+        <!-- Tombol Eksplorasi -->
+        <a href="#sejarah"
+            class="hidden border border-gold/60 px-5 py-3 text-xs font-semibold uppercase tracking-widest text-gold transition-all duration-300 hover:bg-gold hover:text-forest hover:shadow-gold lg:block">
+            Mulai Eksplorasi ↗
+        </a>
+
+    </div>
+
+    <!-- Menu Mobile -->
+    <div id="mobile-menu"
+        class="hidden border-t border-white/10 bg-forest px-6 py-4 md:hidden">
+
+        <div class="flex flex-col gap-5 text-sm">
+            <a href="#beranda" class="mobile-link">Beranda</a>
+            <a href="#galeri-seni" class="mobile-link">Galeri Seni</a>
+            <a href="#tradisi" class="mobile-link">Tradisi</a>
+            <a href="#kuliner" class="mobile-link">Kuliner</a>
+            <a href="#sejarah" class="mobile-link">Sejarah</a>
+        </div>
+
+    </div>
+</nav>
+
+
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 bg-[#080f0c] px-5 py-14 md:px-10 md:py-20">
+
+        <div class="mx-auto grid max-w-7xl gap-10 sm:grid-cols-2 lg:grid-cols-4">
+
+            <div class="lg:col-span-2">
+                <a href="index.html" class="inline-flex items-center gap-3">
+
+
+                    <span class="font-serif text-2xl tracking-[0.15em] text-gold">
+                        Arunika
+                    </span>
+                </a>
+
+                <p class="mt-5 max-w-sm text-sm leading-7 text-muted">
+                    Ruang digital untuk mengenal seni, sejarah,
+                    tradisi, dan kekayaan budaya Jawa.
+                </p>
+
+                <p class="mt-6 text-xs uppercase tracking-widest text-cream/40">
+                    Merawat warisan, meneruskan cerita.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-gold">
+                    Navigasi
+                </h3>
+
+
+               <ul class="mt-6 grid w-fit grid-flow-col grid-rows-3 gap-x-4 gap-y-3 text-sm text-muted">
+
+                    <li>
+                        <a href="#beranda" class="transition hover:text-gold">
+                            Beranda
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#galeri" class="transition hover:text-gold">
+                            Galeri Seni
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#peta" class="transition hover:text-gold">
+                            Tradisi
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#kuliner" class="transition hover:text-gold">
+                            Kuliner
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#sejarah" class="transition hover:text-gold">
+                            Sejarah
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-gold">
+                    Tentang Situs
+                </h3>
+
+                <p class="mt-5 text-sm leading-7 text-muted">
+                    Dibuat sebagai ruang belajar dan eksplorasi
+                    kekayaan seni serta budaya Jawa.
+                </p>
+            </div>
+        </div>
+
+        <div class="mx-auto mt-12 max-w-7xl border-t border-white/10 pt-6">
+            <div class="flex flex-col justify-between gap-3 text-xs text-cream/40 sm:flex-row">
+                <p>© <span id="year"></span> Arunika — Seni & Budaya Jawa.</p>
+                <p>Dibuat dengan rasa cinta terhadap budaya Nusantara.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+<script>
+    // Tahun otomatis di footer
+    document.getElementById('year').textContent =
+        new Date().getFullYear();
+
+    // Menu mobile
+    const menuButton = document.getElementById('menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuButton.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.toggle('hidden');
+
+        menuButton.setAttribute('aria-expanded', String(!isHidden));
+        menuButton.textContent = isHidden ? '☰' : '✕';
+    });
+
+    // Tutup menu setelah link dipilih
+    document.querySelectorAll('.mobile-link').forEach(link => {
+        link.classList.add(
+            'block',
+            'text-cream/80',
+            'hover:text-gold',
+            'transition-colors'
+        );
+
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            menuButton.setAttribute('aria-expanded', 'false');
+            menuButton.textContent = '☰';
+        });
+    });
+
+    // Animasi Scroll (Intersection Observer)
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -50px 0px', // Animasi mulai sedikit sebelum elemen mencapai bagian paling bawah layar
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Tambahkan class animasi ketika elemen terlihat
+                entry.target.classList.add('animate-fade-up');
+                // Hapus observer agar animasi hanya berjalan sekali
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Menerapkan observer ke semua elemen dengan class scroll-animate
+    document.querySelectorAll('.scroll-animate').forEach(el => {
+        observer.observe(el);
+    });
+</script>
+</body>
+</html>
