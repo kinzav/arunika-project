@@ -1,0 +1,268 @@
+
+/* ==================================================
+   ARUNIKA - FITUR TAMBAHAN AKSESIBILITAS
+   ================================================== */
+
+/* Panel tetap berada di dalam floating button */
+.accessibility-panel {
+    max-height: min(78vh, 720px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #d4af67 #142b21;
+}
+
+.accessibility-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.accessibility-panel::-webkit-scrollbar-thumb {
+    background: #d4af67;
+    border-radius: 10px;
+}
+
+/* Pembatas setiap kelompok fitur */
+.accessibility-group,
+.access-extra-section {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(212, 175, 103, 0.22);
+}
+
+.access-extra-heading {
+    margin: 0 0 8px;
+    color: #d4af67;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.access-extra-description {
+    margin: 0 0 12px;
+    color: #b9c2b7;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.access-extra-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 10px;
+}
+
+.access-extra-button {
+    flex: 1 1 auto;
+    min-width: 65px;
+    padding: 9px 10px;
+    border: 1px solid rgba(212, 175, 103, 0.4);
+    border-radius: 5px;
+    background: #142b21;
+    color: #f0e6d2;
+    font: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.access-extra-button:hover,
+.access-extra-button:focus-visible {
+    border-color: #d4af67;
+    background: #d4af67;
+    color: #0b1a15;
+}
+
+.access-extra-button:focus-visible {
+    outline: 2px solid #f0e6d2;
+    outline-offset: 2px;
+}
+
+.access-extra-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.access-extra-status {
+    min-height: 18px;
+    margin: 10px 0 0;
+    color: #b9c2b7;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+/* Visualisasi ritme */
+.ritme-visualizer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    height: 88px;
+    padding: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 103, 0.2);
+    border-radius: 6px;
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(212, 175, 103, 0.1),
+            transparent 75%
+        ),
+        #0b1a15;
+}
+
+.ritme-bar {
+    display: block;
+    flex: 1 1 0;
+    max-width: 12px;
+    height: 12%;
+    min-height: 5px;
+    border-radius: 5px;
+    background: #d4af67;
+    transform-origin: center;
+}
+
+.ritme-bar:nth-child(2n) {
+    background: #f0e6d2;
+}
+
+.ritme-bar:nth-child(3n) {
+    background: #b9c2b7;
+}
+
+/* Animasi aktif hanya ketika tombol Mulai ditekan */
+.ritme-visualizer.is-playing .ritme-bar {
+    animation: arunikaRhythm var(--ritme-duration, 0.67s)
+        ease-in-out infinite alternate;
+}
+
+.ritme-visualizer.is-playing .ritme-bar:nth-child(2n) {
+    animation-delay: -0.2s;
+}
+
+.ritme-visualizer.is-playing .ritme-bar:nth-child(3n) {
+    animation-delay: -0.4s;
+}
+
+.ritme-visualizer.is-playing .ritme-bar:nth-child(4n) {
+    animation-delay: -0.1s;
+}
+
+@keyframes arunikaRhythm {
+    0% {
+        height: 12%;
+        opacity: 0.65;
+    }
+
+    50% {
+        height: 85%;
+        opacity: 1;
+    }
+
+    100% {
+        height: 30%;
+        opacity: 0.8;
+    }
+}
+
+/* Pengaturan tempo */
+.access-extra-label {
+    display: block;
+    margin-top: 14px;
+    color: #f0e6d2;
+    font-size: 12px;
+}
+
+.access-extra-tempo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.access-extra-tempo input {
+    width: 100%;
+    min-width: 0;
+    accent-color: #d4af67;
+    cursor: pointer;
+}
+
+.access-extra-tempo output {
+    flex-shrink: 0;
+    color: #d4af67;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Tampilan HP */
+@media (max-width: 480px) {
+    .accessibility-panel {
+        max-height: 72vh;
+    }
+
+    .access-extra-controls {
+        gap: 6px;
+    }
+
+    .access-extra-button {
+        padding: 10px 7px;
+        font-size: 10px;
+    }
+
+    .ritme-visualizer {
+        height: 75px;
+    }
+}
+
+/* Hormati pengaturan pengurangan animasi pengguna */
+@media (prefers-reduced-motion: reduce) {
+    .ritme-visualizer.is-playing .ritme-bar {
+        animation: none;
+    }
+
+    .access-extra-button {
+        transition: none;
+    }
+}
+
+/* Perbaikan animasi visualisasi ritme */
+#ritmeVisualizer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 70px;
+}
+
+#ritmeVisualizer .ritme-bar {
+    width: 7px;
+    height: 12px;
+    border-radius: 999px;
+    background: #d4af67;
+    transform-origin: center;
+}
+
+#ritmeVisualizer.is-playing .ritme-bar {
+    animation: ritmeGerak var(--ritme-duration, 0.6s) ease-in-out infinite alternate;
+}
+
+#ritmeVisualizer.is-playing .ritme-bar:nth-child(2n) {
+    animation-delay: 0.15s;
+}
+
+#ritmeVisualizer.is-playing .ritme-bar:nth-child(3n) {
+    animation-delay: 0.3s;
+}
+
+@keyframes ritmeGerak {
+    from {
+        transform: scaleY(1);
+    }
+
+    to {
+        transform: scaleY(4);
+    }
+}

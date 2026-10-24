@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth scroll-pt-[100px]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +7,13 @@
 
     <title>Galeri Seni — Arunika</title>
     <meta name="description" content="Jelajahi keindahan seni dan warisan budaya Jawa melalui galeri seni Arunika.">
+    <link rel="stylesheet" href="../../css/accessibility.css">
+    <link rel="stylesheet" href="../../css/accessibility-extra.css">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Tailwind Configuration -->
+    <!-- Tailwind Configuration & Animations disamakan dengan Beranda -->
     <script>
         tailwind.config = {
             theme: {
@@ -26,147 +28,53 @@
                     },
                     fontFamily: {
                         sans: ['Segoe UI', 'Tahoma', 'sans-serif'],
-                        serif: ['Georgia', 'serif']
+                        serif: ['"Playfair Display"', 'serif']
+                    },
+                    backgroundImage: {
+                        'hero-glow': 'radial-gradient(ellipse at 80% 40%, rgba(201,166,107,.09), transparent 40%), radial-gradient(ellipse at 10% 90%, rgba(54,92,68,.13), transparent 40%)',
+                        'section-line': 'linear-gradient(to right, transparent, rgba(201,166,107,.5), transparent)'
                     },
                     keyframes: {
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-20px)' }
                         },
-                        fadeUp: {
-                            '0%': { opacity: '0', transform: 'translateY(40px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        popInFilter: {
+                            '0%': { opacity: '0', transform: 'scale(0.9) translateY(15px)' },
+                            '100%': { opacity: '1', transform: 'scale(1) translateY(0)' }
+                        },
+                        kenBurns: {
+                            '0%': { transform: 'scale(1.02)' },
+                            '100%': { transform: 'scale(1.12)' }
                         }
                     },
                     animation: {
+                        'fade-up': 'fadeUp 1s ease-out forwards',
+                        'fade-in': 'fadeIn 1.5s ease-out forwards',
                         'float-slow': 'float 6s ease-in-out infinite',
                         'float-slower': 'float 8s ease-in-out infinite reverse',
-                        'fade-up': 'fadeUp 1s ease-out forwards'
+                        'pop-in': 'popInFilter 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+                        'ken-burns': 'kenBurns 20s ease-in-out infinite alternate'
                     }
                 }
             }
         }
     </script>
 
+    <!-- Style Animasi Navbar disamakan dengan Beranda -->
     <style>
         html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 100px;
+            scroll-behavior: smooth !important;
         }
 
-        body {
-            margin: 0;
-            background: #0b1512;
-            color: #f0e6d2;
-            overflow-x: hidden;
-        }
-
-        ::selection {
-            background: #c9a66b;
-            color: #0b1512;
-        }
-
-        .font-serif {
-            font-family: 'Playfair Display', serif;
-        }
-
-        .nav-link {
-            position: relative;
-        }
-
-        .nav-link::after {
-            content: "";
-            position: absolute;
-            width: 0;
-            height: 1px;
-            left: 0;
-            bottom: -7px;
-            background: #d4af67;
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .hero-background {
-            background:
-                radial-gradient(ellipse at 80% 40%, rgba(201,166,107,.09), transparent 40%),
-                radial-gradient(ellipse at 10% 90%, rgba(54,92,68,.13), transparent 40%);
-        }
-
-        .hero-image {
-            transition: transform 1s cubic-bezier(.2,.7,.2,1);
-        }
-
-        .hero-frame:hover .hero-image {
-            transform: scale(1.08);
-        }
-
-        /* Transisi Kartu Galeri (Hover Efek) */
-        .gallery-card {
-            transition: transform .5s cubic-bezier(0.2, 0.8, 0.2, 1), border-color .4s ease, background .4s ease, box-shadow .4s ease;
-        }
-
-        .gallery-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(201,166,107,.6);
-            background: #1b2a23;
-            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.5);
-        }
-
-        .gallery-image {
-            transition: transform .8s cubic-bezier(.2,.7,.2,1);
-        }
-
-        .gallery-card:hover .gallery-image {
-            transform: scale(1.1);
-        }
-
-        .gallery-card:hover .card-title {
-            color: #c9a66b;
-        }
-
-        .card-title {
-            transition: color .4s ease;
-        }
-
-        /* Filter UI */
-        .filter-button {
-            transition: all .3s ease;
-        }
-
-        .filter-button.active {
-            background: #c9a66b;
-            color: #0b1512;
-            border-color: #c9a66b;
-            transform: translateY(-2px);
-        }
-
-        .search-input {
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #c9a66b;
-            box-shadow: 0 0 0 3px rgba(201,166,107,.15);
-            transform: translateY(-2px);
-        }
-
-        .section-line {
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(201,166,107,.5), transparent);
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .ornament {
-            color: #c9a66b;
-            letter-spacing: .35em;
-        }
-        
-        /* 1. Animasi Navbar Drop */
         #navbar {
             animation: navbarDrop 0.8s cubic-bezier(.2, .7, .2, 1) forwards;
         }
@@ -174,60 +82,17 @@
             from { opacity: 0; transform: translateY(-100%); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        /* 2. SISTEM SCROLL ANIMATE BARU (Lebih Stabil) */
-        .scroll-animate {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        
-        /* Kelas ini ditambahkan oleh JS saat elemen muncul di layar */
-        .scroll-animate.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* 3. Animasi Filter JS Galeri */
-        .filter-show-anim {
-            animation: popInFilter 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-        }
-        @keyframes popInFilter {
-            0% { opacity: 0; transform: scale(0.9) translateY(15px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        /* Efek Ken Burns untuk Pilihan Editor */
-        .mahakarya-img {
-            animation: kenBurns 20s ease-in-out infinite alternate;
-        }
-        @keyframes kenBurns {
-            0% { transform: scale(1.02); }
-            100% { transform: scale(1.12); }
-        }
-
-        /* Jeda antar kartu di Galeri (Menggunakan transition-delay untuk sistem baru) */
-        #galleryGrid .gallery-card:nth-child(2) { transition-delay: 0.1s; }
-        #galleryGrid .gallery-card:nth-child(3) { transition-delay: 0.2s; }
-        #galleryGrid .gallery-card:nth-child(4) { transition-delay: 0.3s; }
-        #galleryGrid .gallery-card:nth-child(5) { transition-delay: 0.4s; }
-        #galleryGrid .gallery-card:nth-child(6) { transition-delay: 0.5s; }
-
-        @media (prefers-reduced-motion: reduce) {
-            .mahakarya-img { animation: none !important; }
-            .scroll-animate { opacity: 1 !important; transform: none !important; transition: none !important; }
-        }
     </style>
 </head>
 
-<body>
+<body class="m-0 bg-forest text-cream overflow-x-hidden selection:bg-gold selection:text-forest antialiased">
 
 <!-- NAVBAR -->
 <nav id="navbar" class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-forest/90 backdrop-blur-xl">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-10">
         <a href="../beranda/index.html" class="flex items-center group">
             <div>
-                <p class="font-serif text-xl font-bold tracking-[0.15em] text-gold transition-transform group-hover:scale-105">
+                <p class="font-serif text-xl font-bold tracking-[0.15em] text-gold transition-transform duration-300 group-hover:scale-105">
                     Arunika
                 </p>
                 <p class="text-[9px] uppercase tracking-[0.3em] text-cream/60">
@@ -236,42 +101,41 @@
             </div>
         </a>
 
-        <button id="menu-button" class="rounded border border-white/15 px-3 py-2 text-sm text-cream md:hidden hover:bg-white/10 transition">
+        <button id="menu-button" class="rounded border border-white/15 px-3 py-2 text-sm text-cream md:hidden hover:bg-white/10 transition-colors">
             ☰
         </button>
 
         <div class="hidden items-center gap-8 text-sm text-cream/80 md:flex">
-            <a href="../beranda/index.html" class="nav-link transition hover:text-gold">Beranda</a>
-            <a href="index.html" class="nav-link transition hover:text-gold text-gold">Galeri Seni</a>
-            <a href="../tradisi/index.html" class="nav-link hover:text-gold transition-colors">Tradisi</a>
-            <a href="../kuliner/index.html" class="nav-link hover:text-gold transition-colors">Kuliner</a>
-            <a href="../sejarah/index.html" class="nav-link hover:text-gold transition-colors">Sejarah</a>
+            <a href="../beranda/index.html" class="relative transition-colors hover:text-gold after:absolute after:-bottom-2 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Beranda</a>
+            <a href="index.html" class="relative text-gold transition-colors hover:text-gold after:absolute after:-bottom-2 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Galeri Seni</a>
+            <a href="../tradisi/index.html" class="relative transition-colors hover:text-gold after:absolute after:-bottom-2 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Tradisi</a>
+            <a href="../kuliner/index.html" class="relative transition-colors hover:text-gold after:absolute after:-bottom-2 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Kuliner</a>
+            <a href="../sejarah/index.html" class="relative transition-colors hover:text-gold after:absolute after:-bottom-2 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Sejarah</a>
         </div>
 
-        <a href="#koleksi" class="hidden border border-gold/60 px-5 py-3 text-xs font-semibold uppercase tracking-widest text-gold transition hover:bg-gold hover:text-forest hover:-translate-y-1 lg:block">
+        <a href="#koleksi" class="hidden border border-gold/60 px-5 py-3 text-xs font-semibold uppercase tracking-widest text-gold transition-all duration-300 hover:bg-gold hover:text-forest hover:-translate-y-1 lg:block">
             Lihat Koleksi ↗
         </a>
     </div>
 
     <div id="mobile-menu" class="hidden border-t border-white/10 bg-forest px-6 py-4 md:hidden transition-all">
         <div class="flex flex-col gap-5 text-sm">
-            <a href="../beranda/index.html" class="mobile-link block text-cream/80 transition hover:text-gold hover:translate-x-2">Beranda</a>
-            <a href="index.html" class="mobile-link block text-gold transition hover:translate-x-2">Galeri Seni</a>
-            <a href="../tradisi/index.html" class="mobile-link block text-cream/80 transition hover:text-gold hover:translate-x-2">Tradisi</a>
-            <a href="../kuliner/index.html" class="mobile-link block text-cream/80 transition hover:text-gold hover:translate-x-2">Kuliner</a>
-            <a href="../sejarah/index.html" class="mobile-link block text-cream/80 transition hover:text-gold hover:translate-x-2">Sejarah</a>
+            <a href="../beranda/index.html" class="block text-cream/80 transition-all duration-300 hover:text-gold hover:translate-x-2">Beranda</a>
+            <a href="index.html" class="block text-gold transition-all duration-300 hover:translate-x-2">Galeri Seni</a>
+            <a href="../tradisi/index.html" class="block text-cream/80 transition-all duration-300 hover:text-gold hover:translate-x-2">Tradisi</a>
+            <a href="../kuliner/index.html" class="block text-cream/80 transition-all duration-300 hover:text-gold hover:translate-x-2">Kuliner</a>
+            <a href="../sejarah/index.html" class="block text-cream/80 transition-all duration-300 hover:text-gold hover:translate-x-2">Sejarah</a>
         </div>
     </div>
 </nav>
 
     <!-- HERO -->
-    <header id="beranda" class="hero-background relative overflow-hidden px-5 pb-20 pt-32 md:px-10 md:pb-32 md:pt-48">
+    <header id="beranda" class="bg-hero-glow relative overflow-hidden px-5 pb-20 pt-40 md:px-10 md:pb-32 md:pt-56">
         <div class="pointer-events-none absolute -right-40 top-20 h-96 w-96 rounded-full bg-gold/[0.06] blur-[100px] animate-float-slow"></div>
         <div class="pointer-events-none absolute -left-40 bottom-0 h-80 w-80 rounded-full bg-emerald-900/20 blur-[100px] animate-float-slower"></div>
 
         <div class="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1fr_.9fr] lg:gap-20">
-            <!-- Hero Text: Menggunakan animate-fade-up agar langsung jalan tanpa nunggu scroll -->
-            <div class="opacity-0 animate-[fadeUp_1s_ease-out_forwards]" style="animation-delay: 0.1s;">
+            <div class="opacity-0 animate-fade-up" style="animation-delay: 0.1s;">
                 <div class="mb-7 flex items-center gap-4">
                     <span class="h-px w-10 bg-gold"></span>
                     <p class="text-[10px] font-semibold uppercase tracking-[.35em] text-gold md:text-xs">
@@ -291,18 +155,17 @@
                 </p>
 
                 <div class="mt-9 flex flex-wrap items-center gap-5">
-                    <a href="#koleksi" class="group inline-flex items-center gap-5 bg-gold px-6 py-4 text-xs font-bold uppercase tracking-[.18em] text-forest transition hover:bg-cream hover:-translate-y-1">
-                        Temukan Karya <span class="text-base transition-transform group-hover:translate-x-2">→</span>
+                    <a href="#koleksi" class="group inline-flex items-center gap-5 bg-gold px-6 py-4 text-xs font-bold uppercase tracking-[.18em] text-forest transition-all duration-300 hover:bg-cream hover:-translate-y-1">
+                        Temukan Karya <span class="text-base transition-transform duration-300 group-hover:translate-x-2">→</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Hero Images: Langsung jalan tanpa scroll -->
-            <div class="relative mx-auto w-full max-w-xl opacity-0 animate-[fadeUp_1s_ease-out_forwards]" style="animation-delay: 0.3s;">
+            <div class="relative mx-auto w-full max-w-xl opacity-0 animate-fade-up" style="animation-delay: 0.3s;">
                 <div class="absolute -inset-4 border border-gold/20"></div>
                 <div class="relative grid grid-cols-[1.1fr_.9fr] gap-3 sm:gap-4">
-                    <div class="hero-frame relative mt-10 overflow-hidden border border-white/10 bg-surface group">
-                        <img src="https://placehold.co/800x600/142b21/d4af67?text=Wayang+Jawa" alt="Wayang kulit" class="hero-image h-[310px] w-full object-cover sm:h-[420px]" fetchpriority="high">
+                    <div class="relative mt-10 overflow-hidden border border-white/10 bg-surface group">
+                        <img src="https://placehold.co/800x600/142b21/d4af67?text=Wayang+Jawa" alt="Wayang kulit" class="h-[310px] w-full object-cover sm:h-[420px] transition-transform duration-[1000ms] ease-[cubic-bezier(.2,.7,.2,1)] group-hover:scale-[1.08]" fetchpriority="high">
                         <div class="absolute inset-0 bg-gradient-to-t from-forest/90 via-transparent to-transparent"></div>
                         <div class="absolute bottom-0 left-0 p-4 sm:p-6 transition-transform duration-300 group-hover:-translate-y-2">
                             <p class="text-[9px] uppercase tracking-[.25em] text-gold">Seni Pertunjukan</p>
@@ -310,11 +173,11 @@
                         </div>
                     </div>
                     <div class="flex flex-col gap-3 sm:gap-4">
-                        <div class="hero-frame relative overflow-hidden border border-white/10 bg-surface">
-                            <img src="https://placehold.co/800x600/142b21/d4af67?text=Batik+Jawa" alt="Batik tradisional" class="hero-image h-44 w-full object-cover sm:h-60">
+                        <div class="relative overflow-hidden border border-white/10 bg-surface group">
+                            <img src="https://placehold.co/800x600/142b21/d4af67?text=Batik+Jawa" alt="Batik tradisional" class="h-44 w-full object-cover sm:h-60 transition-transform duration-[1000ms] ease-[cubic-bezier(.2,.7,.2,1)] group-hover:scale-[1.08]">
                         </div>
-                        <div class="flex flex-1 flex-col justify-between border border-gold/25 bg-surface p-4 sm:p-6 transition hover:border-gold hover:bg-[#1b2a23]">
-                            <span class="text-2xl text-gold transition-transform hover:rotate-45">✳</span>
+                        <div class="flex flex-1 flex-col justify-between border border-gold/25 bg-surface p-4 sm:p-6 transition-all duration-300 hover:border-gold hover:bg-[#1b2a23] group">
+                            <span class="text-2xl text-gold transition-transform duration-500 group-hover:rotate-45">✳</span>
                             <div>
                                 <p class="text-[9px] uppercase tracking-[.2em] text-muted">Seni Tekstil</p>
                                 <h2 class="mt-2 font-serif text-lg sm:text-2xl">Batik Jawa</h2>
@@ -328,27 +191,27 @@
     </header>
 
     <div class="px-5 md:px-10">
-        <div class="section-line scroll-animate"></div>
+        <div class="opacity-0 scroll-animate h-px w-full bg-section-line mx-auto" style="animation-delay: 0.1s;"></div>
     </div>
 
- <section id="tentang-seni" class="px-5 py-20 md:px-10 md:py-28">
+<section id="tentang-seni" class="px-5 py-20 md:px-10 md:py-28">
     <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-center lg:gap-20">
-        <div class="scroll-animate">
-            <p class="ornament text-[10px] uppercase">Filosofi Karya</p>
+        <div class="opacity-0 scroll-animate" style="animation-delay: 0.1s;">
+            <p class="text-[10px] uppercase text-gold tracking-[.35em]">Filosofi Karya</p>
             <h2 class="mt-6 font-serif text-4xl leading-tight md:text-5xl">
                 Bukan sekadar seni,
                 <span class="block italic text-gold">melainkan cerita.</span>
             </h2>
         </div>
-        <div class="scroll-animate" style="transition-delay: 0.15s;">
+        <div class="opacity-0 scroll-animate" style="animation-delay: 0.3s;">
             <p class="text-sm leading-8 text-muted md:text-base">
                 Seni tradisional Jawa tumbuh bersama kehidupan masyarakatnya. Ia hadir dalam upacara adat, pertunjukan, kerajinan, hingga keseharian. Di balik setiap bentuk dan motif, terdapat nilai, simbol, serta pengetahuan yang diwariskan dari satu generasi ke generasi berikutnya.
             </p>
             <p class="mt-5 text-sm leading-8 text-muted md:text-base">
                 Melalui Arunika, mari mengenal kembali karya-karya tersebut, memahami maknanya, dan menjaga agar kekayaan budaya ini tetap hidup di masa depan.
             </p>
-            <a href="#koleksi" class="mt-7 group inline-flex items-center gap-4 border-b border-gold/60 pb-2 text-xs font-semibold uppercase tracking-[.15em] text-gold transition hover:border-cream hover:text-cream">
-                Jelajahi koleksi <span class="transition-transform group-hover:translate-x-2">→</span>
+            <a href="#koleksi" class="mt-7 group inline-flex items-center gap-4 border-b border-gold/60 pb-2 text-xs font-semibold uppercase tracking-[.15em] text-gold transition-all hover:border-cream hover:text-cream">
+                Jelajahi koleksi <span class="transition-transform duration-300 group-hover:translate-x-2">→</span>
             </a>
         </div>
     </div>
@@ -357,29 +220,29 @@
     <section class="bg-deep px-5 py-20 md:px-10 md:py-28">
         <div class="mx-auto max-w-7xl">
             <div class="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-                <div class="scroll-animate">
+                <div class="opacity-0 scroll-animate" style="animation-delay: 0.1s;">
                     <p class="text-[10px] uppercase tracking-[.3em] text-gold">Pilihan Editor</p>
                     <h2 class="mt-4 font-serif text-4xl md:text-5xl">
                         Mahakarya <span class="italic text-gold">Pilihan.</span>
                     </h2>
                 </div>
-                <p class="max-w-md text-sm leading-7 text-muted scroll-animate" style="transition-delay: 0.1s;">
+                <p class="max-w-md text-sm leading-7 text-muted opacity-0 scroll-animate" style="animation-delay: 0.2s;">
                     Mengenal salah satu kesenian yang menjadi bagian penting dalam perjalanan budaya Jawa.
                 </p>
             </div>
 
-            <div class="grid overflow-hidden border border-gold/20 lg:grid-cols-2 scroll-animate transition hover:border-gold/50" style="transition-delay: 0.2s;">
+            <div class="grid overflow-hidden border border-gold/20 lg:grid-cols-2 opacity-0 scroll-animate transition-colors duration-500 hover:border-gold/50" style="animation-delay: 0.3s;">
                 <div class="group relative min-h-[300px] overflow-hidden bg-surface lg:min-h-[500px]">
-                    <img src="https://placehold.co/800x600/142b21/d4af67?text=Wayang+Jawa" alt="Wayang kulit" loading="lazy" class="absolute inset-0 h-full w-full object-cover mahakarya-img">
-                    <div class="absolute inset-0 bg-gradient-to-t from-forest/90 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity"></div>
-                    <div class="absolute bottom-6 left-6 border border-white/30 px-4 py-3 backdrop-blur-md group-hover:-translate-y-2 transition-transform">
+                    <img src="https://placehold.co/800x600/142b21/d4af67?text=Wayang+Jawa" alt="Wayang kulit" loading="lazy" class="absolute inset-0 h-full w-full object-cover animate-ken-burns">
+                    <div class="absolute inset-0 bg-gradient-to-t from-forest/90 via-transparent to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100"></div>
+                    <div class="absolute bottom-6 left-6 border border-white/30 px-4 py-3 backdrop-blur-md transition-transform duration-500 group-hover:-translate-y-2">
                         <p class="text-[9px] uppercase tracking-[.2em] text-cream">Warisan Budaya Jawa</p>
                     </div>
                 </div>
 
                 <div class="flex flex-col justify-center p-7 md:p-12 lg:p-16 group">
-                    <p class="text-[10px] uppercase tracking-[.3em] text-gold group-hover:translate-x-2 transition-transform">01 — Seni Pertunjukan</p>
-                    <h3 class="mt-5 font-serif text-4xl md:text-5xl group-hover:text-gold transition-colors">Wayang Kulit</h3>
+                    <p class="text-[10px] uppercase tracking-[.3em] text-gold transition-transform duration-500 group-hover:translate-x-2">01 — Seni Pertunjukan</p>
+                    <h3 class="mt-5 font-serif text-4xl md:text-5xl transition-colors duration-500 group-hover:text-gold">Wayang Kulit</h3>
                     <p class="mt-6 text-sm leading-8 text-muted">
                         Wayang kulit merupakan seni pertunjukan tradisional yang menggunakan tokoh berbahan kulit yang diukir. Kisahnya dibawakan oleh dalang, diiringi gamelan, dan kerap mengandung pesan moral serta filosofi kehidupan.
                     </p>
@@ -396,7 +259,8 @@
 
     <section id="koleksi" class="px-5 py-20 md:px-10 md:py-28">
         <div class="mx-auto max-w-7xl">
-            <div id="galeri-seni" class="mb-10 scroll-animate">
+            <!-- Animasi dihapus di bagian ini -->
+            <div id="galeri-seni" class="mb-10">
                 <p class="text-[10px] uppercase tracking-[.3em] text-gold">Arsip Budaya</p>
                 <div class="mt-4 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
                     <div>
@@ -407,109 +271,112 @@
                 </div>
             </div>
 
-            <div class="mb-7 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between scroll-animate" style="transition-delay: 0.1s;">
+            <!-- Animasi dihapus di bagian ini -->
+            <div class="mb-7 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                 <div class="flex flex-wrap gap-2" id="filterButtons">
-                    <button type="button" class="filter-button active border border-white/15 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[.12em]" data-filter="Semua">Semua Karya</button>
-                    <button type="button" class="filter-button border border-white/15 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[.12em] text-cream/65 hover:border-gold/50 hover:text-gold" data-filter="Pertunjukan">Pertunjukan</button>
-                    <button type="button" class="filter-button border border-white/15 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[.12em] text-cream/65 hover:border-gold/50 hover:text-gold" data-filter="Kerajinan">Kerajinan</button>
-                    <button type="button" class="filter-button border border-white/15 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[.12em] text-cream/65 hover:border-gold/50 hover:text-gold" data-filter="Musik">Musik</button>
-                    <button type="button" class="filter-button border border-white/15 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[.12em] text-cream/65 hover:border-gold/50 hover:text-gold" data-filter="Tari">Tari</button>
+                    <button type="button" class="filter-btn border px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[.12em] transition-all duration-300 bg-gold text-forest border-gold -translate-y-[2px]" data-filter="Semua">Semua Karya</button>
+                    <button type="button" class="filter-btn border px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[.12em] transition-all duration-300 text-cream/65 border-white/15 bg-transparent hover:border-gold/50 hover:text-gold hover:-translate-y-[2px]" data-filter="Pertunjukan">Pertunjukan</button>
+                    <button type="button" class="filter-btn border px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[.12em] transition-all duration-300 text-cream/65 border-white/15 bg-transparent hover:border-gold/50 hover:text-gold hover:-translate-y-[2px]" data-filter="Kerajinan">Kerajinan</button>
+                    <button type="button" class="filter-btn border px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[.12em] transition-all duration-300 text-cream/65 border-white/15 bg-transparent hover:border-gold/50 hover:text-gold hover:-translate-y-[2px]" data-filter="Musik">Musik</button>
+                    <button type="button" class="filter-btn border px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[.12em] transition-all duration-300 text-cream/65 border-white/15 bg-transparent hover:border-gold/50 hover:text-gold hover:-translate-y-[2px]" data-filter="Tari">Tari</button>
                 </div>
                 <div class="relative w-full lg:max-w-xs group">
                     <label for="searchGallery" class="sr-only">Cari karya seni</label>
-                    <input id="searchGallery" type="search" placeholder="Cari karya seni..." autocomplete="off" class="search-input w-full border border-white/15 bg-surface px-5 py-3.5 pr-12 text-sm text-cream placeholder:text-muted/60">
-                    <span class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-lg text-gold transition-transform group-focus-within:rotate-90">⌕</span>
+                    <input id="searchGallery" type="search" placeholder="Cari karya seni..." autocomplete="off" class="w-full border border-white/15 bg-surface px-5 py-3.5 pr-12 text-sm text-cream placeholder:text-muted/60 transition-all duration-300 focus:outline-none focus:border-gold focus:ring-[3px] focus:ring-gold/15 focus:-translate-y-[2px]">
+                    <span class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-lg text-gold transition-transform duration-300 group-focus-within:rotate-90">⌕</span>
                 </div>
             </div>
 
             <div id="galleryGrid" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                <article class="gallery-card scroll-animate overflow-hidden border border-white/10 bg-surface" data-title="Wayang Kulit" data-category="Pertunjukan">
+                
+                <!-- Animasi (opacity-0 scroll-animate) dihapus di setiap gallery-card -->
+                <article class="gallery-card group overflow-hidden border border-white/10 bg-surface transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] hover:-translate-y-2 hover:border-gold/60 hover:bg-[#1b2a23] hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.5)]" data-title="Wayang Kulit" data-category="Pertunjukan">
                     <div class="relative overflow-hidden">
-                        <img src="https://placehold.co/800x600/142b21/d4af67?text=Wayang+Kulit" alt="Wayang kulit" loading="lazy" class="gallery-image h-64 w-full object-cover">
+                        <img src="https://placehold.co/800x600/142b21/d4af67?text=Wayang+Kulit" alt="Wayang kulit" loading="lazy" class="h-64 w-full object-cover transition-transform duration-[800ms] ease-[cubic-bezier(.2,.7,.2,1)] group-hover:scale-110">
                         <span class="absolute left-4 top-4 border border-white/20 bg-forest/80 px-3 py-2 text-[9px] uppercase tracking-[.15em] text-gold backdrop-blur-md">Pertunjukan</span>
                     </div>
                     <div class="p-6">
-                        <div class="flex items-start justify-between gap-3"><h3 class="card-title font-serif text-2xl">Wayang Kulit</h3></div>
+                        <div class="flex items-start justify-between gap-3"><h3 class="font-serif text-2xl transition-colors duration-400 group-hover:text-gold">Wayang Kulit</h3></div>
                         <p class="mt-3 text-sm leading-7 text-muted">Kisah kehidupan dan filosofi yang disampaikan melalui tokoh wayang, dalang, dan iringan gamelan.</p>
                         <div class="mt-5 border-t border-white/10 pt-4"><p class="text-[9px] uppercase tracking-[.2em] text-cream/40">Seni Pertunjukan Jawa</p></div>
                     </div>
                 </article>
 
-                <article class="gallery-card scroll-animate overflow-hidden border border-white/10 bg-surface" data-title="Batik Jawa" data-category="Kerajinan">
+                <article class="gallery-card group overflow-hidden border border-white/10 bg-surface transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] hover:-translate-y-2 hover:border-gold/60 hover:bg-[#1b2a23] hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.5)]" data-title="Batik Jawa" data-category="Kerajinan">
                     <div class="relative overflow-hidden">
-                        <img src="https://placehold.co/800x600/142b21/d4af67?text=Batik+Jawa" alt="Batik" loading="lazy" class="gallery-image h-64 w-full object-cover">
+                        <img src="https://placehold.co/800x600/142b21/d4af67?text=Batik+Jawa" alt="Batik" loading="lazy" class="h-64 w-full object-cover transition-transform duration-[800ms] ease-[cubic-bezier(.2,.7,.2,1)] group-hover:scale-110">
                         <span class="absolute left-4 top-4 border border-white/20 bg-forest/80 px-3 py-2 text-[9px] uppercase tracking-[.15em] text-gold backdrop-blur-md">Kerajinan</span>
                     </div>
                     <div class="p-6">
-                        <div class="flex items-start justify-between gap-3"><h3 class="card-title font-serif text-2xl">Batik Jawa</h3></div>
+                        <div class="flex items-start justify-between gap-3"><h3 class="font-serif text-2xl transition-colors duration-400 group-hover:text-gold">Batik Jawa</h3></div>
                         <p class="mt-3 text-sm leading-7 text-muted">Kain bermotif yang dibuat melalui teknik tradisional dengan ragam corak dan makna.</p>
                         <div class="mt-5 border-t border-white/10 pt-4"><p class="text-[9px] uppercase tracking-[.2em] text-cream/40">Seni Tekstil</p></div>
                     </div>
                 </article>
 
-                <article class="gallery-card scroll-animate overflow-hidden border border-white/10 bg-surface" data-title="Gamelan Jawa" data-category="Musik">
+                <article class="gallery-card group overflow-hidden border border-white/10 bg-surface transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] hover:-translate-y-2 hover:border-gold/60 hover:bg-[#1b2a23] hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.5)]" data-title="Gamelan Jawa" data-category="Musik">
                     <div class="relative overflow-hidden">
-                        <img src="https://placehold.co/800x600/142b21/d4af67?text=Gamelan+Jawa" alt="Gamelan" loading="lazy" class="gallery-image h-64 w-full object-cover">
+                        <img src="https://placehold.co/800x600/142b21/d4af67?text=Gamelan+Jawa" alt="Gamelan" loading="lazy" class="h-64 w-full object-cover transition-transform duration-[800ms] ease-[cubic-bezier(.2,.7,.2,1)] group-hover:scale-110">
                         <span class="absolute left-4 top-4 border border-white/20 bg-forest/80 px-3 py-2 text-[9px] uppercase tracking-[.15em] text-gold backdrop-blur-md">Musik</span>
                     </div>
                     <div class="p-6">
-                        <div class="flex items-start justify-between gap-3"><h3 class="card-title font-serif text-2xl">Gamelan Jawa</h3></div>
+                        <div class="flex items-start justify-between gap-3"><h3 class="font-serif text-2xl transition-colors duration-400 group-hover:text-gold">Gamelan Jawa</h3></div>
                         <p class="mt-3 text-sm leading-7 text-muted">Ansambel musik tradisional dengan perpaduan instrumen yang membentuk irama khas Jawa.</p>
                         <div class="mt-5 border-t border-white/10 pt-4"><p class="text-[9px] uppercase tracking-[.2em] text-cream/40">Seni Musik</p></div>
                     </div>
                 </article>
 
-                <article class="gallery-card scroll-animate overflow-hidden border border-white/10 bg-surface" data-title="Tari Gambyong" data-category="Tari">
+                <article class="gallery-card group overflow-hidden border border-white/10 bg-surface transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] hover:-translate-y-2 hover:border-gold/60 hover:bg-[#1b2a23] hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.5)]" data-title="Tari Gambyong" data-category="Tari">
                     <div class="relative overflow-hidden">
-                        <img src="https://placehold.co/800x600/142b21/d4af67?text=Tari+Gambyong" alt="Tari Gambyong" loading="lazy" class="gallery-image h-64 w-full object-cover">
+                        <img src="https://placehold.co/800x600/142b21/d4af67?text=Tari+Gambyong" alt="Tari Gambyong" loading="lazy" class="h-64 w-full object-cover transition-transform duration-[800ms] ease-[cubic-bezier(.2,.7,.2,1)] group-hover:scale-110">
                         <span class="absolute left-4 top-4 border border-white/20 bg-forest/80 px-3 py-2 text-[9px] uppercase tracking-[.15em] text-gold backdrop-blur-md">Tari</span>
                     </div>
                     <div class="p-6">
-                        <div class="flex items-start justify-between gap-3"><h3 class="card-title font-serif text-2xl">Tari Gambyong</h3></div>
+                        <div class="flex items-start justify-between gap-3"><h3 class="font-serif text-2xl transition-colors duration-400 group-hover:text-gold">Tari Gambyong</h3></div>
                         <p class="mt-3 text-sm leading-7 text-muted">Tarian tradisional yang dikenal melalui gerak lembut, ekspresif, dan iringan gamelan.</p>
                         <div class="mt-5 border-t border-white/10 pt-4"><p class="text-[9px] uppercase tracking-[.2em] text-cream/40">Seni Tari Jawa</p></div>
                     </div>
                 </article>
 
-                <article class="gallery-card scroll-animate overflow-hidden border border-white/10 bg-surface" data-title="Ukiran Jepara" data-category="Kerajinan">
+                <article class="gallery-card group overflow-hidden border border-white/10 bg-surface transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] hover:-translate-y-2 hover:border-gold/60 hover:bg-[#1b2a23] hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.5)]" data-title="Ukiran Jepara" data-category="Kerajinan">
                     <div class="relative overflow-hidden">
-                        <img src="https://placehold.co/800x600/142b21/d4af67?text=Ukiran+Jepara" alt="Ukiran Jepara" loading="lazy" class="gallery-image h-64 w-full object-cover">
+                        <img src="https://placehold.co/800x600/142b21/d4af67?text=Ukiran+Jepara" alt="Ukiran Jepara" loading="lazy" class="h-64 w-full object-cover transition-transform duration-[800ms] ease-[cubic-bezier(.2,.7,.2,1)] group-hover:scale-110">
                         <span class="absolute left-4 top-4 border border-white/20 bg-forest/80 px-3 py-2 text-[9px] uppercase tracking-[.15em] text-gold backdrop-blur-md">Kerajinan</span>
                     </div>
                     <div class="p-6">
-                        <div class="flex items-start justify-between gap-3"><h3 class="card-title font-serif text-2xl">Ukiran Jepara</h3></div>
+                        <div class="flex items-start justify-between gap-3"><h3 class="font-serif text-2xl transition-colors duration-400 group-hover:text-gold">Ukiran Jepara</h3></div>
                         <p class="mt-3 text-sm leading-7 text-muted">Seni ukir kayu dengan detail motif yang mencerminkan ketelitian para pengrajin.</p>
                         <div class="mt-5 border-t border-white/10 pt-4"><p class="text-[9px] uppercase tracking-[.2em] text-cream/40">Seni Ukir Kayu</p></div>
                     </div>
                 </article>
 
-                <article class="gallery-card scroll-animate overflow-hidden border border-white/10 bg-surface" data-title="Keris Jawa" data-category="Kerajinan">
+                <article class="gallery-card group overflow-hidden border border-white/10 bg-surface transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] hover:-translate-y-2 hover:border-gold/60 hover:bg-[#1b2a23] hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.5)]" data-title="Keris Jawa" data-category="Kerajinan">
                     <div class="relative overflow-hidden">
-                        <img src="https://placehold.co/800x600/142b21/d4af67?text=Keris+Jawa" alt="Keris Jawa" loading="lazy" class="gallery-image h-64 w-full object-cover">
+                        <img src="https://placehold.co/800x600/142b21/d4af67?text=Keris+Jawa" alt="Keris Jawa" loading="lazy" class="h-64 w-full object-cover transition-transform duration-[800ms] ease-[cubic-bezier(.2,.7,.2,1)] group-hover:scale-110">
                         <span class="absolute left-4 top-4 border border-white/20 bg-forest/80 px-3 py-2 text-[9px] uppercase tracking-[.15em] text-gold backdrop-blur-md">Kerajinan</span>
                     </div>
                     <div class="p-6">
-                        <div class="flex items-start justify-between gap-3"><h3 class="card-title font-serif text-2xl">Keris Jawa</h3></div>
+                        <div class="flex items-start justify-between gap-3"><h3 class="font-serif text-2xl transition-colors duration-400 group-hover:text-gold">Keris Jawa</h3></div>
                         <p class="mt-3 text-sm leading-7 text-muted">Warisan seni tempa yang memiliki nilai sejarah, filosofi, dan identitas budaya.</p>
                         <div class="mt-5 border-t border-white/10 pt-4"><p class="text-[9px] uppercase tracking-[.2em] text-cream/40">Seni Kriya Tradisional</p></div>
                     </div>
                 </article>
             </div>
 
-            <div id="emptyMessage" class="hidden py-20 text-center transition-opacity opacity-0">
+            <div id="emptyMessage" class="hidden py-20 text-center transition-opacity duration-300 opacity-0">
                 <p class="font-serif text-3xl text-cream">Karya belum ditemukan.</p>
                 <p class="mt-3 text-sm text-muted">Coba gunakan kata kunci atau kategori lainnya.</p>
-                <button id="resetSearch" class="mt-6 border border-gold/50 px-5 py-3 text-xs uppercase tracking-widest text-gold transition hover:bg-gold hover:text-forest">Reset Pencarian</button>
+                <button id="resetSearch" class="mt-6 border border-gold/50 px-5 py-3 text-xs uppercase tracking-widest text-gold transition-all duration-300 hover:bg-gold hover:text-forest">Reset Pencarian</button>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-white/10 bg-[#080f0c] px-5 py-14 md:px-10 md:py-20 scroll-animate">
+    <footer class="border-t border-white/10 bg-[#080f0c] px-5 py-14 md:px-10 md:py-20">
         <div class="mx-auto grid max-w-7xl gap-10 sm:grid-cols-2 lg:grid-cols-4">
             <div class="lg:col-span-2">
                 <a href="index.html" class="inline-flex items-center gap-3 group">
-                    <span class="font-serif text-2xl tracking-[0.15em] text-gold transition group-hover:scale-105">Arunika</span>
+                    <span class="font-serif text-2xl tracking-[0.15em] text-gold transition-transform duration-300 group-hover:scale-105">Arunika</span>
                 </a>
                 <p class="mt-5 max-w-sm text-sm leading-7 text-muted">Ruang digital untuk mengenal seni, sejarah, tradisi, dan kekayaan budaya Jawa.</p>
                 <p class="mt-6 text-xs uppercase tracking-widest text-cream/40">Merawat warisan, meneruskan cerita.</p>
@@ -517,11 +384,11 @@
             <div>
                 <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-gold">Navigasi</h3>
                <ul class="mt-6 grid w-fit grid-flow-col grid-rows-3 gap-x-4 gap-y-3 text-sm text-muted">
-                    <li><a href="#beranda" class="transition hover:text-gold block">Beranda</a></li>
-                    <li><a href="#galeri" class="transition hover:text-gold block">Galeri Seni</a></li>
-                    <li><a href="#peta" class="transition hover:text-gold block">Tradisi</a></li>
-                    <li><a href="#kuliner" class="transition hover:text-gold block">Kuliner</a></li>
-                    <li><a href="#sejarah" class="transition hover:text-gold block">Sejarah</a></li>
+                    <li><a href="#beranda" class="transition-colors duration-300 hover:text-gold block">Beranda</a></li>
+                    <li><a href="#koleksi" class="transition-colors duration-300 hover:text-gold block">Galeri Seni</a></li>
+                    <li><a href="#peta" class="transition-colors duration-300 hover:text-gold block">Tradisi</a></li>
+                    <li><a href="#kuliner" class="transition-colors duration-300 hover:text-gold block">Kuliner</a></li>
+                    <li><a href="#sejarah" class="transition-colors duration-300 hover:text-gold block">Sejarah</a></li>
                 </ul>
             </div>
             <div>
@@ -536,6 +403,173 @@
             </div>
         </div>
     </footer>
+    <!-- FLOATING ACCESSIBILITY WIDGET -->
+<div class="accessibility-widget">
+
+    <div
+        class="accessibility-panel"
+        id="accessibilityPanel"
+        aria-hidden="true"
+    >
+        <div class="accessibility-header">
+            <h2>Aksesibilitas</h2>
+        </div>
+
+        <p class="accessibility-description">
+            Sesuaikan tampilan agar lebih nyaman digunakan.
+        </p>
+
+        <!-- PENGATURAN TAMPILAN -->
+        <div class="accessibility-group">
+            <p class="access-extra-heading">Pengaturan tampilan</p>
+
+            <button type="button" class="accessibility-option"
+                id="toggleGrayscale" aria-pressed="false">
+                <span>
+                    Grayscale
+                    <small>Tampilan hitam putih</small>
+                </span>
+                <span class="accessibility-status">MATI</span>
+            </button>
+
+            <button type="button" class="accessibility-option"
+                id="toggleContrast" aria-pressed="false">
+                <span>
+                    Kontras tinggi
+                    <small>Mempertegas perbedaan warna</small>
+                </span>
+                <span class="accessibility-status">MATI</span>
+            </button>
+
+            <button type="button" class="accessibility-option"
+                id="toggleInvert" aria-pressed="false">
+                <span>
+                    Warna terbalik
+                    <small>Membalik skema warna halaman</small>
+                </span>
+                <span class="accessibility-status">MATI</span>
+            </button>
+
+            <button type="button" class="accessibility-reset"
+                id="accessibilityReset">
+                Reset tampilan
+            </button>
+        </div>
+
+        <!-- PEMBACA TEKS -->
+        <div class="access-extra-section">
+            <p class="access-extra-heading">Pembaca teks</p>
+
+            <p class="access-extra-description">
+                Dengarkan artikel Budaya dan Adat Jawa.
+            </p>
+
+            <div class="access-extra-controls">
+                <button type="button" class="access-extra-button"
+                    id="ttsPlay">
+                    ▶ Putar
+                </button>
+
+                <button type="button" class="access-extra-button"
+                    id="ttsPause">
+                    Ⅱ Jeda
+                </button>
+
+                <button type="button" class="access-extra-button"
+                    id="ttsResume">
+                    ↻ Lanjut
+                </button>
+
+                <button type="button" class="access-extra-button"
+                    id="ttsStop">
+                    ■ Berhenti
+                </button>
+            </div>
+
+            <p id="ttsStatus" class="access-extra-status"
+                role="status" aria-live="polite">
+                Siap membacakan artikel.
+            </p>
+        </div>
+
+        <!-- VISUALISASI RITME -->
+        <div class="access-extra-section">
+            <p class="access-extra-heading">Visualisasi ritme</p>
+
+            <p class="access-extra-description">
+                Lihat pola gerakan visual dengan tempo yang dapat diatur.
+            </p>
+
+            <div
+                id="ritmeVisualizer"
+                class="ritme-visualizer"
+                role="img"
+                aria-label="Visualisasi ritme dalam keadaan berhenti"
+            >
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+            </div>
+
+            <label for="ritmeTempo" class="access-extra-label">
+                Tempo visual
+            </label>
+
+            <div class="access-extra-tempo">
+                <input
+                    type="range"
+                    id="ritmeTempo"
+                    min="40"
+                    max="160"
+                    step="5"
+                    value="90"
+                >
+
+                <output id="ritmeTempoValue" for="ritmeTempo">
+                    90 BPM
+                </output>
+            </div>
+
+            <div class="access-extra-controls">
+                <button type="button" class="access-extra-button"
+                    id="ritmePlay">
+                    ▶ Mulai
+                </button>
+
+                <button type="button" class="access-extra-button"
+                    id="ritmeStop">
+                    ■ Berhenti
+                </button>
+            </div>
+
+            <p id="ritmeStatus" class="access-extra-status"
+                role="status" aria-live="polite">
+                Animasi ritme belum dimulai.
+            </p>
+        </div>
+    </div>
+
+    <button
+        type="button"
+        class="accessibility-toggle"
+        id="accessibilityToggle"
+        aria-label="Buka menu aksesibilitas"
+        aria-expanded="false"
+        aria-controls="accessibilityPanel"
+    >
+        <span class="toggle-icon">⚙️</span>
+    </button>
+
+<script src="../../js/accessibility-extra.js" defer></script>
+<script src="../../js/accessibility.js" defer></script>
 
     <!-- JAVASCRIPT -->
     <script>
@@ -561,7 +595,7 @@
 
             const searchInput = document.getElementById('searchGallery');
             const galleryCards = Array.from(document.querySelectorAll('.gallery-card'));
-            const filterButtons = document.querySelectorAll('.filter-button');
+            const filterButtons = document.querySelectorAll('.filter-btn');
             const emptyMessage = document.getElementById('emptyMessage');
             const resultCount = document.getElementById('resultCount');
             const resetButton = document.getElementById('resetSearch');
@@ -584,11 +618,11 @@
                     if (isVisible) {
                         card.classList.remove('hidden');
                         void card.offsetWidth; 
-                        card.classList.add('filter-show-anim');
+                        card.classList.add('animate-pop-in');
                         visibleCards++;
                     } else {
                         card.classList.add('hidden');
-                        card.classList.remove('filter-show-anim');
+                        card.classList.remove('animate-pop-in');
                     }
                 });
 
@@ -608,11 +642,13 @@
                 button.addEventListener('click', function () {
                     activeFilter = this.dataset.filter;
                     filterButtons.forEach(item => {
-                        item.classList.remove('active');
-                        item.classList.add('text-cream/65');
+                        item.classList.remove('bg-gold', 'text-forest', 'border-gold', '-translate-y-[2px]');
+                        item.classList.add('text-cream/65', 'border-white/15', 'bg-transparent');
                     });
-                    this.classList.add('active');
-                    this.classList.remove('text-cream/65');
+                    
+                    this.classList.remove('text-cream/65', 'border-white/15', 'bg-transparent');
+                    this.classList.add('bg-gold', 'text-forest', 'border-gold', '-translate-y-[2px]');
+                    
                     filterGallery();
                 });
             });
@@ -622,41 +658,39 @@
                 activeFilter = 'Semua';
                 filterButtons.forEach(button => {
                     const isAll = button.dataset.filter === 'Semua';
-                    button.classList.toggle('active', isAll);
-                    button.classList.toggle('text-cream/65', !isAll);
+                    if(isAll){
+                        button.classList.remove('text-cream/65', 'border-white/15', 'bg-transparent');
+                        button.classList.add('bg-gold', 'text-forest', 'border-gold', '-translate-y-[2px]');
+                    } else {
+                        button.classList.remove('bg-gold', 'text-forest', 'border-gold', '-translate-y-[2px]');
+                        button.classList.add('text-cream/65', 'border-white/15', 'bg-transparent');
+                    }
                 });
                 filterGallery();
                 searchInput.focus();
             });
 
             // ============================================
-            // LOGIKA ANIMASI SCROLL (MURNI CSS TRANSITION)
+            // LOGIKA ANIMASI SCROLL PERSIS SEPERTI BERANDA
             // ============================================
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                const observerOptions = {
-                    root: null,
-                    rootMargin: '0px 0px -50px 0px',
-                    threshold: 0.1
-                };
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -50px 0px',
+                threshold: 0.1
+            };
 
-                const observer = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            // Cukup tambahkan class is-visible, CSS Transition akan mengurus sisanya
-                            entry.target.classList.add('is-visible');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, observerOptions);
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-up');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
 
-                document.querySelectorAll('.scroll-animate').forEach(el => {
-                    observer.observe(el);
-                });
-            } else {
-                document.querySelectorAll('.scroll-animate').forEach(el => {
-                    el.classList.add('is-visible');
-                });
-            }
+            document.querySelectorAll('.scroll-animate').forEach(el => {
+                observer.observe(el);
+            });
         }); 
     </script>
 </body>
