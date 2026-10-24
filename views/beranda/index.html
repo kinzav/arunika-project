@@ -128,13 +128,21 @@
 
         background-size: auto, 35px 35px, 35px 35px;
     }
+    /* Tambahkan animasi navbarDrop di bawah class map-pattern atau di akhir tag <style> */
+    #navbar {
+        animation: navbarDrop 0.8s cubic-bezier(.2, .7, .2, 1) forwards;
+    }
+    @keyframes navbarDrop {
+        from { opacity: 0; transform: translateY(-100%); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 </style>
 </head>
 
 <body class="font-sans antialiased">
 
 <nav id="navbar"
-    class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-forest/90 backdrop-blur-xl opacity-0 animate-fade-in">
+    class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-forest/90 backdrop-blur-xl">
 
     <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-10">
 
