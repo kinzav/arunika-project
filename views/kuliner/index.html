@@ -71,7 +71,6 @@
     }
 
     .hero {
-      min-height: 420px;
       background-image:
         linear-gradient(
           90deg,
@@ -80,9 +79,6 @@
           rgba(11, 26, 21, 0.48) 61%,
           rgba(11, 26, 21, 0.06) 100%
         ),
-        url('images/hero-kuliner.jpg');
-      background-size: cover;
-      background-position: center;
     }
 
     /* NAVBAR: gold underline on hover */
@@ -141,13 +137,22 @@
       }
       .food-card p { font-size: 11px; line-height: 1.55; }
     }
+
+    /* Tambahkan animasi navbarDrop di bawah class map-pattern atau di akhir tag <style> */
+    #navbar {
+        animation: navbarDrop 0.8s cubic-bezier(.2, .7, .2, 1) forwards;
+    }
+    @keyframes navbarDrop {
+        from { opacity: 0; transform: translateY(-100%); }
+        to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 
 <body class="font-sans antialiased">
 
 <nav id="navbar"
-    class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-forest/90 backdrop-blur-xl opacity-0 animate-fade-in">
+    class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-forest/90 backdrop-blur-xl">
 
     <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-10">
 
@@ -174,7 +179,7 @@
 
         <!-- Menu Desktop -->
         <div class="hidden items-center gap-8 text-sm text-cream/80 md:flex">
-            <a href="../beranda/index.html" class="nav-link hover:text-gold transition-colors">
+            <a href="index.html" class="nav-link hover:text-gold transition-colors">
                 Beranda
             </a>
 
@@ -186,7 +191,7 @@
                 Tradisi
             </a>
 
-            <a href="index.html" class="nav-link hover:text-gold transition-colors">
+            <a href="../kuliner/index.html" class="nav-link hover:text-gold transition-colors">
                 Kuliner
             </a>
 
@@ -219,25 +224,45 @@
 </nav>
 
   <main>
-    <!-- =========================================
-         HERO SECTION
-         Ganti images/hero-kuliner.jpg untuk mengganti foto latar.
-         ========================================= -->
-    <section id="beranda" class="hero flex items-center pt-20">
-      <div class="mx-auto w-full max-w-6xl px-8 py-14 md:px-14 md:py-20">
-        <div class="max-w-md">
-          <p class="mb-3 text-[10px] uppercase tracking-[.35em] text-gold">Cita rasa warisan Nusantara</p>
-          <h1 class="max-w-2xl font-serif text-5xl md:text-7xl leading-[1.12] margin-bottom animate-fade-up" style="animation-delay: 0.3s;">Rasa yang<br>
-            <span class="block italic text-gold">Punya cerita</span>
-        </h1>
-          <p class="mt-7 max-w-lg text-base leading-8 text-cream/75 md:text-lg opacity-0 animate-fade-up" style="animation-delay: 0.5s;">Setiap hidangan punya kisah, budaya, dan cita rasa yang layak dikenang.</p>
+
+    <!-- === HERO SECTION === -->
+
+    <section id="beranda" class="relative flex min-h-[1000px] items-center overflow-hidden">
+
+        <!-- Hero Image -->
+        <img
+            src="https://images.unsplash.com/photo-1655740005902-2436216b82b8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
+            alt="Hidangan tradisional Indonesia"
+            class="absolute inset-0 h-full w-full object-cover"
+        >
+
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-r from-forest via-forest/80 to-forest/10"></div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 mx-auto w-full max-w-6xl px-8 py-20 md:px-14 md:py-28">
+            <div class="max-w-xl">
+
+                <p class="mb-3 text-[10px] uppercase tracking-[.35em] text-gold">
+                    Cita rasa warisan Nusantara
+                </p>
+
+                <h1 class="font-serif text-5xl leading-[1.12] text-gold md:text-7xl">
+                    Rasa yang<br>
+                    <span class="italic">Punya cerita</span>
+                </h1>
+
+                <p class="mt-7 max-w-lg text-base leading-8 text-cream/75 md:text-lg">
+                    Setiap hidangan punya kisah, budaya, dan cita rasa yang layak dikenang.
+                </p>
+
+            </div>
         </div>
-      </div>
+
     </section>
 
-    <!-- =========================================
-         KONTEN UTAMA: CERITA KULINER
-         ========================================= -->
+
+    <!-- === KONTEN UTAMA: CERITA KULINER === -->
     <section id="kuliner" class="bg-deep px-5 pb-24 pt-16 md:px-10 md:pb-32 md:pt-20">
       <div class="mx-auto max-w-5xl">
         <div class="mb-14 text-center md:mb-20">
@@ -258,7 +283,7 @@
             <div class="space-y-4">
                 <p class="max-w-lg text-base leading-8 text-cream/75 md:text-lg">
                     <strong class="text-gold">1. Rawon — Jawa Timur</strong><br>
-                    Deskripsi: Rawon adalah hidangan berkuah hitam yang khas.
+                    Rawon adalah hidangan berkuah hitam yang khas.
                 </p>
 
                 <ul class="list-disc pl-5 text-base leading-8 text-cream/75 md:text-lg">
@@ -286,7 +311,7 @@
             <div class="space-y-4">
                 <p class="max-w-lg text-base leading-8 text-cream/75 md:text-lg">
                     <strong class="text-gold">2. Gudeg — Yogyakarta</strong><br>
-                    Deskripsi: Gudeg terbuat dari nangka muda yang dimasak lama bersama santan dan berbagai rempah. Rasanya manis, lembut, dan menjadi salah satu kuliner khas Yogyakarta.
+                    Gudeg terbuat dari nangka muda yang dimasak lama bersama santan dan berbagai rempah. Rasanya manis, lembut, dan menjadi salah satu kuliner khas Yogyakarta.
                 </p>
 
                 <ul class="list-disc pl-5 text-base leading-8 text-cream/75 md:text-lg">
@@ -313,7 +338,7 @@
             <div class="space-y-4">
                 <p class="max-w-lg text-base leading-8 text-cream/75 md:text-lg">
                     <strong class="text-gold">3. Soto Kudus — Jawa Tengah</strong><br>
-                    Deskripsi: Soto Kudus merupakan hidangan berkuah dengan rasa gurih yang biasanya menggunakan daging ayam atau kerbau, disajikan bersama nasi, tauge, dan bawang goreng.               
+                    Soto Kudus merupakan hidangan berkuah dengan rasa gurih yang biasanya menggunakan daging ayam atau kerbau, disajikan bersama nasi, tauge, dan bawang goreng.               
                 </p>
 
                 <ul class="list-disc pl-5 text-base leading-8 text-cream/75 md:text-lg">
