@@ -91,3 +91,103 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const STORAGE_KEY = "arunikaAccessibility";
+
+    const defaults = {
+        grayscale: false,
+        contrast: false,
+        invert: false
+    };
+
+    let settings;
+
+    try {
+        settings = {
+            ...defaults,
+            ...JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}")
+        };
+    } catch {
+        settings = { ...defaults };
+    }
+
+    const options = {
+        grayscale: document.getElementById("toggleGrayscale"),
+        contrast: document.getElementById("toggleContrast"),
+        invert: document.getElementById("toggleInvert")
+    };
+
+    function applySettings() {
+        const root = document.documentElement;
+
+        root.classList.toggle("access-grayscale", settings.grayscale);
+        root.classList.toggle("access-contrast", settings.contrast);
+        root.classList.toggle("access-invert", settings.invert);
+
+        // Gabungkan filter supaya beberapa pengaturan
+        // bisa aktif bersamaan.
+        const filters = [];
+
+        if (settings.grayscale) filters.push("grayscale(1)");
+        if (settings.contrast) filters.push("contrast(1.4)");
+        if (settings.invert) {
+            filters.push("invert(1)", "hue-rotate(180deg)");
+        }
+
+        document.documentElement.style.filter = filters.length
+            ? filters.join(" ")
+            : "";
+
+        // Perbarui tombol jika tersedia di halaman ini.
+        Object.entries(options).forEach(([key, button]) => {
+            if (!button) return;
+
+            button.setAttribute(
+                "aria-pressed",
+                String(settings[key])
+            );
+
+            const status = button.querySelector(
+                ".accessibility-status"
+            );
+
+            if (status) {
+                status.textContent = settings[key] ? "NYALA" : "MATI";
+            }
+        });
+    }
+
+    function saveSettings() {
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(settings)
+        );
+
+        applySettings();
+    }
+
+    Object.entries(options).forEach(([key, button]) => {
+        if (!button) return;
+
+        button.addEventListener("click", () => {
+            settings[key] = !settings[key];
+            saveSettings();
+        });
+    });
+
+    // Reset semua pengaturan tampilan.
+    const resetButton = document.getElementById(
+        "accessibilityReset"
+    );
+
+    if (resetButton) {
+        resetButton.addEventListener("click", () => {
+            settings = { ...defaults };
+            saveSettings();
+        });
+    }
+
+    // Terapkan pengaturan tersimpan saat halaman dibuka.
+    applySettings();
+});
