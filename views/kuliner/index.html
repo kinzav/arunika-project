@@ -109,24 +109,41 @@
 
     /* FOOD CARDS: alternate image placement from left to right */
     .food-card {
-      position: relative; width: min(82%, 680px); min-height: 180px;
-      border: 1px solid rgba(212,175,103,.32); border-radius: 7px;
-      background: rgba(20,43,33,.72); display: flex; align-items: center;
-      padding: 28px 28px 28px 125px; margin-left: auto;
+        position: relative;
+        width: min(82%, 680px);
+        min-height: 180px;
+        border: 1px solid rgba(212,175,103,.32);
+        border-radius: 7px;
+        background: rgba(20,43,33,.72);
+        display: flex;
+        align-items: center;
+        padding: 28px 28px 28px 125px;
+        margin-left: auto;
     }
 
-    .food-card:nth-child(even) { 
-        margin-left: 0; margin-right: auto; padding: 28px 125px 28px 28px; 
+    .food-card:nth-child(even) {
+        margin-left: 0;
+        margin-right: auto;
+        padding: 28px 125px 28px 28px;
     }
 
     .food-image {
-      position: absolute; left: -50px; top: 50%; transform: translateY(-50%);
-      width: 160px; height: 145px; background: #eee; color: #555;
-      display: grid; place-items: center; border: 1px solid #c9c9c9;
+        position: absolute;
+        left: -220px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 320px;
+        height: 220px;
+        background: #eee;
+        color: #555;
+        display: grid;
+        place-items: center;
+        border: 1px solid #c9c9c9;
     }
 
-    .food-card:nth-child(even) .food-image { 
-        left: auto; right: -50px; 
+    .food-card:nth-child(even) .food-image {
+        left: auto;
+        right: -220px;
     }
 
     .placeholder-icon { 
@@ -261,11 +278,11 @@
           <!-- Card 1: Muncul dari kiri -->
           <article class="food-card opacity-0 scroll-animate-left">
             <div class="food-image" aria-label="Tempat foto Rawon">
-              <svg class="placeholder-icon" viewBox="0 0 48 36" fill="none" aria-hidden="true">
-                <rect x="1" y="1" width="46" height="34" stroke="#555" stroke-width="1.2" />
-                <circle cx="34" cy="10" r="3" fill="#555" />
-                <path d="M3 31L17 16L26 24L32 19L45 31H3Z" fill="#777" stroke="#555" />
-              </svg>
+                <img
+                    src="../../img/kuliner/rawon.jpg"
+                    alt="Rawon khas Jawa Timur"
+                    class="h-full w-full object-cover"
+                >
             </div>
             <div class="space-y-4">
                 <p class="max-w-lg text-base leading-8 text-cream/75 md:text-lg">
@@ -287,11 +304,11 @@
           <!-- Card 2: Muncul dari kanan -->
           <article class="food-card opacity-0 scroll-animate-right">
             <div class="food-image" aria-label="Tempat foto Gudeg">
-              <svg class="placeholder-icon" viewBox="0 0 48 36" fill="none" aria-hidden="true">
-                <rect x="1" y="1" width="46" height="34" stroke="#555" stroke-width="1.2" />
-                <circle cx="34" cy="10" r="3" fill="#555" />
-                <path d="M3 31L17 16L26 24L32 19L45 31H3Z" fill="#777" stroke="#555" />
-              </svg>
+                <img
+                    src="../../img/kuliner/gudeg.jpg"
+                    alt="Rawon khas Jawa Timur"
+                    class="h-full w-full object-cover"
+                >
             </div>
             <div class="space-y-4">
                 <p class="max-w-lg text-base leading-8 text-cream/75 md:text-lg">
@@ -312,11 +329,11 @@
           <!-- Card 3: Muncul dari kiri -->
           <article class="food-card opacity-0 scroll-animate-left">
             <div class="food-image" aria-label="Tempat foto Soto Kudus">
-              <svg class="placeholder-icon" viewBox="0 0 48 36" fill="none" aria-hidden="true">
-                <rect x="1" y="1" width="46" height="34" stroke="#555" stroke-width="1.2" />
-                <circle cx="34" cy="10" r="3" fill="#555" />
-                <path d="M3 31L17 16L26 24L32 19L45 31H3Z" fill="#777" stroke="#555" />
-              </svg>
+                <img
+                    src="../../img/kuliner/soto-kudus.jpg"
+                    alt="Rawon khas Jawa Timur"
+                    class="h-full w-full object-cover"
+                >
             </div>
             <div class="space-y-4">
                 <p class="max-w-lg text-base leading-8 text-cream/75 md:text-lg">
