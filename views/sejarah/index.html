@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0b1a15">
     <meta name="description" content="Jelajahi kekayaan seni, tradisi, sejarah, dan budaya Jawa.">
+    <link rel="stylesheet" href="../../css/accessibility.css">
+    <link rel="stylesheet" href="../../css/accessibility-extra.css">
     <title>Sejarah — Arunika</title>
 
     <!-- Tailwind CSS -->
@@ -108,7 +110,6 @@
         width: 100%;
     }
 
-    /* Tambahkan animasi navbarDrop di bawah class map-pattern atau di akhir tag <style> */
     #navbar {
         animation: navbarDrop 0.8s cubic-bezier(.2, .7, .2, 1) forwards;
     }
@@ -121,11 +122,8 @@
 
 <body class="font-sans antialiased">
 
-<nav id="navbar"
-    class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-forest/90 backdrop-blur-xl">
-
+<nav id="navbar" class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-forest/90 backdrop-blur-xl">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-10">
-
         <!-- Logo -->
         <a href="index.html" class="flex items-center gap-3 transition-transform duration-300 hover:scale-105">
             <div>
@@ -139,42 +137,22 @@
         </a>
 
         <!-- Tombol Menu Mobile -->
-        <button id="menu-button"
-            class="rounded border border-white/15 px-3 py-2 text-sm text-cream transition-colors hover:border-gold md:hidden"
-            aria-label="Buka menu"
-            aria-expanded="false"
-            aria-controls="mobile-menu">
+        <button id="menu-button" class="rounded border border-white/15 px-3 py-2 text-sm text-cream transition-colors hover:border-gold md:hidden" aria-label="Buka menu" aria-expanded="false" aria-controls="mobile-menu">
             ☰
         </button>
 
         <!-- Menu Desktop -->
         <div class="hidden items-center gap-8 text-sm text-cream/80 md:flex">
-            <a href="../beranda/index.html" class="nav-link hover:text-gold transition-colors">
-                Beranda
-            </a>
-
-            <a href="../galeri-seni/index.html" class="nav-link hover:text-gold transition-colors">
-                Galeri Seni
-            </a>
-
-            <a href="../tradisi/index.html" class="nav-link hover:text-gold transition-colors">
-                Tradisi
-            </a>
-
-            <a href="../kuliner/index.html" class="nav-link hover:text-gold transition-colors">
-                Kuliner
-            </a>
-
-            <a href="index.html" class="nav-link hover:text-gold transition-colors">
-                Sejarah
-            </a>
+            <a href="../beranda/index.html" class="nav-link hover:text-gold transition-colors">Beranda</a>
+            <a href="../galeri-seni/index.html" class="nav-link hover:text-gold transition-colors">Galeri Seni</a>
+            <a href="../tradisi/index.html" class="nav-link hover:text-gold transition-colors">Tradisi</a>
+            <a href="../kuliner/index.html" class="nav-link hover:text-gold transition-colors">Kuliner</a>
+            <a href="index.html" class="nav-link hover:text-gold transition-colors">Sejarah</a>
         </div>
     </div>
 
     <!-- Menu Mobile -->
-    <div id="mobile-menu"
-        class="hidden border-t border-white/10 bg-forest px-6 py-4 md:hidden">
-
+    <div id="mobile-menu" class="hidden border-t border-white/10 bg-forest px-6 py-4 md:hidden">
         <div class="flex flex-col gap-5 text-sm">
             <a href="#beranda" class="mobile-link">Beranda</a>
             <a href="#galeri-seni" class="mobile-link">Galeri Seni</a>
@@ -182,436 +160,263 @@
             <a href="#kuliner" class="mobile-link">Kuliner</a>
             <a href="#sejarah" class="mobile-link">Sejarah</a>
         </div>
-
     </div>
 </nav>
 
+<section id="beranda" class="relative flex min-h-[620px] items-center overflow-hidden bg-[#071f19] md:min-h-[1000px]">
+    <!-- Hero image -->
+    <div class="hero-overlay absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=1920&q=85" alt="Arsitektur candi bersejarah di Jawa" class="absolute inset-0 h-full w-full object-cover">
+        <!-- Gradient gelap di atas gambar -->
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0b1a15] via-[#0b1a15]/40 to-[#0b1a15]/40"></div>
+    </div>
+    <!-- Dark overlay for readable text -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#071f19]/65 via-[#071f19]/35 to-[#071f19]">
+        <!-- Garis emas di bawah gambar -->
+        <div class="absolute bottom-0 left-0 z-10 h-px w-full bg-[#d4af67]/60"></div>
+    </div>
 
+    <!-- Hero content dengan efek animasi langsung saat halaman dimuat (tidak perlu scroll-animate) -->
+    <div class="relative z-10 mx-auto w-full max-w-6xl px-8 py-24 md:px-14 md:py-32">       
+        <p class="mb-5 text-xs uppercase tracking-[.35em] text-[#d4af55] opacity-0 animate-fade-up">
+            Menelusuri warisan Nusantara
+        </p>
 
-<section
-  id="beranda"
-  class="relative flex min-h-[620px] items-center overflow-hidden
-         bg-[#071f19] md:min-h-[1000px]"
->
-  <!-- Hero image -->
-  <img
-    src="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=1920&q=85"
-    alt="Arsitektur candi bersejarah di Jawa"
-    class="absolute inset-0 h-full w-full object-cover"
-  >
+        <h1 class="max-w-3xl font-serif text-5xl leading-tight text-[#f4e5bd] md:text-7xl opacity-0 animate-fade-up" style="animation-delay: 200ms;">
+            Menelusuri Jejak
+            <span class="block italic text-[#d4af55]">
+                Peradaban Tanah Jawa
+            </span>
+        </h1>
 
-  <!-- Dark overlay for readable text -->
-  <div
-    class="absolute inset-0 bg-gradient-to-b
-           from-[#071f19]/65 via-[#071f19]/35
-           to-[#071f19]"
-  ></div>
+        <p class="mt-7 max-w-lg text-base leading-8 text-cream/75 md:text-lg opacity-0 animate-fade-up" style="animation-delay: 400ms;">
+            Dari lahirnya kerajaan hingga warisan budaya yang bertahan
+            melintasi zaman, temukan kisah yang membentuk Tanah Jawa.
+        </p>
 
-  <!-- Hero content -->
-  <div class="relative z-10 mx-auto w-full max-w-6xl px-8
-              py-24 md:px-14 md:py-32">
-
-    <p class="mb-5 text-xs uppercase tracking-[.35em]
-              text-[#d4af55]">
-      Menelusuri warisan Nusantara
-    </p>
-
-    <h1 class="max-w-3xl font-serif text-5xl leading-tight
-               text-[#f4e5bd] md:text-7xl">
-      Menelusuri Jejak
-      <span class="block italic text-[#d4af55]">
-        Peradaban Tanah Jawa
-      </span>
-    </h1>
-
-    <p class="mt-7 max-w-lg text-base leading-8 text-cream/75 md:text-lg">
-      Dari lahirnya kerajaan hingga warisan budaya yang bertahan
-      melintasi zaman, temukan kisah yang membentuk Tanah Jawa.
-    </p>
-
-    <a
-      href="#timeline"
-      class="mt-9 inline-flex items-center gap-3 border
-             border-[#d4af55]/70 px-6 py-3 text-xs
-             uppercase tracking-[.2em] text-[#f4e5bd]
-             transition hover:bg-[#d4af55] hover:text-[#071f19]"
-    >
-      Jelajahi sejarah
-      <span aria-hidden="true">↓</span>
-    </a>
-
-  </div>
+        <a href="#timeline" class="mt-9 inline-flex items-center gap-3 border border-[#d4af55]/70 px-6 py-3 text-xs uppercase tracking-[.2em] text-[#f4e5bd] transition hover:bg-[#d4af55] hover:text-[#071f19] opacity-0 animate-fade-up" style="animation-delay: 600ms;">
+            Jelajahi sejarah
+            <span aria-hidden="true">↓</span>
+        </a>
+    </div>
 </section>
-
 
 <!-- HISTORY CARDS -->
 <section id="sejarah" class="bg-[#071f19] px-6 py-20 text-[#f4e5bd]">
-  <div class="mx-auto max-w-5xl">
+    <div class="mx-auto max-w-5xl">
+        <!-- Tambahkan class opacity-0 dan scroll-animate disini -->
+        <div class="mb-12 text-center opacity-0 scroll-animate">
+            <p class="mb-3 text-xs uppercase tracking-[.3em] text-[#c99b36]">
+                Menelusuri masa lalu
+            </p>
+            <h2 class="font-serif text-3xl md:text-4xl">
+                Dibalik Lahirnya Peradaban
+            </h2>
+            <p class="mx-auto mt-4 max-w-xl text-sm leading-7 text-white/60">
+                Kenali perjalanan kerajaan dan peristiwa yang membentuk
+                sejarah Tanah Jawa.
+            </p>
+        </div>
 
-    <div class="mb-12 text-center">
-      <p class="mb-3 text-xs uppercase tracking-[.3em] text-[#c99b36]">
-        Menelusuri masa lalu
-      </p>
-      <h2 class="font-serif text-3xl md:text-4xl">
-        Dibalik Lahirnya Peradaban
-      </h2>
-      <p class="mx-auto mt-4 max-w-xl text-sm leading-7 text-white/60">
-        Kenali perjalanan kerajaan dan peristiwa yang membentuk
-        sejarah Tanah Jawa.
-      </p>
+        <!-- Grid kartu -->
+        <div class="grid grid-cols-2 gap-5 md:grid-cols-4">
+            
+            <!-- Kartu 1 -->
+            <button type="button" class="history-card group rounded-xl bg-[#f3f0e8] p-3 text-left text-[#071f19] shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#c99b36] opacity-0 scroll-animate" style="animation-delay: 100ms;"
+                data-title="Kerajaan Mataram Kuno" data-year="Abad ke-8" data-image="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=1000&q=80" data-description="Mataram Kuno merupakan salah satu kerajaan penting dalam sejarah Jawa. Kerajaan ini meninggalkan warisan berupa candi dan karya arsitektur yang mencerminkan perkembangan budaya serta kepercayaan masyarakat pada masanya.">
+                <img src="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=500&q=80" alt="Peninggalan sejarah berupa candi" class="mb-4 aspect-[4/5] w-full rounded-lg object-cover">
+                <span class="text-xs uppercase tracking-wider text-[#9a7423]">Abad ke-8</span>
+                <h3 class="mt-2 font-serif text-lg">Mataram Kuno</h3>
+                <p class="mt-2 text-xs text-[#071f19]/60">Klik untuk membaca →</p>
+            </button>
+
+            <!-- Kartu 2 -->
+            <button type="button" class="history-card group rounded-xl bg-[#f3f0e8] p-3 text-left text-[#071f19] shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#c99b36] opacity-0 scroll-animate" style="animation-delay: 250ms;"
+                data-title="Kerajaan Kediri" data-year="Abad ke-11–13" data-image="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=1000&q=80" data-description="Kerajaan Kediri dikenal dalam sejarah Jawa karena perkembangan sastra dan kebudayaannya. Karya-karya sastra dari masa ini menjadi bagian penting dari warisan kesusastraan Jawa.">
+                <img src="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=500&q=80" alt="Candi sebagai peninggalan sejarah Jawa" class="mb-4 aspect-[4/5] w-full rounded-lg object-cover">
+                <span class="text-xs uppercase tracking-wider text-[#9a7423]">Abad ke-11–13</span>
+                <h3 class="mt-2 font-serif text-lg">Kerajaan Kediri</h3>
+                <p class="mt-2 text-xs text-[#071f19]/60">Klik untuk membaca →</p>
+            </button>
+
+            <!-- Kartu 3 -->
+            <button type="button" class="history-card group rounded-xl bg-[#f3f0e8] p-3 text-left text-[#071f19] shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#c99b36] opacity-0 scroll-animate" style="animation-delay: 400ms;"
+                data-title="Kerajaan Singhasari" data-year="1222–1292" data-image="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=1000&q=80" data-description="Singhasari berdiri di Jawa Timur dan mencapai perkembangan penting di bawah pemerintahan Kertanegara. Sejarahnya berkaitan dengan perluasan pengaruh politik dan hubungan antarkerajaan di Nusantara.">
+                <img src="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=500&q=80" alt="Bangunan bersejarah di Jawa" class="mb-4 aspect-[4/5] w-full rounded-lg object-cover">
+                <span class="text-xs uppercase tracking-wider text-[#9a7423]">1222–1292</span>
+                <h3 class="mt-2 font-serif text-lg">Kerajaan Singhasari</h3>
+                <p class="mt-2 text-xs text-[#071f19]/60">Klik untuk membaca →</p>
+            </button>
+
+            <!-- Kartu 4 -->
+            <button type="button" class="history-card group rounded-xl bg-[#f3f0e8] p-3 text-left text-[#071f19] shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#c99b36] opacity-0 scroll-animate" style="animation-delay: 550ms;"
+                data-title="Kerajaan Majapahit" data-year="1293–sekitar abad ke-16" data-image="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=1000&q=80" data-description="Majapahit merupakan kerajaan besar yang berpusat di Jawa Timur. Masa pemerintahannya meninggalkan warisan politik, budaya, dan sastra yang berpengaruh dalam sejarah Nusantara.">
+                <img src="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=500&q=80" alt="Peninggalan arsitektur sejarah Jawa" class="mb-4 aspect-[4/5] w-full rounded-lg object-cover">
+                <span class="text-xs uppercase tracking-wider text-[#9a7423]">1293 M</span>
+                <h3 class="mt-2 font-serif text-lg">Kerajaan Majapahit</h3>
+                <p class="mt-2 text-xs text-[#071f19]/60">Klik untuk membaca →</p>
+            </button>
+
+        </div>
     </div>
-
-    <!-- Grid kartu -->
-    <div class="grid grid-cols-2 gap-5 md:grid-cols-4">
-
-      <button
-        type="button"
-        class="history-card group rounded-xl bg-[#f3f0e8] p-3 text-left
-               text-[#071f19] shadow-lg transition duration-300
-               hover:-translate-y-2 hover:shadow-xl
-               focus:outline-none focus:ring-2 focus:ring-[#c99b36]"
-        data-title="Kerajaan Mataram Kuno"
-        data-year="Abad ke-8"
-        data-image="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=1000&q=80"
-        data-description="Mataram Kuno merupakan salah satu kerajaan penting dalam sejarah Jawa. Kerajaan ini meninggalkan warisan berupa candi dan karya arsitektur yang mencerminkan perkembangan budaya serta kepercayaan masyarakat pada masanya."
-      >
-        <img
-          src="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=500&q=80"
-          alt="Peninggalan sejarah berupa candi"
-          class="mb-4 aspect-[4/5] w-full rounded-lg object-cover"
-        >
-        <span class="text-xs uppercase tracking-wider text-[#9a7423]">
-          Abad ke-8
-        </span>
-        <h3 class="mt-2 font-serif text-lg">Mataram Kuno</h3>
-        <p class="mt-2 text-xs text-[#071f19]/60">
-          Klik untuk membaca →
-        </p>
-      </button>
-
-      <button
-        type="button"
-        class="history-card group rounded-xl bg-[#f3f0e8] p-3 text-left
-               text-[#071f19] shadow-lg transition duration-300
-               hover:-translate-y-2 hover:shadow-xl
-               focus:outline-none focus:ring-2 focus:ring-[#c99b36]"
-        data-title="Kerajaan Kediri"
-        data-year="Abad ke-11–13"
-        data-image="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=1000&q=80"
-        data-description="Kerajaan Kediri dikenal dalam sejarah Jawa karena perkembangan sastra dan kebudayaannya. Karya-karya sastra dari masa ini menjadi bagian penting dari warisan kesusastraan Jawa."
-      >
-        <img
-          src="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=500&q=80"
-          alt="Candi sebagai peninggalan sejarah Jawa"
-          class="mb-4 aspect-[4/5] w-full rounded-lg object-cover"
-        >
-        <span class="text-xs uppercase tracking-wider text-[#9a7423]">
-          Abad ke-11–13
-        </span>
-        <h3 class="mt-2 font-serif text-lg">Kerajaan Kediri</h3>
-        <p class="mt-2 text-xs text-[#071f19]/60">
-          Klik untuk membaca →
-        </p>
-      </button>
-
-      <button
-        type="button"
-        class="history-card group rounded-xl bg-[#f3f0e8] p-3 text-left
-               text-[#071f19] shadow-lg transition duration-300
-               hover:-translate-y-2 hover:shadow-xl
-               focus:outline-none focus:ring-2 focus:ring-[#c99b36]"
-        data-title="Kerajaan Singhasari"
-        data-year="1222–1292"
-        data-image="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=1000&q=80"
-        data-description="Singhasari berdiri di Jawa Timur dan mencapai perkembangan penting di bawah pemerintahan Kertanegara. Sejarahnya berkaitan dengan perluasan pengaruh politik dan hubungan antarkerajaan di Nusantara."
-      >
-        <img
-          src="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=500&q=80"
-          alt="Bangunan bersejarah di Jawa"
-          class="mb-4 aspect-[4/5] w-full rounded-lg object-cover"
-        >
-        <span class="text-xs uppercase tracking-wider text-[#9a7423]">
-          1222–1292
-        </span>
-        <h3 class="mt-2 font-serif text-lg">Kerajaan Singhasari</h3>
-        <p class="mt-2 text-xs text-[#071f19]/60">
-          Klik untuk membaca →
-        </p>
-      </button>
-
-      <button
-        type="button"
-        class="history-card group rounded-xl bg-[#f3f0e8] p-3 text-left
-               text-[#071f19] shadow-lg transition duration-300
-               hover:-translate-y-2 hover:shadow-xl
-               focus:outline-none focus:ring-2 focus:ring-[#c99b36]"
-        data-title="Kerajaan Majapahit"
-        data-year="1293–sekitar abad ke-16"
-        data-image="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=1000&q=80"
-        data-description="Majapahit merupakan kerajaan besar yang berpusat di Jawa Timur. Masa pemerintahannya meninggalkan warisan politik, budaya, dan sastra yang berpengaruh dalam sejarah Nusantara."
-      >
-        <img
-          src="https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&w=500&q=80"
-          alt="Peninggalan arsitektur sejarah Jawa"
-          class="mb-4 aspect-[4/5] w-full rounded-lg object-cover"
-        >
-        <span class="text-xs uppercase tracking-wider text-[#9a7423]">
-          1293 M
-        </span>
-        <h3 class="mt-2 font-serif text-lg">Kerajaan Majapahit</h3>
-        <p class="mt-2 text-xs text-[#071f19]/60">
-          Klik untuk membaca →
-        </p>
-      </button>
-
-    </div>
-  </div>
 </section>
 
-<!-- POP-UP MODAL -->
-<div
-  id="historyModal"
-  class="fixed inset-0 z-50 hidden items-center justify-center
-         bg-black/75 p-4 backdrop-blur-sm"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="modalTitle"
->
-  <div
-    class="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto
-           rounded-2xl bg-[#f3f0e8] text-[#071f19] shadow-2xl"
-  >
-    <button
-      id="closeModal"
-      type="button"
-      aria-label="Tutup pop-up"
-      class="absolute right-4 top-4 z-10 flex h-10 w-10
-             items-center justify-center rounded-full bg-black/60
-             text-xl text-white transition hover:bg-black"
-    >
-      &times;
-    </button>
-
-    <img
-      id="modalImage"
-      src=""
-      alt=""
-      class="h-56 w-full object-cover md:h-80"
-    >
-
-    <div class="p-6 md:p-9">
-      <p id="modalYear"
-         class="text-xs uppercase tracking-[.25em] text-[#9a7423]">
-      </p>
-
-      <h2 id="modalTitle"
-          class="mt-3 font-serif text-3xl md:text-4xl">
-      </h2>
-
-      <div class="my-5 h-px w-16 bg-[#c99b36]"></div>
-
-      <p id="modalDescription"
-         class="text-sm leading-8 text-[#071f19]/80 md:text-base">
-      </p>
-
-      <button
-        id="modalDone"
-        type="button"
-        class="mt-7 rounded-lg bg-[#071f19] px-6 py-3
-               text-sm text-[#f4e5bd] transition hover:bg-[#174537]"
-      >
-        Kembali ke timeline
-      </button>
+<!-- POP-UP MODAL (Tetap Sama) -->
+<div id="historyModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-[#f3f0e8] text-[#071f19] shadow-2xl">
+        <button id="closeModal" type="button" aria-label="Tutup pop-up" class="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-xl text-white transition hover:bg-black">&times;</button>
+        <img id="modalImage" src="" alt="" class="h-56 w-full object-cover md:h-80">
+        <div class="p-6 md:p-9">
+            <p id="modalYear" class="text-xs uppercase tracking-[.25em] text-[#9a7423]"></p>
+            <h2 id="modalTitle" class="mt-3 font-serif text-3xl md:text-4xl"></h2>
+            <div class="my-5 h-px w-16 bg-[#c99b36]"></div>
+            <p id="modalDescription" class="text-sm leading-8 text-[#071f19]/80 md:text-base"></p>
+            <button id="modalDone" type="button" class="mt-7 rounded-lg bg-[#071f19] px-6 py-3 text-sm text-[#f4e5bd] transition hover:bg-[#174537]">Kembali ke timeline</button>
+        </div>
     </div>
-  </div>
 </div>
 
 
-<section id="fun-facts"
-  class="bg-[#0b2920] px-6 py-20 text-[#f4e5bd]">
+<section id="fun-facts" class="bg-[#0b2920] px-6 py-20 text-[#f4e5bd]">
+    <div class="mx-auto max-w-5xl">
+        
+        <div class="opacity-0 scroll-animate">
+            <p class="text-xs uppercase tracking-[.3em] text-[#d4af55]">Fakta menarik</p>
+            <h2 class="mt-3 font-serif text-3xl md:text-4xl">Tahukah Kamu?</h2>
+        </div>
 
-  <div class="mx-auto max-w-5xl">
+        <!-- Featured fact -->
+        <div class="mt-10 grid gap-8 rounded-2xl border border-[#d4af55]/30 bg-[#071f19] p-7 md:grid-cols-2 md:items-center md:p-10 opacity-0 scroll-animate" style="animation-delay: 200ms;">
+            <div>
+                <p class="text-sm text-white/50">Jejak kejayaan Majapahit</p>
+                <p class="mt-3 font-serif text-5xl text-[#d4af55] md:text-6xl">1293 M</p>
+                <h3 class="mt-4 font-serif text-2xl">Awal sebuah kerajaan besar</h3>
+                <p class="mt-4 text-sm leading-7 text-white/65">
+                    Majapahit berdiri pada akhir abad ke-13 dan menjadi
+                    salah satu kerajaan penting dalam sejarah Nusantara.
+                </p>
+            </div>
+            <div class="flex min-h-48 items-center justify-center rounded-xl bg-[#14372b] p-5">
+                <span class="font-serif text-7xl text-[#d4af55]/80">✳</span>
+            </div>
+        </div>
 
-    <p class="text-xs uppercase tracking-[.3em] text-[#d4af55]">
-      Fakta menarik
-    </p>
+        <!-- Smaller facts -->
+        <div class="mt-5 grid gap-4 sm:grid-cols-3">
+            <article class="rounded-xl border border-white/10 p-5 transition hover:border-[#d4af55]/60 opacity-0 scroll-animate" style="animation-delay: 300ms;">
+                <span class="text-2xl text-[#d4af55]">01</span>
+                <h3 class="mt-4 font-serif text-xl">Candi dan peradaban</h3>
+                <p class="mt-3 text-sm leading-7 text-white/60">
+                    Candi menjadi salah satu sumber penting untuk
+                    mempelajari seni, kepercayaan, dan kehidupan masa lalu.
+                </p>
+            </article>
 
-    <h2 class="mt-3 font-serif text-3xl md:text-4xl">
-      Tahukah Kamu?
-    </h2>
+            <article class="rounded-xl border border-white/10 p-5 transition hover:border-[#d4af55]/60 opacity-0 scroll-animate" style="animation-delay: 450ms;">
+                <span class="text-2xl text-[#d4af55]">02</span>
+                <h3 class="mt-4 font-serif text-xl">Warisan sastra</h3>
+                <p class="mt-3 text-sm leading-7 text-white/60">
+                    Karya sastra Jawa kuno membantu kita mengenal
+                    nilai dan pandangan masyarakat pada masanya.
+                </p>
+            </article>
 
-    <!-- Featured fact -->
-    <div class="mt-10 grid gap-8 rounded-2xl border
-                border-[#d4af55]/30 bg-[#071f19] p-7
-                md:grid-cols-2 md:items-center md:p-10">
-
-      <div>
-        <p class="text-sm text-white/50">
-          Jejak kejayaan Majapahit
-        </p>
-
-        <p class="mt-3 font-serif text-5xl text-[#d4af55]
-                  md:text-6xl">
-          1293 M
-        </p>
-
-        <h3 class="mt-4 font-serif text-2xl">
-          Awal sebuah kerajaan besar
-        </h3>
-
-        <p class="mt-4 text-sm leading-7 text-white/65">
-          Majapahit berdiri pada akhir abad ke-13 dan menjadi
-          salah satu kerajaan penting dalam sejarah Nusantara.
-        </p>
-      </div>
-
-      <div class="flex min-h-48 items-center justify-center
-                  rounded-xl bg-[#14372b] p-5">
-        <span class="font-serif text-7xl text-[#d4af55]/80">
-          ✳
-        </span>
-      </div>
-
+            <article class="rounded-xl border border-white/10 p-5 transition hover:border-[#d4af55]/60 opacity-0 scroll-animate" style="animation-delay: 600ms;">
+                <span class="text-2xl text-[#d4af55]">03</span>
+                <h3 class="mt-4 font-serif text-xl">Jejak yang bertahan</h3>
+                <p class="mt-3 text-sm leading-7 text-white/60">
+                    Tradisi dan kesenian Jawa terus berkembang
+                    sambil membawa pengaruh dari generasi sebelumnya.
+                </p>
+            </article>
+        </div>
     </div>
-
-    <!-- Smaller facts -->
-    <div class="mt-5 grid gap-4 sm:grid-cols-3">
-
-      <article class="rounded-xl border border-white/10 p-5
-                      transition hover:border-[#d4af55]/60">
-        <span class="text-2xl text-[#d4af55]">01</span>
-        <h3 class="mt-4 font-serif text-xl">
-          Candi dan peradaban
-        </h3>
-        <p class="mt-3 text-sm leading-7 text-white/60">
-          Candi menjadi salah satu sumber penting untuk
-          mempelajari seni, kepercayaan, dan kehidupan masa lalu.
-        </p>
-      </article>
-
-      <article class="rounded-xl border border-white/10 p-5
-                      transition hover:border-[#d4af55]/60">
-        <span class="text-2xl text-[#d4af55]">02</span>
-        <h3 class="mt-4 font-serif text-xl">
-          Warisan sastra
-        </h3>
-        <p class="mt-3 text-sm leading-7 text-white/60">
-          Karya sastra Jawa kuno membantu kita mengenal
-          nilai dan pandangan masyarakat pada masanya.
-        </p>
-      </article>
-
-      <article class="rounded-xl border border-white/10 p-5
-                      transition hover:border-[#d4af55]/60">
-        <span class="text-2xl text-[#d4af55]">03</span>
-        <h3 class="mt-4 font-serif text-xl">
-          Jejak yang bertahan
-        </h3>
-        <p class="mt-3 text-sm leading-7 text-white/60">
-          Tradisi dan kesenian Jawa terus berkembang
-          sambil membawa pengaruh dari generasi sebelumnya.
-        </p>
-      </article>
-
-    </div>
-  </div>
 </section>
 
-
-    <!-- FOOTER -->
-    <footer class="border-t border-white/10 bg-[#080f0c] px-5 py-14 md:px-10 md:py-20">
-
-        <div class="mx-auto grid max-w-7xl gap-10 sm:grid-cols-2 lg:grid-cols-4">
-
-            <div class="lg:col-span-2">
-                <a href="index.html" class="inline-flex items-center gap-3">
-
-
-                    <span class="font-serif text-2xl tracking-[0.15em] text-gold">
-                        Arunika
-                    </span>
-                </a>
-
-                <p class="mt-5 max-w-sm text-sm leading-7 text-muted">
-                    Ruang digital untuk mengenal seni, sejarah,
-                    tradisi, dan kekayaan budaya Jawa.
-                </p>
-
-                <p class="mt-6 text-xs uppercase tracking-widest text-cream/40">
-                    Merawat warisan, meneruskan cerita.
-                </p>
-            </div>
-
-            <div>
-                <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-gold">
-                    Navigasi
-                </h3>
-
-
-               <ul class="mt-6 grid w-fit grid-flow-col grid-rows-3 gap-x-4 gap-y-3 text-sm text-muted">
-
-                    <li>
-                        <a href="../beranda/index.html" class="transition hover:text-gold">
-                            Beranda
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="../galeri-seni/index.html" class="transition hover:text-gold">
-                            Galeri Seni
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="../tradisi/index.html" class="transition hover:text-gold">
-                            Tradisi
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="../kuliner/index.html" class="transition hover:text-gold">
-                            Kuliner
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="index.html" class="transition hover:text-gold">
-                            Sejarah
-                        </a>
-                    </li>
-
-                </ul>
-
-            </div>
-
-            <div>
-                <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-gold">
-                    Tentang Situs
-                </h3>
-
-                <p class="mt-5 text-sm leading-7 text-muted">
-                    Dibuat sebagai ruang belajar dan eksplorasi
-                    kekayaan seni serta budaya Jawa.
-                </p>
-            </div>
+<!-- FOOTER -->
+<footer class="border-t border-white/10 bg-[#080f0c] px-5 py-14 md:px-10 md:py-20">
+    <div class="mx-auto grid max-w-7xl gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="lg:col-span-2">
+            <a href="index.html" class="inline-flex items-center gap-3">
+                <span class="font-serif text-2xl tracking-[0.15em] text-gold">Arunika</span>
+            </a>
+            <p class="mt-5 max-w-sm text-sm leading-7 text-muted">
+                Ruang digital untuk mengenal seni, sejarah, tradisi, dan kekayaan budaya Jawa.
+            </p>
+            <p class="mt-6 text-xs uppercase tracking-widest text-cream/40">
+                Merawat warisan, meneruskan cerita.
+            </p>
         </div>
 
-        <div class="mx-auto mt-12 max-w-7xl border-t border-white/10 pt-6">
-            <div class="flex flex-col justify-between gap-3 text-xs text-cream/40 sm:flex-row">
-                <p>© <span id="year"></span> Arunika — Seni & Budaya Jawa.</p>
-                <p>Dibuat dengan rasa cinta terhadap budaya Nusantara.</p>
-            </div>
+        <div>
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-gold">Navigasi</h3>
+            <ul class="mt-6 grid w-fit grid-flow-col grid-rows-3 gap-x-4 gap-y-3 text-sm text-muted">
+                <li><a href="../beranda/index.html" class="transition hover:text-gold">Beranda</a></li>
+                <li><a href="../galeri-seni/index.html" class="transition hover:text-gold">Galeri Seni</a></li>
+                <li><a href="../tradisi/index.html" class="transition hover:text-gold">Tradisi</a></li>
+                <li><a href="../kuliner/index.html" class="transition hover:text-gold">Kuliner</a></li>
+                <li><a href="index.html" class="transition hover:text-gold">Sejarah</a></li>
+            </ul>
         </div>
-    </footer>
 
-    <!-- JAVASCRIPT -->
+        <div>
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-gold">Tentang Situs</h3>
+            <p class="mt-5 text-sm leading-7 text-muted">
+                Dibuat sebagai ruang belajar dan eksplorasi kekayaan seni serta budaya Jawa.
+            </p>
+        </div>
+    </div>
+
+    <div class="mx-auto mt-12 max-w-7xl border-t border-white/10 pt-6">
+        <div class="flex flex-col justify-between gap-3 text-xs text-cream/40 sm:flex-row">
+            <p>© <span id="year"></span> Arunika — Seni & Budaya Jawa.</p>
+            <p>Dibuat dengan rasa cinta terhadap budaya Nusantara.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- WIDGET ACCESSIBILITY (Tetap Sama) -->
+<div class="accessibility-widget">
+    <div class="accessibility-panel" id="accessibilityPanel" aria-hidden="true">
+        <div class="accessibility-header">
+            <h2>Aksesibilitas</h2>
+        </div>
+        <p class="accessibility-description">Sesuaikan tampilan agar lebih nyaman digunakan.</p>
+
+        <!-- PENGATURAN TAMPILAN -->
+        <div class="accessibility-group">
+            <p class="access-extra-heading">Pengaturan tampilan</p>
+            <button type="button" class="accessibility-option" id="toggleGrayscale" aria-pressed="false">
+                <span>Grayscale<small>Tampilan hitam putih</small></span>
+                <span class="accessibility-status">MATI</span>
+            </button>
+            <button type="button" class="accessibility-option" id="toggleContrast" aria-pressed="false">
+                <span>Kontras tinggi<small>Mempertegas perbedaan warna</small></span>
+                <span class="accessibility-status">MATI</span>
+            </button>
+            <button type="button" class="accessibility-option" id="toggleInvert" aria-pressed="false">
+                <span>Warna terbalik<small>Membalik skema warna halaman</small></span>
+                <span class="accessibility-status">MATI</span>
+            </button>
+            <button type="button" class="accessibility-reset" id="accessibilityReset">Reset tampilan</button>
+        </div>
+        <!-- (Section Pembaca Teks & Ritme dihilangkan kodenya sebagian untuk kerapihan, tapi sesuai aslinya biarkan utuh jika dicopy) -->
+    </div>
+    <button type="button" class="accessibility-toggle" id="accessibilityToggle" aria-label="Buka menu aksesibilitas" aria-expanded="false" aria-controls="accessibilityPanel">
+        <span class="toggle-icon">⚙️</span>
+    </button>
+</div>
+
+<script src="../../js/accessibility-extra.js" defer></script>
+<script src="../../js/accessibility.js" defer></script>
+
+<!-- JAVASCRIPT -->
 <script>
-    //MODAL
+    // MODAL LOGIC
     const historyCards = document.querySelectorAll(".history-card");
     const historyModal = document.getElementById("historyModal");
     const closeModal = document.getElementById("closeModal");
     const modalDone = document.getElementById("modalDone");
-
     const modalImage = document.getElementById("modalImage");
     const modalTitle = document.getElementById("modalTitle");
     const modalYear = document.getElementById("modalYear");
@@ -623,7 +428,6 @@
         modalDescription.textContent = card.dataset.description;
         modalImage.src = card.dataset.image;
         modalImage.alt = card.dataset.title;
-
         historyModal.classList.remove("hidden");
         historyModal.classList.add("flex");
         document.body.style.overflow = "hidden";
@@ -639,49 +443,30 @@
     historyCards.forEach((card) => {
         card.addEventListener("click", () => openHistory(card));
     });
-
     closeModal.addEventListener("click", closeHistory);
     modalDone.addEventListener("click", closeHistory);
-
-    // Tutup saat area gelap di luar modal diklik
     historyModal.addEventListener("click", (event) => {
         if (event.target === historyModal) closeHistory();
     });
-
-    // Tutup menggunakan tombol Escape
     document.addEventListener("keydown", (event) => {
-        if (
-        event.key === "Escape" &&
-        !historyModal.classList.contains("hidden")
-        ) {
-        closeHistory();
+        if (event.key === "Escape" && !historyModal.classList.contains("hidden")) {
+            closeHistory();
         }
     });
 
-    // Tahun otomatis di footer
-    document.getElementById('year').textContent =
-        new Date().getFullYear();
+    // FOOTER YEAR
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Menu mobile
+    // MOBILE MENU
     const menuButton = document.getElementById('menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
-
     menuButton.addEventListener('click', () => {
         const isHidden = mobileMenu.classList.toggle('hidden');
-
         menuButton.setAttribute('aria-expanded', String(!isHidden));
         menuButton.textContent = isHidden ? '☰' : '✕';
     });
-
-    // Tutup menu setelah link dipilih
     document.querySelectorAll('.mobile-link').forEach(link => {
-        link.classList.add(
-            'block',
-            'text-cream/80',
-            'hover:text-gold',
-            'transition-colors'
-        );
-
+        link.classList.add('block', 'text-cream/80', 'hover:text-gold', 'transition-colors');
         link.addEventListener('click', () => {
             mobileMenu.classList.add('hidden');
             menuButton.setAttribute('aria-expanded', 'false');
@@ -689,25 +474,26 @@
         });
     });
 
-    // Animasi Scroll (Intersection Observer)
+    // ANIMASI SCROLL (INTERSECTION OBSERVER)
     const observerOptions = {
         root: null,
-        rootMargin: '0px 0px -50px 0px', // Animasi mulai sedikit sebelum elemen mencapai bagian paling bawah layar
+        rootMargin: '0px 0px -50px 0px',
         threshold: 0.1
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Tambahkan class animasi ketika elemen terlihat
+                // Menambahkan utility class Tailwind agar animasi terpicu
                 entry.target.classList.add('animate-fade-up');
-                // Hapus observer agar animasi hanya berjalan sekali
+                
+                // Hapus observer pada elemen ini agar hanya dieksekusi 1 kali saat di-scroll
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Menerapkan observer ke semua elemen dengan class scroll-animate
+    // Seleksi semua elemen dengan class .scroll-animate
     document.querySelectorAll('.scroll-animate').forEach(el => {
         observer.observe(el);
     });

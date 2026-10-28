@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0b1a15">
     <meta name="description" content="Jelajahi kekayaan seni, tradisi, sejarah, dan budaya Jawa.">
+    <link rel="stylesheet" href="../../css/accessibility.css">
+    <link rel="stylesheet" href="../../css/accessibility-extra.css">
     <title>Tradisi — Arunika</title>
 
     <!-- Tailwind CSS -->
@@ -110,13 +112,15 @@
 
     /* Tradition card hover effect */
     .tradition-card {
-        transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                    border-color 0.3s ease, 
+                    box-shadow 0.4s ease;
     }
 
     .tradition-card:hover {
-        transform: translateY(-7px);
+        transform: translateY(-10px);
         border-color: #D4AF55;
-        box-shadow: 0 18px 40px #0002;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
     }
 
     /* Active category filter */
@@ -126,7 +130,7 @@
         border-color: #D4AF55;
     }
 
-    /* Tambahkan animasi navbarDrop di bawah class map-pattern atau di akhir tag <style> */
+    /* Navbar drop animation */
     #navbar {
         animation: navbarDrop 0.8s cubic-bezier(.2, .7, .2, 1) forwards;
     }
@@ -134,6 +138,27 @@
         from { opacity: 0; transform: translateY(-100%); }
         to { opacity: 1; transform: translateY(0); }
     }
+
+    /* ===================================================
+       Vanilla CSS Scroll Reveal Animations (Pengganti GSAP)
+       =================================================== */
+    .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+                    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Staggering effect untuk baris kartu agar muncul berurutan */
+    .tradition-card.reveal:nth-child(1) { transition-delay: 0.1s; }
+    .tradition-card.reveal:nth-child(2) { transition-delay: 0.2s; }
+    .tradition-card.reveal:nth-child(3) { transition-delay: 0.3s; }
+    .tradition-card.reveal:nth-child(4) { transition-delay: 0.4s; }
 </style>
 </head>
 
@@ -263,7 +288,7 @@
                     class="mt-9 inline-flex items-center gap-4 bg-gold px-6 py-4 text-xs font-semibold uppercase tracking-[.16em] text-forest transition hover:bg-cream"
                 >
                     Jelajahi tradisi
-                    <span>↓</span>
+                    <span class="transition-transform group-hover:translate-y-1">↓</span>
                 </a>
             </div>
 
@@ -284,7 +309,7 @@
                 </div>
             </div>
         </section>
-   
+    
 
         <!-- ========================================
              JELAJAHI TRADISI
@@ -298,8 +323,7 @@
                 <!-- Section Heading -->
                 <div class="reveal grid gap-8 md:grid-cols-[.85fr_1.15fr] md:items-end">
                     <div>
-
-                        <h2 class="mt-5 font-serif text-4xl md:text-6xl transition-transform duration-500 group-hover:scale-[1.02];">
+                        <h2 class="mt-5 font-serif text-4xl md:text-6xl">
                             Banyak cara untuk<br>
                             <span class="italic">
                                 menjaga cerita.
@@ -322,7 +346,7 @@
 
                     <!-- Card 1: Tedak Siten -->
                     <button
-                        class="tradition-card reveal overflow-hidden rounded-xl border border-forest/10 bg-white text-left"
+                        class="tradition-card reveal overflow-hidden rounded-xl border border-forest/10 bg-white text-left group"
                         data-category="upacara"
                         data-title="Tedak Siten"
                         data-kicker="Upacara adat · Siklus kehidupan"
@@ -331,7 +355,7 @@
                         data-meaning="Doa, harapan, dan dukungan keluarga dalam menyambut tahap baru kehidupan."
                     >
                         <img
-                            class="h-64 w-full object-cover"
+                            class="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-105"
                             src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=80"
                             alt="Suasana tradisi"
                             loading="lazy"
@@ -344,7 +368,7 @@
                                 Siklus kehidupan
                             </p>
 
-                            <h3 class="display mt-2 text-2xl">
+                            <h3 class="display mt-2 text-2xl group-hover:text-[#A98A43] transition-colors">
                                 Tedak Siten
                             </h3>
 
@@ -352,14 +376,14 @@
                                 class="mt-5 border-t border-forest/10 pt-4 text-xs text-forest/55"
                             >
                                 Temukan maknanya
-                                <span class="float-right">↗</span>
+                                <span class="float-right transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
                             </p>
                         </div>
                     </button>
 
                     <!-- Card 2: Wayang Kulit -->
                     <button
-                        class="tradition-card reveal overflow-hidden rounded-xl border border-forest/10 bg-white text-left"
+                        class="tradition-card reveal overflow-hidden rounded-xl border border-forest/10 bg-white text-left group"
                         data-category="seni"
                         data-title="Wayang Kulit"
                         data-kicker="Seni pertunjukan · Kisah dan filosofi"
@@ -368,7 +392,7 @@
                         data-meaning="Seni bercerita, refleksi tentang pilihan hidup, dan ruang berkumpul bagi masyarakat."
                     >
                         <img
-                            class="h-64 w-full object-cover"
+                            class="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-105"
                             src="https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=700&q=80"
                             alt="Seni pertunjukan"
                             loading="lazy"
@@ -381,7 +405,7 @@
                                 Cerita dan filosofi
                             </p>
 
-                            <h3 class="display mt-2 text-2xl">
+                            <h3 class="display mt-2 text-2xl group-hover:text-[#A98A43] transition-colors">
                                 Wayang Kulit
                             </h3>
 
@@ -389,14 +413,14 @@
                                 class="mt-5 border-t border-forest/10 pt-4 text-xs text-forest/55"
                             >
                                 Temukan maknanya
-                                <span class="float-right">↗</span>
+                                <span class="float-right transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
                             </p>
                         </div>
                     </button>
 
                     <!-- Card 3: Sekaten -->
                     <button
-                        class="tradition-card reveal overflow-hidden rounded-xl border border-forest/10 bg-white text-left"
+                        class="tradition-card reveal overflow-hidden rounded-xl border border-forest/10 bg-white text-left group"
                         data-category="perayaan"
                         data-title="Sekaten"
                         data-kicker="Perayaan · Tradisi masyarakat"
@@ -405,7 +429,7 @@
                         data-meaning="Pertemuan antara tradisi keraton, kehidupan masyarakat, dan perayaan keagamaan dalam konteks sejarah setempat."
                     >
                         <img
-                            class="h-64 w-full object-cover"
+                            class="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-105"
                             src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=700&q=80"
                             alt="Perayaan budaya"
                             loading="lazy"
@@ -418,7 +442,7 @@
                                 Tradisi masyarakat
                             </p>
 
-                            <h3 class="display mt-2 text-2xl">
+                            <h3 class="display mt-2 text-2xl group-hover:text-[#A98A43] transition-colors">
                                 Sekaten
                             </h3>
 
@@ -426,14 +450,14 @@
                                 class="mt-5 border-t border-forest/10 pt-4 text-xs text-forest/55"
                             >
                                 Temukan maknanya
-                                <span class="float-right">↗</span>
+                                <span class="float-right transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
                             </p>
                         </div>
                     </button>
 
                     <!-- Card 4: Batik Tulis -->
                     <button
-                        class="tradition-card reveal overflow-hidden rounded-xl border border-forest/10 bg-white text-left"
+                        class="tradition-card reveal overflow-hidden rounded-xl border border-forest/10 bg-white text-left group"
                         data-category="keseharian"
                         data-title="Batik Tulis"
                         data-kicker="Keseharian · Keterampilan turun-temurun"
@@ -442,7 +466,7 @@
                         data-meaning="Kesabaran, kreativitas, keterampilan, dan pengetahuan yang dipelajari serta diwariskan antargenerasi."
                     >
                         <img
-                            class="h-64 w-full object-cover"
+                            class="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-105"
                             src="https://images.unsplash.com/photo-1590736969955-71cc94901144?auto=format&fit=crop&w=700&q=80"
                             alt="Kain tradisional"
                             loading="lazy"
@@ -455,7 +479,7 @@
                                 Keterampilan turun-temurun
                             </p>
 
-                            <h3 class="display mt-2 text-2xl">
+                            <h3 class="display mt-2 text-2xl group-hover:text-[#A98A43] transition-colors">
                                 Batik Tulis
                             </h3>
 
@@ -463,7 +487,7 @@
                                 class="mt-5 border-t border-forest/10 pt-4 text-xs text-forest/55"
                             >
                                 Temukan maknanya
-                                <span class="float-right">↗</span>
+                                <span class="float-right transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
                             </p>
                         </div>
                     </button>
@@ -471,7 +495,7 @@
                 </div>
 
                 <!-- Section Note -->
-                <p class="mt-5 text-xs text-forest/45">
+                <p class="mt-5 text-xs text-forest/45 reveal">
                     Pilih kartu untuk membaca cerita lebih lanjut. Gambar dan
                     konten dapat kamu ganti sesuai sumber yang digunakan.
                 </p>
@@ -479,14 +503,14 @@
             </div>
         </section>
 
-   
+    
 
         <!-- ========================================
              DI BALIK MAKNA
         ========================================= -->
         <section
             id="makna"
-            class="bg-forest2 py-24 md:py-32"
+            class="bg-forest py-24 md:py-32"
         >
             <div class="mx-auto max-w-7xl px-6 md:px-12">
 
@@ -501,7 +525,7 @@
                             Sebuah cerita, banyak makna
                         </p>
 
-                        <h2 class="mt-5 font-serif text-4xl md:text-6xl transition-transform duration-500 group-hover:scale-[1.02];">
+                        <h2 class="mt-5 font-serif text-4xl md:text-6xl">
                             Di balik
                             <span class="italic text-gold">makna.</span>
                         </h2>
@@ -519,9 +543,9 @@
                 >
 
                     <!-- Featured Image -->
-                    <div class="relative min-h-[380px]">
+                    <div class="relative min-h-[380px] overflow-hidden group">
                         <img
-                            class="absolute inset-0 h-full w-full object-cover"
+                            class="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
                             src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=85"
                             alt="Suasana warisan budaya"
                             loading="lazy"
@@ -590,7 +614,7 @@
                         <!-- Read More Button -->
                         <button
                             data-open-feature
-                            class="mt-8 border-b border-[#A98A43] pb-2 text-xs font-semibold uppercase tracking-[.15em] hover:text-[#A98A43]"
+                            class="mt-8 border-b border-[#A98A43] pb-2 text-xs font-semibold uppercase tracking-[.15em] transition hover:text-[#A98A43] hover:border-forest"
                         >
                             Baca cerita lengkap ↗
                         </button>
@@ -608,7 +632,7 @@
         ========================================= -->
         <section
             id="generasi"
-            class="bg-forest py-20 md:py-24"
+            class="bg-deep py-20 md:py-24"
         >
             <div class="mx-auto max-w-7xl px-6 md:px-12">
 
@@ -621,7 +645,7 @@
                     </p>
 
                     <h2
-                        class="mt-5 font-serif text-4xl md:text-6xl transition-transform duration-500 group-hover:scale-[1.02];"
+                        class="mt-5 font-serif text-4xl md:text-6xl"
                     >
                         Warisan yang terus
                         <span class="italic text-gold">hidup.</span>
@@ -717,7 +741,7 @@
 
                     <a
                         href="#beranda"
-                        class="mt-5 inline-flex items-center gap-3 text-[10px] uppercase tracking-[.2em] text-gold hover:text-cream"
+                        class="mt-5 inline-flex items-center gap-3 text-[10px] uppercase tracking-[.2em] text-gold hover:text-cream transition-colors"
                     >
                         Kembali ke atas ↑
                     </a>
@@ -728,21 +752,23 @@
 
 
 <!-- ==================== DETAIL MODAL ==================== -->
+<!-- Perubahan dari hidden menjadi flex, dengan state awal opacity-0 -->
 <div
     id="detailModal"
-    class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
+    class="fixed inset-0 z-50 flex opacity-0 pointer-events-none transition-opacity duration-300 items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
     role="dialog"
     aria-modal="true"
     aria-labelledby="detailTitle"
 >
     <!-- Modal Container -->
     <div
-        class="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-cream text-forest shadow-2xl"
+        class="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-cream text-forest shadow-2xl transition-transform duration-300 transform scale-95"
+        id="modalContainer"
     >
         <!-- Close Button -->
         <button
             id="modalClose"
-            class="absolute right-4 top-4 z-10 h-10 w-10 rounded-full bg-forest/85 text-2xl text-cream"
+            class="absolute right-4 top-4 z-10 h-10 w-10 rounded-full bg-forest/85 text-2xl text-cream hover:bg-forest transition-colors"
             aria-label="Tutup pop-up"
         >
             ×
@@ -792,7 +818,7 @@
             <!-- Return Button -->
             <button
                 id="modalDone"
-                class="mt-8 bg-forest px-6 py-3 text-xs uppercase tracking-[.15em] text-cream"
+                class="mt-8 bg-forest px-6 py-3 text-xs uppercase tracking-[.15em] text-cream hover:bg-forest/80 transition-colors"
             >
                 Kembali menjelajah
             </button>
@@ -886,6 +912,175 @@
             </div>
         </div>
     </footer>
+    <div class="accessibility-widget">
+
+    <div
+        class="accessibility-panel"
+        id="accessibilityPanel"
+        aria-hidden="true"
+    >
+        <div class="accessibility-header">
+            <h2>Aksesibilitas</h2>
+        </div>
+
+        <p class="accessibility-description">
+            Sesuaikan tampilan agar lebih nyaman digunakan.
+        </p>
+
+        <!-- PENGATURAN TAMPILAN -->
+        <div class="accessibility-group">
+            <p class="access-extra-heading">Pengaturan tampilan</p>
+
+            <button type="button" class="accessibility-option"
+                id="toggleGrayscale" aria-pressed="false">
+                <span>
+                    Grayscale
+                    <small>Tampilan hitam putih</small>
+                </span>
+                <span class="accessibility-status">MATI</span>
+            </button>
+
+            <button type="button" class="accessibility-option"
+                id="toggleContrast" aria-pressed="false">
+                <span>
+                    Kontras tinggi
+                    <small>Mempertegas perbedaan warna</small>
+                </span>
+                <span class="accessibility-status">MATI</span>
+            </button>
+
+            <button type="button" class="accessibility-option"
+                id="toggleInvert" aria-pressed="false">
+                <span>
+                    Warna terbalik
+                    <small>Membalik skema warna halaman</small>
+                </span>
+                <span class="accessibility-status">MATI</span>
+            </button>
+
+            <button type="button" class="accessibility-reset"
+                id="accessibilityReset">
+                Reset tampilan
+            </button>
+        </div>
+
+        <!-- PEMBACA TEKS -->
+        <div class="access-extra-section">
+            <p class="access-extra-heading">Pembaca teks</p>
+
+            <p class="access-extra-description">
+                Dengarkan artikel Budaya dan Adat Jawa.
+            </p>
+
+            <div class="access-extra-controls">
+                <button type="button" class="access-extra-button"
+                    id="ttsPlay">
+                    ▶ Putar
+                </button>
+
+                <button type="button" class="access-extra-button"
+                    id="ttsPause">
+                    Ⅱ Jeda
+                </button>
+
+                <button type="button" class="access-extra-button"
+                    id="ttsResume">
+                    ↻ Lanjut
+                </button>
+
+                <button type="button" class="access-extra-button"
+                    id="ttsStop">
+                    ■ Berhenti
+                </button>
+            </div>
+
+            <p id="ttsStatus" class="access-extra-status"
+                role="status" aria-live="polite">
+                Siap membacakan artikel.
+            </p>
+        </div>
+
+        <!-- VISUALISASI RITME -->
+        <div class="access-extra-section">
+            <p class="access-extra-heading">Visualisasi ritme</p>
+
+            <p class="access-extra-description">
+                Lihat pola gerakan visual dengan tempo yang dapat diatur.
+            </p>
+
+            <div
+                id="ritmeVisualizer"
+                class="ritme-visualizer"
+                role="img"
+                aria-label="Visualisasi ritme dalam keadaan berhenti"
+            >
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+            </div>
+
+            <label for="ritmeTempo" class="access-extra-label">
+                Tempo visual
+            </label>
+
+            <div class="access-extra-tempo">
+                <input
+                    type="range"
+                    id="ritmeTempo"
+                    min="40"
+                    max="160"
+                    step="5"
+                    value="90"
+                >
+
+                <output id="ritmeTempoValue" for="ritmeTempo">
+                    90 BPM
+                </output>
+            </div>
+
+            <div class="access-extra-controls">
+                <button type="button" class="access-extra-button"
+                    id="ritmePlay">
+                    ▶ Mulai
+                </button>
+
+                <button type="button" class="access-extra-button"
+                    id="ritmeStop">
+                    ■ Berhenti
+                </button>
+            </div>
+
+            <p id="ritmeStatus" class="access-extra-status"
+                role="status" aria-live="polite">
+                Animasi ritme belum dimulai.
+            </p>
+        </div>
+    </div>
+
+    <button
+        type="button"
+        class="accessibility-toggle"
+        id="accessibilityToggle"
+        aria-label="Buka menu aksesibilitas"
+        aria-expanded="false"
+        aria-controls="accessibilityPanel"
+    >
+        <span class="toggle-icon">⚙️</span>
+    </button>
+
+</div>
+<!-- END FLOATING ACCESSIBILITY WIDGET -->
+
+<script src="../../js/accessibility-extra.js" defer></script>
+<script src="../../js/accessibility.js" defer></script>
 
     <!-- JAVASCRIPT -->
 <script>
@@ -920,31 +1115,28 @@
         });
     });
 
-    // Animasi Scroll (Intersection Observer)
+    // Animasi Scroll (Intersection Observer untuk class scroll-animate, dipertahankan bila ada)
     const observerOptions = {
         root: null,
-        rootMargin: '0px 0px -50px 0px', // Animasi mulai sedikit sebelum elemen mencapai bagian paling bawah layar
+        rootMargin: '0px 0px -50px 0px', 
         threshold: 0.1
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Tambahkan class animasi ketika elemen terlihat
                 entry.target.classList.add('animate-fade-up');
-                // Hapus observer agar animasi hanya berjalan sekali
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Menerapkan observer ke semua elemen dengan class scroll-animate
     document.querySelectorAll('.scroll-animate').forEach(el => {
         observer.observe(el);
     });
 
     // -----------------------------------------------------
-    // B. Scroll reveal animation
+    // B. Scroll reveal animation (CSS Transition Vanilla)
     // -----------------------------------------------------
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -967,11 +1159,9 @@
 
     filterButtons.forEach((button) => {
         button.addEventListener('click', () => {
-            // Highlight the selected filter button.
             filterButtons.forEach((item) => item.classList.remove('active'));
             button.classList.add('active');
 
-            // Show cards that match the selected category.
             traditionCards.forEach((card) => {
                 const matchesCategory =
                     button.dataset.filter === 'semua' ||
@@ -990,14 +1180,14 @@
     });
 
     // -----------------------------------------------------
-    // D. Tradition detail modal
+    // D. Tradition detail modal (Animasi Fade Transisi)
     // -----------------------------------------------------
     const detailModal = document.getElementById('detailModal');
+    const modalContainer = document.getElementById('modalContainer');
     const modalCloseButton = document.getElementById('modalClose');
     const modalDoneButton = document.getElementById('modalDone');
     let previousFocus = null;
 
-    // Fill the popup with the selected tradition's information.
     function openDetail(tradition) {
         previousFocus = document.activeElement;
 
@@ -1008,16 +1198,27 @@
         document.getElementById('detailDescription').textContent = tradition.description;
         document.getElementById('detailMeaning').textContent = tradition.meaning;
 
-        detailModal.classList.remove('hidden');
-        detailModal.classList.add('flex');
+        // Membuka modal dengan transisi
+        detailModal.classList.remove('opacity-0', 'pointer-events-none');
+        detailModal.classList.add('opacity-100', 'pointer-events-auto');
+        
+        // Sedikit zoom-in animasi kontainer
+        modalContainer.classList.remove('scale-95');
+        modalContainer.classList.add('scale-100');
+
         document.body.style.overflow = 'hidden';
         modalCloseButton.focus();
     }
 
-    // Close the popup and return focus to the previously selected element.
     function closeDetail() {
-        detailModal.classList.add('hidden');
-        detailModal.classList.remove('flex');
+        // Menutup modal dengan transisi
+        detailModal.classList.remove('opacity-100', 'pointer-events-auto');
+        detailModal.classList.add('opacity-0', 'pointer-events-none');
+        
+        // Zoom-out kontainer kembali
+        modalContainer.classList.remove('scale-100');
+        modalContainer.classList.add('scale-95');
+
         document.body.style.overflow = '';
 
         if (previousFocus) {
@@ -1025,7 +1226,6 @@
         }
     }
 
-    // Open the popup when a tradition card is selected.
     traditionCards.forEach((card) => {
         card.addEventListener('click', () => {
             openDetail({
@@ -1038,7 +1238,6 @@
         });
     });
 
-    // Open the same popup from the featured Tedak Siten story.
     document.querySelector('[data-open-feature]').addEventListener('click', () => {
         openDetail({
             title: 'Tedak Siten',
@@ -1049,7 +1248,6 @@
         });
     });
 
-    // Close buttons, clicking the backdrop, or pressing Escape all close the popup.
     modalCloseButton.addEventListener('click', closeDetail);
     modalDoneButton.addEventListener('click', closeDetail);
 
@@ -1060,7 +1258,7 @@
     });
 
     document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && !detailModal.classList.contains('hidden')) {
+        if (event.key === 'Escape' && !detailModal.classList.contains('opacity-0')) {
             closeDetail();
         }
     });
