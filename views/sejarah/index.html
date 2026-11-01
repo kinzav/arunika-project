@@ -375,37 +375,170 @@
     </div>
 </footer>
 
-<!-- WIDGET ACCESSIBILITY (Tetap Sama) -->
 <div class="accessibility-widget">
-    <div class="accessibility-panel" id="accessibilityPanel" aria-hidden="true">
+
+    <div
+        class="accessibility-panel"
+        id="accessibilityPanel"
+        aria-hidden="true"
+    >
         <div class="accessibility-header">
             <h2>Aksesibilitas</h2>
         </div>
-        <p class="accessibility-description">Sesuaikan tampilan agar lebih nyaman digunakan.</p>
+
+        <p class="accessibility-description">
+            Sesuaikan tampilan agar lebih nyaman digunakan.
+        </p>
 
         <!-- PENGATURAN TAMPILAN -->
         <div class="accessibility-group">
             <p class="access-extra-heading">Pengaturan tampilan</p>
-            <button type="button" class="accessibility-option" id="toggleGrayscale" aria-pressed="false">
-                <span>Grayscale<small>Tampilan hitam putih</small></span>
+
+            <button type="button" class="accessibility-option"
+                id="toggleGrayscale" aria-pressed="false">
+                <span>
+                    Grayscale
+                    <small>Tampilan hitam putih</small>
+                </span>
                 <span class="accessibility-status">MATI</span>
             </button>
-            <button type="button" class="accessibility-option" id="toggleContrast" aria-pressed="false">
-                <span>Kontras tinggi<small>Mempertegas perbedaan warna</small></span>
+
+            <button type="button" class="accessibility-option"
+                id="toggleContrast" aria-pressed="false">
+                <span>
+                    Kontras tinggi
+                    <small>Mempertegas perbedaan warna</small>
+                </span>
                 <span class="accessibility-status">MATI</span>
             </button>
-            <button type="button" class="accessibility-option" id="toggleInvert" aria-pressed="false">
-                <span>Warna terbalik<small>Membalik skema warna halaman</small></span>
+
+            <button type="button" class="accessibility-option"
+                id="toggleInvert" aria-pressed="false">
+                <span>
+                    Warna terbalik
+                    <small>Membalik skema warna halaman</small>
+                </span>
                 <span class="accessibility-status">MATI</span>
             </button>
-            <button type="button" class="accessibility-reset" id="accessibilityReset">Reset tampilan</button>
+
+            <button type="button" class="accessibility-reset"
+                id="accessibilityReset">
+                Reset tampilan
+            </button>
         </div>
-        <!-- (Section Pembaca Teks & Ritme dihilangkan kodenya sebagian untuk kerapihan, tapi sesuai aslinya biarkan utuh jika dicopy) -->
+
+        <!-- PEMBACA TEKS -->
+        <div class="access-extra-section">
+            <p class="access-extra-heading">Pembaca teks</p>
+
+            <p class="access-extra-description">
+                Dengarkan artikel Budaya dan Adat Jawa.
+            </p>
+
+            <div class="access-extra-controls">
+                <button type="button" class="access-extra-button"
+                    id="ttsPlay">
+                    ▶ Putar
+                </button>
+
+                <button type="button" class="access-extra-button"
+                    id="ttsPause">
+                    Ⅱ Jeda
+                </button>
+
+                <button type="button" class="access-extra-button"
+                    id="ttsResume">
+                    ↻ Lanjut
+                </button>
+
+                <button type="button" class="access-extra-button"
+                    id="ttsStop">
+                    ■ Berhenti
+                </button>
+            </div>
+
+            <p id="ttsStatus" class="access-extra-status"
+                role="status" aria-live="polite">
+                Siap membacakan artikel.
+            </p>
+        </div>
+
+        <!-- VISUALISASI RITME -->
+        <div class="access-extra-section">
+            <p class="access-extra-heading">Visualisasi ritme</p>
+
+            <p class="access-extra-description">
+                Lihat pola gerakan visual dengan tempo yang dapat diatur.
+            </p>
+
+            <div
+                id="ritmeVisualizer"
+                class="ritme-visualizer"
+                role="img"
+                aria-label="Visualisasi ritme dalam keadaan berhenti"
+            >
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+                <span class="ritme-bar"></span>
+            </div>
+
+            <label for="ritmeTempo" class="access-extra-label">
+                Tempo visual
+            </label>
+
+            <div class="access-extra-tempo">
+                <input
+                    type="range"
+                    id="ritmeTempo"
+                    min="40"
+                    max="160"
+                    step="5"
+                    value="90"
+                >
+
+                <output id="ritmeTempoValue" for="ritmeTempo">
+                    90 BPM
+                </output>
+            </div>
+
+            <div class="access-extra-controls">
+                <button type="button" class="access-extra-button"
+                    id="ritmePlay">
+                    ▶ Mulai
+                </button>
+
+                <button type="button" class="access-extra-button"
+                    id="ritmeStop">
+                    ■ Berhenti
+                </button>
+            </div>
+
+            <p id="ritmeStatus" class="access-extra-status"
+                role="status" aria-live="polite">
+                Animasi ritme belum dimulai.
+            </p>
+        </div>
     </div>
-    <button type="button" class="accessibility-toggle" id="accessibilityToggle" aria-label="Buka menu aksesibilitas" aria-expanded="false" aria-controls="accessibilityPanel">
+
+    <button
+        type="button"
+        class="accessibility-toggle"
+        id="accessibilityToggle"
+        aria-label="Buka menu aksesibilitas"
+        aria-expanded="false"
+        aria-controls="accessibilityPanel"
+    >
         <span class="toggle-icon">⚙️</span>
     </button>
-</div>
+
 
 <script src="../../js/accessibility-extra.js" defer></script>
 <script src="../../js/accessibility.js" defer></script>
